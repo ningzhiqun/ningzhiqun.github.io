@@ -6,7 +6,7 @@
   <link href="http://chen_nian_lee.gitee.io/atom.xml" rel="self"/>
   
   <link href="http://chen_nian_lee.gitee.io/"/>
-  <updated>2021-03-09T07:44:38.611Z</updated>
+  <updated>2021-03-09T09:32:08.433Z</updated>
   <id>http://chen_nian_lee.gitee.io/</id>
   
   <author>
@@ -17,48 +17,21 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>my test</title>
-    <link href="http://chen_nian_lee.gitee.io/2021/03/09/my-test/"/>
-    <id>http://chen_nian_lee.gitee.io/2021/03/09/my-test/</id>
-    <published>2021-03-09T07:44:38.000Z</published>
-    <updated>2021-03-09T07:44:38.611Z</updated>
+    <title>Spring IOC 源码分析</title>
+    <link href="http://chen_nian_lee.gitee.io/2020/03/09/Spring-IOC-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>http://chen_nian_lee.gitee.io/2020/03/09/Spring-IOC-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</id>
+    <published>2020-03-09T09:29:04.000Z</published>
+    <updated>2021-03-09T09:32:08.433Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的，文章稍微有点长，不过介绍得还是比较细致的。"><a href="#这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的，文章稍微有点长，不过介绍得还是比较细致的。" class="headerlink" title="这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的，文章稍微有点长，不过介绍得还是比较细致的。"></a>这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的，文章稍微有点长，不过介绍得还是比较细致的。</h1><span id="more"></span>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的，文章稍微有点长，不过介绍得还是比较细致的。&quot;&gt;&lt;a href=&quot;#这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的，文章稍微有点长，不过介绍得还是比较细致的。&quot; class=&quot;headerlink&quot; title=&quot;这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的，文章稍微有点长，不过介绍得还是比较细致的。&quot;&gt;&lt;/a&gt;这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的，文章稍微有点长，不过介绍得还是比较细致的。&lt;/h1&gt;</summary>
     
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://chen_nian_lee.gitee.io/2021/03/09/hello-world/"/>
-    <id>http://chen_nian_lee.gitee.io/2021/03/09/hello-world/</id>
-    <published>2021-03-09T03:00:00.384Z</published>
-    <updated>2021-03-09T03:00:00.384Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>my first</title>
-    <link href="http://chen_nian_lee.gitee.io/1994/03/09/my-first/"/>
-    <id>http://chen_nian_lee.gitee.io/1994/03/09/my-first/</id>
-    <published>1994-03-09T07:59:22.000Z</published>
-    <updated>2021-03-09T08:23:48.597Z</updated>
-    
-    
-    
-    
+    <category term="Spring" scheme="http://chen_nian_lee.gitee.io/tags/Spring/"/>
     
   </entry>
   
