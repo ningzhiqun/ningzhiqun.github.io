@@ -6,7 +6,7 @@
   <link href="http://chen_nian_lee.gitee.io/atom.xml" rel="self"/>
   
   <link href="http://chen_nian_lee.gitee.io/"/>
-  <updated>2021-03-09T09:37:50.112Z</updated>
+  <updated>2021-03-09T10:30:17.766Z</updated>
   <id>http://chen_nian_lee.gitee.io/</id>
   
   <author>
@@ -17,16 +17,29 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Spring AOP 源码分析</title>
+    <link href="http://chen_nian_lee.gitee.io/2021/03/09/Spring-AOP-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>http://chen_nian_lee.gitee.io/2021/03/09/Spring-AOP-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</id>
+    <published>2021-03-09T10:30:17.000Z</published>
+    <updated>2021-03-09T10:30:17.766Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Spring IOC 源码分析</title>
     <link href="http://chen_nian_lee.gitee.io/2020/03/09/Spring-IOC-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
     <id>http://chen_nian_lee.gitee.io/2020/03/09/Spring-IOC-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</id>
     <published>2020-03-09T09:29:04.000Z</published>
-    <updated>2021-03-09T09:37:50.112Z</updated>
+    <updated>2021-03-09T12:07:56.629Z</updated>
     
-    <content type="html"><![CDATA[<h5 id="这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的，文章稍微有点长，不过介绍得还是比较细致的。"><a href="#这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的，文章稍微有点长，不过介绍得还是比较细致的。" class="headerlink" title="这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的，文章稍微有点长，不过介绍得还是比较细致的。"></a>这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的，文章稍微有点长，不过介绍得还是比较细致的。</h5><span id="more"></span>]]></content>
+    <content type="html"><![CDATA[<h5 id="这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的。"><a href="#这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的。" class="headerlink" title="这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的。"></a>这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的。</h5><span id="more"></span><blockquote><p>Spring 最重要的概念有 IOC 、AOP 和 自动装配。本篇文章主要是为了梳理 IOC 启动的过程。既然大家平时都在使用Spring, 那一定要抽空阅读并梳理一下源代码。了解了Spring的一些概念以后，会帮助你排查一些日常回到的问题。</p></blockquote><blockquote><p>文本采用的源代码版本为 5.1.6.RELEASE。尽管现在大家很少看到使用 Xml 的方式配置了（基于注解方式），但是这次通过阅读源码后，笔者觉得先基于 Xml 的配置方式阅读一遍代码，会降低不少难度。</p></blockquote><blockquote><p>阅读建议：1、首先要搞懂 Spring IOC 中的概念。2、一定要阅读并理解 IOC 的流程图（一定要看懂）。3、最后从源码一步步的看下去。</p></blockquote><p>希望通过本文能让大家对 Spring IOC 有个基本的认识，如果中间有不对的地方也希望大家能指出来。</p><hr><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>首先给大家来一段启动入口的代码 </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static void main( String[] args ) &#123;</span><br><span class="line">    ApplicationContext applicationContext &#x3D; new ClassPathXmlApplicationContext(&quot;classpath:application.xml&quot;);</span><br><span class="line">    Person person &#x3D; applicationContext.getBean(Person.class);</span><br><span class="line">    person.getName();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上面的代码就是通过加载classPath路径下的配置文件来启动 Spring 容器。这里我用的 maven 方式配置的。（在这里我想和大家说一下，曾经我使用 Spring 的时候会把所有依赖都添加进来，其实也是自己不知道该依赖哪些。其实Spring 是渐进式的工具，并不具有很强的侵入性，它的模块也划分得很合理，即使你的应用不是 web 应用，或者之前完全没有使用到 Spring，而你就想用 Spring 的依赖注入这个功能，其实完全是可以的，它的引入不会对其他的组件产生冲突。）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-context&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;5.1.6&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure><blockquote><p>这里给大家推荐两个 IDEA 的快捷键，方便阅读源码。1、查看父类关系的 option + command + U ; 2、查看子类的 control + H。</p></blockquote><p>继续说下去， <strong>ApplicationContext applicationContext = new ClassPathXmlApplicationContext(“classpath:application.xml”);</strong> 根据指定的xml文件构建 ApplicationContext。当然，除了 ClassPathXmlApplicationContext 加载的方式以外，还有其他的加载方式，如下图。</p><p><img src="/2020/03/09/Spring-IOC-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/application.png" alt="ApplicationContext继承关系"></p><blockquote><p>大家看的时候只需要仔细看一下 ApplicationContext 这个类，对里面的方法有个了解 Spring。 为了适应各种使用场景，提供的各个接口都可能有很多的实现类。我们在看源码的时候，只需要从一个入口往里面看就可以了。</p><p>当然，读本文的时候读者也不必太担心，每个代码块分析的时候，我都会告诉读者我们在说哪个类第几行。</p></blockquote><p>从上面的继承关系中我们可以看到，ClassPathXmlApplicationContext 这个类兜兜转转才到 ApplicationContext 接口。在图中我们用绿色标注了 <strong>FileSystemXmlApplicationContext 和 AnnotationConfigApplicationContext 这两个类。</strong></p><p>1、FileSystemXmlApplicationContext 的构造函数需要一个 xml 配置文件在系统中的路径，其他和 ClassPathXmlApplicationContext 基本上一样。</p><p>2、AnnotationConfigApplicationContext 是基于注解来使用的，它不需要配置文件，采用 java 配置类和各种注解来配置，是比较简单的方式，也是大势所趋吧。</p><p>接下来就用一个简单的例子，看看怎么实例化 ApplicationContext 的。</p>]]></content>
     
     
-    <summary type="html">&lt;h5 id=&quot;这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的，文章稍微有点长，不过介绍得还是比较细致的。&quot;&gt;&lt;a href=&quot;#这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的，文章稍微有点长，不过介绍得还是比较细致的。&quot; class=&quot;headerlink&quot; title=&quot;这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的，文章稍微有点长，不过介绍得还是比较细致的。&quot;&gt;&lt;/a&gt;这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的，文章稍微有点长，不过介绍得还是比较细致的。&lt;/h5&gt;</summary>
+    <summary type="html">&lt;h5 id=&quot;这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的。&quot;&gt;&lt;a href=&quot;#这篇文章从-Spring-IOC-容器的启动过程，分析了-Spring-是怎样管理-bean-的。&quot; class=&quot;headerlink&quot; title=&quot;这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的。&quot;&gt;&lt;/a&gt;这篇文章从 Spring IOC 容器的启动过程，分析了 Spring 是怎样管理 bean 的。&lt;/h5&gt;</summary>
     
     
     
