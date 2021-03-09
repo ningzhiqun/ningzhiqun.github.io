@@ -12,11 +12,11 @@ var EventUtil = {
 			}
 
 		}
-		
+
 	},
 }
 
-//==== 开始=== click nav-icon 出现导航菜单+菜单消失 
+//==== 开始=== click nav-icon 出现导航菜单+菜单消失
 var navIcon = document.getElementById('nav-icon');
 var navList = document.getElementById('nav-list');
 // 通过点击navIcon控制navList
@@ -26,7 +26,7 @@ EventUtil.addHandler(navIcon, "click", function() {
 	} else {
 		navList.style.display = "block";
 	}
-	
+
 })
 //  ==== 结束==== nav-icon 出现导航菜单+菜单消失
 
@@ -69,7 +69,7 @@ if (mainContentColumn) {
 		mainContentColumn.style.margin = 'auto';
 		tocColumn.style.display = 'none';
 		toggleOff.style.display = 'block';
-		toggleOn.style.display = 'none';		
+		toggleOn.style.display = 'none';
 	})
 
 	EventUtil.addHandler(toggleOff, 'click', function() {
@@ -79,7 +79,7 @@ if (mainContentColumn) {
 			tocColumn.style.display = 'block';
 			toggleOff.style.display = 'none';
 			toggleOn.style.display = 'block';
-			
+
 	})
 
 }
@@ -109,16 +109,16 @@ if (!headings || headings.length <=2 ) {
 		tocColumn.style.display = 'none';
 		toggleOff.style.display = 'none';
 		toggleOn.style.display = 'none';
-	}	
-	
-	
-		
+	}
+
+
+
 }else{
 	// 正文中最后一个标题的offsetTop, 用来让高亮持续
 	lastHeadingsTop = headings[headings.length-1].offsetTop;
 	// toc再次和正文一起滚动的临界点
 	tocMoveAlongPoint = lastHeadingsTop - 150;
-	
+
 }
 
 
@@ -146,17 +146,17 @@ EventUtil.addHandler(window, "scroll", function() {
  			// 相对于#body-inner-wrapper而定位，和正文一起被滚动
  			tocColumn.style.position = 'absolute';
  			tocColumn.style.top = '480px';
- 			
- 		} else if (330 < scrolledTop && scrolledTop < tocMoveAlongPoint) {	
- 			// toc 位置固定，不再滚动 
+
+ 		} else if (330 < scrolledTop && scrolledTop < tocMoveAlongPoint) {
+ 			// toc 位置固定，不再滚动
  			tocColumn.style.position = 'fixed';
  			tocColumn.style.top = '150px';
- 			
+
  		} else if (scrolledTop >= tocMoveAlongPoint) {
  			// toc再次和正文一起滚动的临界点
  			tocColumn.style.position = 'absolute';
  			// 注意这里需要拼接成string
- 			tocColumn.style.top = lastHeadingsTop + 'px';			
+ 			tocColumn.style.top = lastHeadingsTop + 'px';
  		}
 
  	}
@@ -165,8 +165,8 @@ EventUtil.addHandler(window, "scroll", function() {
 		var i,
 			j,
 			currentHeadingHref;
-		
-		
+
+
 		// 找到出现视窗里头的出现的第一个heading<a>的parent<hx>的的id值，或者直接用<a>的href值
 		for (i=0; i<headings.length; i++) {
 			// 剪掉45px是为了更好的用户体验效果。
@@ -184,7 +184,7 @@ EventUtil.addHandler(window, "scroll", function() {
 			if (currTocLink.href == currentHeadingHref) {
 				if (currTocLink.className.indexOf("active") === -1) {
 					currTocLink.className += " active";
-				} 
+				}
 			} else {
 				// 溢出非在视窗最前面，但是有被赋上过active的tocLink的active这个class值。
 				if (currTocLink.className.indexOf("active") !== -1) {
@@ -231,9 +231,9 @@ if (algoliaConfig.on) {
 			container: '#algolia-hits',
 			templates: {
 				empty: 'Oops! No matched post found for your query.',
-				item: '<a class="relatedTitles" href="'+ '{{permalink}}" target="_self"> {{{_highlightResult.title.value}}} </a>',
+				item: '<a class="relatedTitles" href="'+ 'http://chen_nian_lee.gitee.io/compass/js/blog.js" target="_self">  </a>',
 			},
-			
+
 		})
 	);
 
@@ -263,19 +263,19 @@ if (algoliaConfig.on) {
 	var algoliaWrapper = document.getElementById('algolia-wrapper');
 
 	EventUtil.addHandler(searchBtn, 'click', function() {
-		algoliaWrapper.style.display = 'block';		
+		algoliaWrapper.style.display = 'block';
 		searchBtn.style.display = 'none';
 	});
 
 	// input event的implement并不是全部覆盖了，基本用法是支持的，IE9+删除字符的时候是不会触发的
 	EventUtil.addHandler(inputBtn, 'input', function() {
 		// 如果输入值为空，让algolia-hits消失
-		if (!inputBtn.value) {	
+		if (!inputBtn.value) {
 			algoliaHits.innerHTML = '';
 			algoliaHitsWrapper.style.display = 'none';
 		} else {
 			algoliaHitsWrapper.style.display = 'block';
-		}				
+		}
 	});
 
 	// 点击reset按钮，如果input有值，则algolia-hits的内容消失，否则algolia的全部消失。默认是会展示全部的records且reset会消失
@@ -289,6 +289,6 @@ if (algoliaConfig.on) {
 		algoliaHitsWrapper.style.display = 'none';
 	});
 
-} 
+}
 // ====== algolia search 只在on为true的时候触发 ===== 结束
 
