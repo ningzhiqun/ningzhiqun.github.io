@@ -1,0 +1,713 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>HashMap · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../design/" />
+    
+    
+    <link rel="prev" href="linkedlist.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    我的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../design/">
+            
+                <a href="../design/">
+            
+                    
+                    设计模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../design/status_machine.html">
+            
+                <a href="../design/status_machine.html">
+            
+                    
+                    状态机模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    java 容器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="arraylist.html">
+            
+                <a href="arraylist.html">
+            
+                    
+                    ArrayList
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="linkedlist.html">
+            
+                <a href="linkedlist.html">
+            
+                    
+                    LinkedList
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2.3" data-path="hashmap.html">
+            
+                <a href="hashmap.html">
+            
+                    
+                    HashMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../design/">
+            
+                <a href="../design/">
+            
+                    
+                    消息队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../design/">
+            
+                <a href="../design/">
+            
+                    
+                    线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >HashMap</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <ul>
+<li><a href="#title_1">HashMap &#x7B80;&#x4ECB;</a></li>
+<li><a href="#title_2">&#x6570;&#x636E;&#x7ED3;&#x6784;</a></li>
+<li><a href="title_3">&#x6E90;&#x7801;&#x5206;&#x6790;</a><ul>
+<li><a href="title_3_1">&#x6784;&#x9020;&#x65B9;&#x6CD5;</a></li>
+<li><a href="title_3_3">put &#x64CD;&#x4F5C;&#x5206;&#x6790;</a></li>
+<li><a href="title_3_4">get &#x64CD;&#x4F5C;&#x5206;&#x6790;</a></li>
+<li><a href="title_3_5">resize &#x64CD;&#x4F5C;&#x5206;&#x6790;</a></li>
+</ul>
+</li>
+<li><a href="title_4">&#x603B;&#x7ED3;</a></li>
+</ul>
+<h3 id="hashmap-&#x7B80;&#x4ECB;"><p id="title_1">HashMap &#x7B80;&#x4ECB;</p></h3>
+<p>HashMap &#x4E0D;&#x4EC5;&#x5728;&#x6211;&#x4EEC;&#x65E5;&#x5E38;&#x5F00;&#x53D1;&#x4E2D;&#x7ECF;&#x5E38;&#x88AB;&#x4F7F;&#x7528;&#xFF0C;&#x800C;&#x4E14;&#x5728;&#x5F88;&#x591A;&#x6846;&#x67B6;&#x4E2D;&#x6211;&#x4EEC;&#x4E5F;&#x80FD;&#x7ECF;&#x5E38;&#x89C1;&#x5230;&#x5B83;&#x7684;&#x8EAB;&#x5F71;&#x3002;&#x90A3;&#x4E48;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x5F00;&#x53D1;&#x8005;&#x662F;&#x6709;&#x5FC5;&#x8981;&#x53BB;&#x4E86;&#x89E3;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x673A;&#x5236;&#x7684;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;&#x672C;&#x4EBA;&#x5DE5;&#x4F5C;&#x4EE5;&#x6765;&#x5C31;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x8FC7; <code>JDK1.8</code> &#x4E00;&#x4E0B;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x5BF9; <code>JDK1.7</code> &#x7684;HashMap&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;</p>
+<p>HashMap &#x4E3B;&#x8981;&#x7528;&#x6765;&#x5B58;&#x653E;&#x952E;&#x503C;&#x5BF9;&#xFF0C;&#x5B83;&#x57FA;&#x4E8E;&#x54C8;&#x5E0C;&#x8868;&#x7684; Map &#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#xFF0C;&#x662F;&#x5E38;&#x7528;&#x7684; Java &#x96C6;&#x5408;&#x4E4B;&#x4E00;&#xFF0C;<strong>&#x662F;&#x975E;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;</strong>&#x3002;</p>
+<p><code>HashMap</code> &#x53EF;&#x4EE5;&#x5B58;&#x50A8; null &#x7684; key &#x548C; value&#xFF0C;&#x4F46; null &#x4F5C;&#x4E3A;&#x952E;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#xFF0C;null &#x4F5C;&#x4E3A;&#x503C;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x3002;</p>
+<p>&#x9605;&#x8BFB;&#x524D;&#x63D0;&#xFF1A;&#x672C;&#x6587;&#x5206;&#x6790;&#x7684;&#x662F;&#x6E90;&#x7801;&#xFF0C;&#x6240;&#x4EE5;&#x81F3;&#x5C11;&#x8BFB;&#x8005;&#x8981;&#x719F;&#x6089;&#x5B83;&#x4EEC;&#x7684;&#x63A5;&#x53E3;&#x4F7F;&#x7528;&#xFF0C;&#x540C;&#x65F6;&#xFF0C;&#x5BF9;&#x4E8E;&#x5E76;&#x53D1;&#xFF0C;&#x8BFB;&#x8005;&#x81F3;&#x5C11;&#x8981;&#x77E5;&#x9053; CAS&#x3001;ReentrantLock&#x3001;UNSAFE &#x64CD;&#x4F5C;&#x8FD9;&#x51E0;&#x4E2A;&#x57FA;&#x672C;&#x7684;&#x77E5;&#x8BC6;&#xFF0C;&#x6587;&#x4E2D;&#x4E0D;&#x4F1A;&#x5BF9;&#x8FD9;&#x4E9B;&#x77E5;&#x8BC6;&#x8FDB;&#x884C;&#x4ECB;&#x7ECD;&#x3002;Java8 &#x7528;&#x5230;&#x4E86;&#x7EA2;&#x9ED1;&#x6811;&#xFF0C;&#x4E0D;&#x8FC7;&#x672C;&#x6587;&#x4E0D;&#x4F1A;&#x8FDB;&#x884C;&#x5C55;&#x5F00;&#xFF0C;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x8BFB;&#x8005;&#x8BF7;&#x81EA;&#x884C;&#x67E5;&#x627E;&#x76F8;&#x5173;&#x8D44;&#x6599;&#x3002;</p>
+<h3 id="&#x6570;&#x636E;&#x7ED3;&#x6784;"><p id="title_2">&#x6570;&#x636E;&#x7ED3;&#x6784;</p></h3>
+<p>&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x4E0B;&#x9762;&#x8FD9;&#x5F20;&#x56FE;&#x6765;&#x4ECB;&#x7ECD; HashMap &#x7684;&#x7ED3;&#x6784;&#x3002;</p>
+<p><a href="../../images/hashmap&#x7ED3;&#x6784;&#x56FE;.png" data-lightbox="bf506f99-3b40-4f07-ba97-6ffecc99f0d2" data-title="hashmap&#x7ED3;&#x6784;&#x56FE;"><img src="../../images/hashmap&#x7ED3;&#x6784;&#x56FE;.png" alt="hashmap&#x7ED3;&#x6784;&#x56FE;"></a></p>
+<blockquote>
+<p>&#x8FD9;&#x4E2A;&#x4EC5;&#x4EC5;&#x662F;&#x793A;&#x610F;&#x56FE;&#xFF0C;&#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x8003;&#x8651;&#x5230;&#x6570;&#x7EC4;&#x8981;&#x6269;&#x5BB9;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x540E;&#x9762;&#x518D;&#x8BF4;&#x3002;</p>
+</blockquote>
+<p>&#x672C;&#x8D28;&#x4E0A;&#xFF0C;HashMap &#x662F;&#x4E3B;&#x4F53;&#x662F;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x6BCF;&#x4E2A; entry &#x53C8;&#x6784;&#x6210;&#x4E86;&#x4E00;&#x4E2A;<strong>&#x5355;&#x5411;&#x7684;&#x94FE;&#x8868;</strong>&#x3002;</p>
+<p><strong>&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#xFF1A;</strong></p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashMap</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractMap</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt;, <span class="hljs-title">Cloneable</span>, <span class="hljs-title">Serializable</span> </span>{
+    <span class="hljs-comment">// &#x5E8F;&#x5217;&#x53F7;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">362498820763181265L</span>;
+    <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x7684;&#x521D;&#x59CB;&#x5BB9;&#x91CF;&#x662F;16</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">4</span>;
+    <span class="hljs-comment">// &#x6700;&#x5927;&#x5BB9;&#x91CF;</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAXIMUM_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">30</span>;
+    <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x7684;&#x586B;&#x5145;&#x56E0;&#x5B50;</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="hljs-number">0.75f</span>;
+    <span class="hljs-comment">// &#x5F53;&#x6876;(bucket)&#x4E0A;&#x7684;&#x7ED3;&#x70B9;&#x6570;&#x5927;&#x4E8E;&#x8FD9;&#x4E2A;&#x503C;&#x65F6;&#x4F1A;&#x8F6C;&#x6210;&#x7EA2;&#x9ED1;&#x6811;</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TREEIFY_THRESHOLD = <span class="hljs-number">8</span>;
+    <span class="hljs-comment">// &#x5F53;&#x6876;(bucket)&#x4E0A;&#x7684;&#x7ED3;&#x70B9;&#x6570;&#x5C0F;&#x4E8E;&#x8FD9;&#x4E2A;&#x503C;&#x65F6;&#x6811;&#x8F6C;&#x94FE;&#x8868;</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> UNTREEIFY_THRESHOLD = <span class="hljs-number">6</span>;
+    <span class="hljs-comment">// &#x6876;&#x4E2D;&#x7ED3;&#x6784;&#x8F6C;&#x5316;&#x4E3A;&#x7EA2;&#x9ED1;&#x6811;&#x5BF9;&#x5E94;&#x7684;table&#x7684;&#x6700;&#x5C0F;&#x5927;&#x5C0F;</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="hljs-number">64</span>;
+    <span class="hljs-comment">// &#x5B58;&#x50A8;&#x5143;&#x7D20;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x603B;&#x662F;2&#x7684;&#x5E42;&#x6B21;&#x500D;</span>
+    <span class="hljs-keyword">transient</span> Node&lt;k,v&gt;[] table;
+    <span class="hljs-comment">// &#x5B58;&#x653E;&#x5177;&#x4F53;&#x5143;&#x7D20;&#x7684;&#x96C6;</span>
+    <span class="hljs-keyword">transient</span> Set&lt;map.entry&lt;k,v&gt;&gt; entrySet;
+    <span class="hljs-comment">// &#x5B58;&#x653E;&#x5143;&#x7D20;&#x7684;&#x4E2A;&#x6570;&#xFF0C;&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x4E0D;&#x7B49;&#x4E8E;&#x6570;&#x7EC4;&#x7684;&#x957F;&#x5EA6;&#x3002;</span>
+    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> size;
+    <span class="hljs-comment">// &#x6BCF;&#x6B21;&#x6269;&#x5BB9;&#x548C;&#x66F4;&#x6539;map&#x7ED3;&#x6784;&#x7684;&#x8BA1;&#x6570;&#x5668;</span>
+    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> modCount;
+    <span class="hljs-comment">// &#x4E34;&#x754C;&#x503C; &#x5F53;&#x5B9E;&#x9645;&#x5927;&#x5C0F;(&#x5BB9;&#x91CF;*&#x52A0;&#x8F7D;&#x56E0;&#x5B50;)&#x8D85;&#x8FC7;&#x4E34;&#x754C;&#x503C;&#x65F6;&#xFF0C;&#x4F1A;&#x8FDB;&#x884C;&#x6269;&#x5BB9;</span>
+    <span class="hljs-keyword">int</span> threshold;
+    <span class="hljs-comment">// &#x52A0;&#x8F7D;&#x56E0;&#x5B50;</span>
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> loadFactor;
+}
+</code></pre>
+<ul>
+<li><p><strong>loadFactor &#x52A0;&#x8F7D;&#x56E0;&#x5B50;</strong>&#xFF08;&#x7A00;&#x758F;&#x56E0;&#x5B50;&#xFF09;</p>
+<p>loadFactor &#x56E0;&#x5B50;&#x662F;&#x63A7;&#x5236;&#x6570;&#x7EC4;&#x5B58;&#x653E;&#x6570;&#x636E;&#x7684;&#x758F;&#x5BC6;&#x7A0B;&#x5EA6;&#x3002;&#x5373;&#x5F53;loadFactor &#x8D8A;&#x8D8B;&#x8FD1;&#x4E8E; 1&#xFF0C;&#x90A3;&#x4E48;&#x6570;&#x7EC4;&#x4E2D;&#x5B58;&#x653E;&#x7684;&#x6570;&#x636E;&#x7684;&#x9971;&#x548C;&#x5EA6;&#x5C31;&#x8D8A;&#x5927;&#xFF0C;&#x540C;&#x65F6; hash &#x51B2;&#x7A81;&#x7684;&#x6982;&#x7387;&#x8D8A;&#x5927;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4F1A;&#x8BA9;&#x94FE;&#x8868;&#x7684;&#x957F;&#x5EA6;&#x589E;&#x52A0;&#xFF0C;loadFactor &#x8D8A;&#x5C0F;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8D8B;&#x8FD1;&#x4E8E; 0&#xFF0C;&#x6570;&#x7EC4;&#x4E2D;&#x5B58;&#x653E;&#x7684;&#x6570;&#x636E;(entry)&#x4E5F;&#x5C31;&#x8D8A;&#x5C11;&#xFF0C;&#x4E5F;&#x5C31;&#x8D8A;&#x7A00;&#x758F;&#x3002;</p>
+<p><strong>loadFactor &#x592A;&#x5927;&#x5BFC;&#x81F4;&#x67E5;&#x627E;&#x5143;&#x7D20;&#x6548;&#x7387;&#x4F4E;&#xFF0C;&#x592A;&#x5C0F;&#x5BFC;&#x81F4;&#x6570;&#x7EC4;&#x7684;&#x5229;&#x7528;&#x7387;&#x4F4E;&#xFF0C;&#x5B58;&#x653E;&#x7684;&#x6570;&#x636E;&#x4F1A;&#x5F88;&#x5206;&#x6563;&#x3002;loadFactor &#x7684;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; 0.75f &#x662F;&#x5B98;&#x65B9;&#x7ED9;&#x51FA;&#x7684;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83;&#x597D;&#x7684;&#x4E34;&#x754C;&#x503C;</strong>&#x3002;</p>
+<p>&#x7ED9;&#x5B9A;&#x7684;&#x9ED8;&#x8BA4;&#x5BB9;&#x91CF;&#x4E3A; 16&#xFF0C;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;&#x4E3A; 0.75&#x3002;Map &#x5728;&#x4F7F;&#x7528;&#x8FC7;&#x7A0B;&#x4E2D;&#x4E0D;&#x65AD;&#x7684;&#x5F80;&#x91CC;&#x9762;&#x5B58;&#x653E;&#x6570;&#x636E;&#xFF0C;&#x5F53;&#x6570;&#x91CF;&#x8FBE;&#x5230;&#x4E86; 16 * 0.75 = 12 &#x5C31;&#x9700;&#x8981;&#x5C06;&#x5F53;&#x524D; 16 &#x7684;&#x5BB9;&#x91CF;&#x8FDB;&#x884C;&#x6269;&#x5BB9;&#xFF0C;&#x800C;&#x6269;&#x5BB9;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x6D89;&#x53CA;&#x5230; rehash&#x3001;&#x590D;&#x5236;&#x6570;&#x636E;&#x7B49;&#x64CD;&#x4F5C;&#xFF0C;&#x6240;&#x4EE5;&#x975E;&#x5E38;&#x6D88;&#x8017;&#x6027;&#x80FD;&#x3002;</p>
+</li>
+<li><p><strong>threshold</strong></p>
+<p><strong>threshold = capacity * loadFactor</strong>&#xFF0C;<strong>&#x5F53; Size&gt;=threshold</strong>&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8981;&#x8003;&#x8651;&#x5BF9;&#x6570;&#x7EC4;&#x7684;&#x6269;&#x589E;&#x4E86;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x8FD9;&#x4E2A;&#x7684;&#x610F;&#x601D;&#x5C31;&#x662F; <strong>&#x8861;&#x91CF;&#x6570;&#x7EC4;&#x662F;&#x5426;&#x9700;&#x8981;&#x6269;&#x589E;&#x7684;&#x4E00;&#x4E2A;&#x6807;&#x51C6;</strong>&#x3002;</p>
+</li>
+</ul>
+<p><code>HashMap</code>&#x6709;&#x4E24;&#x79CD;&#x6570;&#x636E;&#x8282;&#x70B9;&#xFF1A;Node &#xFF08;&#x666E;&#x901A;&#x8282;&#x70B9;&#xFF09;&#x548C; TreeNode&#xFF08;&#x6811;&#x578B;&#x8282;&#x70B9;&#xFF09;</p>
+<p><strong>Node &#x8282;&#x70B9;&#x7C7B;&#x6E90;&#x7801;:</strong></p>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x7EE7;&#x627F;&#x81EA; Map.Entry&lt;K,V&gt;</span>
+<span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>{
+       <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> hash;<span class="hljs-comment">// &#x54C8;&#x5E0C;&#x503C;&#xFF0C;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x7684; hash &#x503C;</span>
+       <span class="hljs-keyword">final</span> K key;<span class="hljs-comment">//&#x952E;</span>
+       V value;<span class="hljs-comment">//&#x503C;</span>
+       <span class="hljs-comment">// &#x6307;&#x5411;&#x4E0B;&#x4E00;&#x4E2A;&#x8282;&#x70B9;</span>
+       Node&lt;K,V&gt; next;
+       Node(<span class="hljs-keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) {
+            <span class="hljs-keyword">this</span>.hash = hash;
+            <span class="hljs-keyword">this</span>.key = key;
+            <span class="hljs-keyword">this</span>.value = value;
+            <span class="hljs-keyword">this</span>.next = next;
+        }
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> K <span class="hljs-title">getKey</span><span class="hljs-params">()</span>        </span>{ <span class="hljs-keyword">return</span> key; }
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> V <span class="hljs-title">getValue</span><span class="hljs-params">()</span>      </span>{ <span class="hljs-keyword">return</span> value; }
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> key + <span class="hljs-string">&quot;=&quot;</span> + value; }
+        <span class="hljs-comment">// override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hashCode</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">return</span> Objects.hashCode(key) ^ Objects.hashCode(value);
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> V <span class="hljs-title">setValue</span><span class="hljs-params">(V newValue)</span> </span>{
+            V oldValue = value;
+            value = newValue;
+            <span class="hljs-keyword">return</span> oldValue;
+        }
+        <span class="hljs-comment">// override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object o)</span> </span>{
+            <span class="hljs-keyword">if</span> (o == <span class="hljs-keyword">this</span>)
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+            <span class="hljs-keyword">if</span> (o <span class="hljs-keyword">instanceof</span> Map.Entry) {
+                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;
+                <span class="hljs-keyword">if</span> (Objects.equals(key, e.getKey()) &amp;&amp;
+                    Objects.equals(value, e.getValue()))
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        }
+}
+</code></pre>
+<p><strong>TreeNode &#x8282;&#x70B9;&#x7C7B;&#x6E90;&#x7801;:</strong></p>
+<pre><code class="lang-java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeNode</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">LinkedHashMap</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>{
+        TreeNode&lt;K,V&gt; parent;  <span class="hljs-comment">// &#x7236;</span>
+        TreeNode&lt;K,V&gt; left;    <span class="hljs-comment">// &#x5DE6;</span>
+        TreeNode&lt;K,V&gt; right;   <span class="hljs-comment">// &#x53F3;</span>
+        TreeNode&lt;K,V&gt; prev;    <span class="hljs-comment">// needed to unlink next upon deletion</span>
+        <span class="hljs-keyword">boolean</span> red;           <span class="hljs-comment">// &#x5224;&#x65AD;&#x989C;&#x8272;</span>
+        TreeNode(<span class="hljs-keyword">int</span> hash, K key, V val, Node&lt;K,V&gt; next) {
+            <span class="hljs-keyword">super</span>(hash, key, val, next);
+        }
+        <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x6839;&#x8282;&#x70B9;</span>
+        <span class="hljs-function"><span class="hljs-keyword">final</span> TreeNode&lt;K,V&gt; <span class="hljs-title">root</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">for</span> (TreeNode&lt;K,V&gt; r = <span class="hljs-keyword">this</span>, p;;) {
+                <span class="hljs-keyword">if</span> ((p = r.parent) == <span class="hljs-keyword">null</span>)
+                    <span class="hljs-keyword">return</span> r;
+                r = p;
+       }
+</code></pre>
+<h3 id="&#x6E90;&#x7801;&#x5206;&#x6790;"><p id="title_3">&#x6E90;&#x7801;&#x5206;&#x6790;</p></h3>
+<h4 id="&#x6784;&#x9020;&#x65B9;&#x6CD5;"><p id="title_3_1">&#x6784;&#x9020;&#x65B9;&#x6CD5;</p></h4>
+<p>HashMap &#x4E2D;&#x6709;&#x56DB;&#x4E2A;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x4EEC;&#x5206;&#x522B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java">    <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR;
+     }
+
+     <span class="hljs-comment">// &#x5305;&#x542B;&#x53E6;&#x4E00;&#x4E2A;&#x201C;Map&#x201D;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(Map&lt;? extends K, ? extends V&gt; m)</span> </span>{
+         <span class="hljs-keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR;
+         putMapEntries(m, <span class="hljs-keyword">false</span>);<span class="hljs-comment">//&#x81EA;&#x5DF1;&#x53EF;&#x4EE5;&#x70B9;&#x8FDB;&#x53BB;&#x770B;</span>
+     }
+
+     <span class="hljs-comment">// &#x6307;&#x5B9A;&#x201C;&#x5BB9;&#x91CF;&#x5927;&#x5C0F;&#x201D;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity)</span> </span>{
+         <span class="hljs-keyword">this</span>(initialCapacity, DEFAULT_LOAD_FACTOR);
+     }
+
+     <span class="hljs-comment">// &#x6307;&#x5B9A;&#x201C;&#x5BB9;&#x91CF;&#x5927;&#x5C0F;&#x201D;&#x548C;&#x201C;&#x52A0;&#x8F7D;&#x56E0;&#x5B50;&#x201D;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity, <span class="hljs-keyword">float</span> loadFactor)</span> </span>{
+         <span class="hljs-keyword">if</span> (initialCapacity &lt; <span class="hljs-number">0</span>)
+             <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Illegal initial capacity: &quot;</span> + initialCapacity);
+         <span class="hljs-keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)
+             initialCapacity = MAXIMUM_CAPACITY;
+         <span class="hljs-keyword">if</span> (loadFactor &lt;= <span class="hljs-number">0</span> || Float.isNaN(loadFactor))
+             <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Illegal load factor: &quot;</span> + loadFactor);
+         <span class="hljs-keyword">this</span>.loadFactor = loadFactor;
+         <span class="hljs-keyword">this</span>.threshold = tableSizeFor(initialCapacity);
+     }
+</code></pre>
+<h4 id="put-&#x64CD;&#x4F5C;&#x5206;&#x6790;"><p id="title_3_3">put &#x64CD;&#x4F5C;&#x5206;&#x6790;</p></h4>
+<p>&#x9996;&#x5148;&#x7ED9;&#x5927;&#x5BB6;&#x770B;&#x4E00;&#x4E0B; put &#x6D41;&#x7A0B;&#x56FE;&#xFF0C;&#x5927;&#x5BB6;&#x770B;&#x6E90;&#x7801;&#x7684;&#x65F6;&#x5019;&#x6839;&#x636E;&#x8FD9;&#x4E2A;&#x6D41;&#x7A0B;&#x56FE;&#x770B;&#xFF0C;&#x4F1A;&#x8F7B;&#x677E;&#x5F88;&#x591A;&#x3002;</p>
+<p><a href="../../images/Hashmap-process.png" data-lightbox="9185327d-711f-4e85-b5f6-6a5073b80a20" data-title="hashmap put &#x6D41;&#x7A0B;&#x56FE;"><img src="../../images/Hashmap-process.png" alt="hashmap put &#x6D41;&#x7A0B;&#x56FE;"></a></p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> V <span class="hljs-title">put</span><span class="hljs-params">(K key, V value)</span> </span>{
+    <span class="hljs-keyword">return</span> putVal(hash(key), key, value, <span class="hljs-keyword">false</span>, <span class="hljs-keyword">true</span>);
+}
+
+<span class="hljs-comment">// &#x7B2C;&#x56DB;&#x4E2A;&#x53C2;&#x6570; onlyIfAbsent &#x5982;&#x679C;&#x662F; true&#xFF0C;&#x90A3;&#x4E48;&#x53EA;&#x6709;&#x5728;&#x4E0D;&#x5B58;&#x5728;&#x8BE5; key &#x65F6;&#x624D;&#x4F1A;&#x8FDB;&#x884C; put &#x64CD;&#x4F5C;</span>
+<span class="hljs-comment">// &#x7B2C;&#x4E94;&#x4E2A;&#x53C2;&#x6570; evict &#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x4E0D;&#x5173;&#x5FC3;</span>
+<span class="hljs-function"><span class="hljs-keyword">final</span> V <span class="hljs-title">putVal</span><span class="hljs-params">(<span class="hljs-keyword">int</span> hash, K key, V value, <span class="hljs-keyword">boolean</span> onlyIfAbsent,
+               <span class="hljs-keyword">boolean</span> evict)</span> </span>{
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="hljs-keyword">int</span> n, i;
+    <span class="hljs-comment">// &#x7B2C;&#x4E00;&#x6B21; put &#x503C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x89E6;&#x53D1;&#x4E0B;&#x9762;&#x7684; resize()&#xFF0C;&#x7C7B;&#x4F3C; java7 &#x7684;&#x7B2C;&#x4E00;&#x6B21; put &#x4E5F;&#x8981;&#x521D;&#x59CB;&#x5316;&#x6570;&#x7EC4;&#x957F;&#x5EA6;</span>
+    <span class="hljs-comment">// &#x7B2C;&#x4E00;&#x6B21; resize &#x548C;&#x540E;&#x7EED;&#x7684;&#x6269;&#x5BB9;&#x6709;&#x4E9B;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x6B21;&#x662F;&#x6570;&#x7EC4;&#x4ECE; null &#x521D;&#x59CB;&#x5316;&#x5230;&#x9ED8;&#x8BA4;&#x7684; 16 &#x6216;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x521D;&#x59CB;&#x5BB9;&#x91CF;</span>
+    <span class="hljs-keyword">if</span> ((tab = table) == <span class="hljs-keyword">null</span> || (n = tab.length) == <span class="hljs-number">0</span>)
+        n = (tab = resize()).length;
+    <span class="hljs-comment">// &#x627E;&#x5230;&#x5177;&#x4F53;&#x7684;&#x6570;&#x7EC4;&#x4E0B;&#x6807;&#xFF0C;&#x5982;&#x679C;&#x6B64;&#x4F4D;&#x7F6E;&#x6CA1;&#x6709;&#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x76F4;&#x63A5;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E0B; Node &#x5E76;&#x653E;&#x7F6E;&#x5728;&#x8FD9;&#x4E2A;&#x4F4D;&#x7F6E;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;</span>
+    <span class="hljs-keyword">if</span> ((p = tab[i = (n - <span class="hljs-number">1</span>) &amp; hash]) == <span class="hljs-keyword">null</span>)
+        tab[i] = newNode(hash, key, value, <span class="hljs-keyword">null</span>);
+
+    <span class="hljs-keyword">else</span> {<span class="hljs-comment">// &#x6570;&#x7EC4;&#x8BE5;&#x4F4D;&#x7F6E;&#x6709;&#x6570;&#x636E;</span>
+        Node&lt;K,V&gt; e; K k;
+        <span class="hljs-comment">// &#x9996;&#x5148;&#xFF0C;&#x5224;&#x65AD;&#x8BE5;&#x4F4D;&#x7F6E;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x548C;&#x6211;&#x4EEC;&#x8981;&#x63D2;&#x5165;&#x7684;&#x6570;&#x636E;&#xFF0C;key &#x662F;&#x4E0D;&#x662F;&quot;&#x76F8;&#x7B49;&quot;&#xFF0C;&#x5982;&#x679C;&#x662F;&#xFF0C;&#x53D6;&#x51FA;&#x8FD9;&#x4E2A;&#x8282;&#x70B9;</span>
+        <span class="hljs-keyword">if</span> (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != <span class="hljs-keyword">null</span> &amp;&amp; key.equals(k))))
+            e = p;
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x8BE5;&#x8282;&#x70B9;&#x662F;&#x4EE3;&#x8868;&#x7EA2;&#x9ED1;&#x6811;&#x7684;&#x8282;&#x70B9;&#xFF0C;&#x8C03;&#x7528;&#x7EA2;&#x9ED1;&#x6811;&#x7684;&#x63D2;&#x503C;&#x65B9;&#x6CD5;&#xFF0C;&#x672C;&#x6587;&#x4E0D;&#x5C55;&#x5F00;&#x8BF4;&#x7EA2;&#x9ED1;&#x6811;</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p <span class="hljs-keyword">instanceof</span> TreeNode)
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="hljs-keyword">this</span>, tab, hash, key, value);
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// &#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x8BF4;&#x660E;&#x6570;&#x7EC4;&#x8BE5;&#x4F4D;&#x7F6E;&#x4E0A;&#x662F;&#x4E00;&#x4E2A;&#x94FE;&#x8868;</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> binCount = <span class="hljs-number">0</span>; ; ++binCount) {
+                <span class="hljs-comment">// &#x63D2;&#x5165;&#x5230;&#x94FE;&#x8868;&#x7684;&#x6700;&#x540E;&#x9762;(Java7 &#x662F;&#x63D2;&#x5165;&#x5230;&#x94FE;&#x8868;&#x7684;&#x6700;&#x524D;&#x9762;)</span>
+                <span class="hljs-keyword">if</span> ((e = p.next) == <span class="hljs-keyword">null</span>) {
+                    p.next = newNode(hash, key, value, <span class="hljs-keyword">null</span>);
+                    <span class="hljs-comment">// TREEIFY_THRESHOLD &#x4E3A; 8&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x5982;&#x679C;&#x65B0;&#x63D2;&#x5165;&#x7684;&#x503C;&#x662F;&#x94FE;&#x8868;&#x4E2D;&#x7684;&#x7B2C; 8 &#x4E2A;</span>
+                    <span class="hljs-comment">// &#x4F1A;&#x89E6;&#x53D1;&#x4E0B;&#x9762;&#x7684; treeifyBin&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5C06;&#x94FE;&#x8868;&#x8F6C;&#x6362;&#x4E3A;&#x7EA2;&#x9ED1;&#x6811;</span>
+                    <span class="hljs-keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="hljs-number">1</span>) <span class="hljs-comment">// -1 for 1st</span>
+                        treeifyBin(tab, hash);
+                    <span class="hljs-keyword">break</span>;
+                }
+                <span class="hljs-comment">// &#x5982;&#x679C;&#x5728;&#x8BE5;&#x94FE;&#x8868;&#x4E2D;&#x627E;&#x5230;&#x4E86;&quot;&#x76F8;&#x7B49;&quot;&#x7684; key(== &#x6216; equals)</span>
+                <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != <span class="hljs-keyword">null</span> &amp;&amp; key.equals(k))))
+                    <span class="hljs-comment">// &#x6B64;&#x65F6; break&#xFF0C;&#x90A3;&#x4E48; e &#x4E3A;&#x94FE;&#x8868;&#x4E2D;[&#x4E0E;&#x8981;&#x63D2;&#x5165;&#x7684;&#x65B0;&#x503C;&#x7684; key &quot;&#x76F8;&#x7B49;&quot;]&#x7684; node</span>
+                    <span class="hljs-keyword">break</span>;
+                p = e;
+            }
+        }
+        <span class="hljs-comment">// e!=null &#x8BF4;&#x660E;&#x5B58;&#x5728;&#x65E7;&#x503C;&#x7684;key&#x4E0E;&#x8981;&#x63D2;&#x5165;&#x7684;key&quot;&#x76F8;&#x7B49;&quot;</span>
+        <span class="hljs-comment">// &#x5BF9;&#x4E8E;&#x6211;&#x4EEC;&#x5206;&#x6790;&#x7684;put&#x64CD;&#x4F5C;&#xFF0C;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A; if &#x5176;&#x5B9E;&#x5C31;&#x662F;&#x8FDB;&#x884C; &quot;&#x503C;&#x8986;&#x76D6;&quot;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x65E7;&#x503C;</span>
+        <span class="hljs-keyword">if</span> (e != <span class="hljs-keyword">null</span>) {
+            V oldValue = e.value;
+            <span class="hljs-keyword">if</span> (!onlyIfAbsent || oldValue == <span class="hljs-keyword">null</span>)
+                e.value = value;
+            afterNodeAccess(e);
+            <span class="hljs-keyword">return</span> oldValue;
+        }
+    }
+    ++modCount;
+    <span class="hljs-comment">// &#x5982;&#x679C; HashMap &#x7531;&#x4E8E;&#x65B0;&#x63D2;&#x5165;&#x8FD9;&#x4E2A;&#x503C;&#x5BFC;&#x81F4; size &#x5DF2;&#x7ECF;&#x8D85;&#x8FC7;&#x4E86;&#x9608;&#x503C;&#xFF0C;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x6269;&#x5BB9;</span>
+    <span class="hljs-keyword">if</span> (++size &gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+}
+</code></pre>
+<h4 id="get-&#x64CD;&#x4F5C;&#x5206;&#x6790;"><p id="title_3_4">get &#x64CD;&#x4F5C;&#x5206;&#x6790;</p></h4>
+<p>&#x76F8;&#x5BF9;&#x4E8E; put &#x6765;&#x8BF4;&#xFF0C;get &#x771F;&#x7684;&#x592A;&#x7B80;&#x5355;&#x4E86;&#x3002;</p>
+<ol>
+<li>&#x8BA1;&#x7B97; key &#x7684; hash &#x503C;&#xFF0C;&#x6839;&#x636E; hash &#x503C;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x6570;&#x7EC4;&#x4E0B;&#x6807;: hash &amp; (length-1)</li>
+<li>&#x5224;&#x65AD;&#x6570;&#x7EC4;&#x8BE5;&#x4F4D;&#x7F6E;&#x5904;&#x7684;&#x5143;&#x7D20;&#x662F;&#x5426;&#x521A;&#x597D;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x8981;&#x627E;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x662F;&#xFF0C;&#x8D70;&#x7B2C;&#x4E09;&#x6B65;</li>
+<li>&#x5224;&#x65AD;&#x8BE5;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x662F;&#x5426;&#x662F; TreeNode&#xFF0C;&#x5982;&#x679C;&#x662F;&#xFF0C;&#x7528;&#x7EA2;&#x9ED1;&#x6811;&#x7684;&#x65B9;&#x6CD5;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x662F;&#xFF0C;&#x8D70;&#x7B2C;&#x56DB;&#x6B65;</li>
+<li>&#x904D;&#x5386;&#x94FE;&#x8868;&#xFF0C;&#x76F4;&#x5230;&#x627E;&#x5230;&#x76F8;&#x7B49;(==&#x6216;equals)&#x7684; key</li>
+</ol>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> V <span class="hljs-title">get</span><span class="hljs-params">(Object key)</span> </span>{
+    Node&lt;K,V&gt; e;
+    <span class="hljs-keyword">return</span> (e = getNode(hash(key), key)) == <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">null</span> : e.value;
+}
+<span class="hljs-function"><span class="hljs-keyword">final</span> Node&lt;K,V&gt; <span class="hljs-title">getNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> hash, Object key)</span> </span>{
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; <span class="hljs-keyword">int</span> n; K k;
+    <span class="hljs-keyword">if</span> ((tab = table) != <span class="hljs-keyword">null</span> &amp;&amp; (n = tab.length) &gt; <span class="hljs-number">0</span> &amp;&amp;
+        (first = tab[(n - <span class="hljs-number">1</span>) &amp; hash]) != <span class="hljs-keyword">null</span>) {
+        <span class="hljs-comment">// &#x5224;&#x65AD;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x662F;&#x4E0D;&#x662F;&#x5C31;&#x662F;&#x9700;&#x8981;&#x7684;</span>
+        <span class="hljs-keyword">if</span> (first.hash == hash &amp;&amp; <span class="hljs-comment">// always check first node</span>
+            ((k = first.key) == key || (key != <span class="hljs-keyword">null</span> &amp;&amp; key.equals(k))))
+            <span class="hljs-keyword">return</span> first;
+        <span class="hljs-keyword">if</span> ((e = first.next) != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-comment">// &#x5224;&#x65AD;&#x662F;&#x5426;&#x662F;&#x7EA2;&#x9ED1;&#x6811;</span>
+            <span class="hljs-keyword">if</span> (first <span class="hljs-keyword">instanceof</span> TreeNode)
+                <span class="hljs-keyword">return</span> ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
+
+            <span class="hljs-comment">// &#x94FE;&#x8868;&#x904D;&#x5386;</span>
+            do {
+                <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != <span class="hljs-keyword">null</span> &amp;&amp; key.equals(k))))
+                    <span class="hljs-keyword">return</span> e;
+            } <span class="hljs-keyword">while</span> ((e = e.next) != <span class="hljs-keyword">null</span>);
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+}
+</code></pre>
+<h4 id="resize-&#x64CD;&#x4F5C;&#x5206;&#x6790;"><p id="title_3_5">resize &#x64CD;&#x4F5C;&#x5206;&#x6790;</p></h4>
+<p>&#x8FDB;&#x884C;&#x6269;&#x5BB9;&#xFF0C;&#x4F1A;&#x4F34;&#x968F;&#x7740;&#x4E00;&#x6B21;&#x91CD;&#x65B0; hash &#x5206;&#x914D;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x904D;&#x5386; hash &#x8868;&#x4E2D;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x662F;&#x975E;&#x5E38;&#x8017;&#x65F6;&#x7684;&#x3002;&#x5728;&#x7F16;&#x5199;&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x8981;&#x5C3D;&#x91CF;&#x907F;&#x514D; resize&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">final</span> Node&lt;K,V&gt;[] resize() {
+    Node&lt;K,V&gt;[] oldTab = table;
+    <span class="hljs-keyword">int</span> oldCap = (oldTab == <span class="hljs-keyword">null</span>) ? <span class="hljs-number">0</span> : oldTab.length;
+    <span class="hljs-keyword">int</span> oldThr = threshold;
+    <span class="hljs-keyword">int</span> newCap, newThr = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (oldCap &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-comment">// &#x8D85;&#x8FC7;&#x6700;&#x5927;&#x503C;&#x5C31;&#x4E0D;&#x518D;&#x6269;&#x5145;&#x4E86;&#xFF0C;&#x5C31;&#x53EA;&#x597D;&#x968F;&#x4F60;&#x78B0;&#x649E;&#x53BB;&#x5427;</span>
+        <span class="hljs-keyword">if</span> (oldCap &gt;= MAXIMUM_CAPACITY) {
+            threshold = Integer.MAX_VALUE;
+            <span class="hljs-keyword">return</span> oldTab;
+        }
+        <span class="hljs-comment">// &#x6CA1;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x503C;&#xFF0C;&#x5C31;&#x6269;&#x5145;&#x4E3A;&#x539F;&#x6765;&#x7684;2&#x500D;</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((newCap = oldCap &lt;&lt; <span class="hljs-number">1</span>) &lt; MAXIMUM_CAPACITY &amp;&amp; oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
+            newThr = oldThr &lt;&lt; <span class="hljs-number">1</span>; <span class="hljs-comment">// double threshold</span>
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (oldThr &gt; <span class="hljs-number">0</span>) <span class="hljs-comment">// initial capacity was placed in threshold</span>
+        newCap = oldThr;
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// signifies using defaults</span>
+        newCap = DEFAULT_INITIAL_CAPACITY;
+        newThr = (<span class="hljs-keyword">int</span>)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+    }
+    <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x65B0;&#x7684;resize&#x4E0A;&#x9650;</span>
+    <span class="hljs-keyword">if</span> (newThr == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">float</span> ft = (<span class="hljs-keyword">float</span>)newCap * loadFactor;
+        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (<span class="hljs-keyword">float</span>)MAXIMUM_CAPACITY ? (<span class="hljs-keyword">int</span>)ft : Integer.MAX_VALUE);
+    }
+    threshold = newThr;
+    <span class="hljs-meta">@SuppressWarnings</span>({<span class="hljs-string">&quot;rawtypes&quot;</span>,<span class="hljs-string">&quot;unchecked&quot;</span>})
+        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])<span class="hljs-keyword">new</span> Node[newCap];
+    table = newTab;
+    <span class="hljs-keyword">if</span> (oldTab != <span class="hljs-keyword">null</span>) {
+        <span class="hljs-comment">// &#x628A;&#x6BCF;&#x4E2A;bucket&#x90FD;&#x79FB;&#x52A8;&#x5230;&#x65B0;&#x7684;buckets&#x4E2D;</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; oldCap; ++j) {
+            Node&lt;K,V&gt; e;
+            <span class="hljs-keyword">if</span> ((e = oldTab[j]) != <span class="hljs-keyword">null</span>) {
+                oldTab[j] = <span class="hljs-keyword">null</span>;
+                <span class="hljs-keyword">if</span> (e.next == <span class="hljs-keyword">null</span>)
+                    newTab[e.hash &amp; (newCap - <span class="hljs-number">1</span>)] = e;
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> TreeNode)
+                    ((TreeNode&lt;K,V&gt;)e).split(<span class="hljs-keyword">this</span>, newTab, j, oldCap);
+                <span class="hljs-keyword">else</span> {
+                    Node&lt;K,V&gt; loHead = <span class="hljs-keyword">null</span>, loTail = <span class="hljs-keyword">null</span>;
+                    Node&lt;K,V&gt; hiHead = <span class="hljs-keyword">null</span>, hiTail = <span class="hljs-keyword">null</span>;
+                    Node&lt;K,V&gt; next;
+                    do {
+                        next = e.next;
+                        <span class="hljs-comment">// &#x539F;&#x7D22;&#x5F15;</span>
+                        <span class="hljs-keyword">if</span> ((e.hash &amp; oldCap) == <span class="hljs-number">0</span>) {
+                            <span class="hljs-keyword">if</span> (loTail == <span class="hljs-keyword">null</span>)
+                                loHead = e;
+                            <span class="hljs-keyword">else</span>
+                                loTail.next = e;
+                            loTail = e;
+                        }
+                        <span class="hljs-comment">// &#x539F;&#x7D22;&#x5F15;+oldCap</span>
+                        <span class="hljs-keyword">else</span> {
+                            <span class="hljs-keyword">if</span> (hiTail == <span class="hljs-keyword">null</span>)
+                                hiHead = e;
+                            <span class="hljs-keyword">else</span>
+                                hiTail.next = e;
+                            hiTail = e;
+                        }
+                    } <span class="hljs-keyword">while</span> ((e = next) != <span class="hljs-keyword">null</span>);
+                    <span class="hljs-comment">// &#x539F;&#x7D22;&#x5F15;&#x653E;&#x5230;bucket&#x91CC;</span>
+                    <span class="hljs-keyword">if</span> (loTail != <span class="hljs-keyword">null</span>) {
+                        loTail.next = <span class="hljs-keyword">null</span>;
+                        newTab[j] = loHead;
+                    }
+                    <span class="hljs-comment">// &#x539F;&#x7D22;&#x5F15;+oldCap&#x653E;&#x5230;bucket&#x91CC;</span>
+                    <span class="hljs-keyword">if</span> (hiTail != <span class="hljs-keyword">null</span>) {
+                        hiTail.next = <span class="hljs-keyword">null</span>;
+                        newTab[j + oldCap] = hiHead;
+                    }
+                }
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> newTab;
+}
+</code></pre>
+<h3 id="&#x603B;&#x7ED3;"><p id="title_4">&#x603B;&#x7ED3;</p></h3>
+<p>&#x672C;&#x6587;&#x53EA;&#x662F;&#x4ECB;&#x7ECD;&#x4E86; HashMap &#x7684;&#x6E90;&#x7801;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x7ED9;&#x5927;&#x5BB6;&#x4ECB;&#x7ECD;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684; ConcurrentHashMap &#x3002;&#x4EE5;&#x540E;&#x6709;&#x7A7A;&#x4F1A;&#x7ED9;&#x5927;&#x5BB6;&#x5199;&#x4E00;&#x671F;&#x5BF9;ConcurrentHashMap &#x7684;&#x8BB2;&#x89E3;&#x3002;</p>
+<p>&#x770B;&#x6E90;&#x7801;&#x4E0D;&#x7B97;&#x662F;&#x76EE;&#x7684;&#x5427;&#xFF0C;&#x6DF1;&#x5165;&#x5730;&#x4E86;&#x89E3; Doug Lea &#x7684;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#xFF0C;&#x5411;&#x5927;&#x4F6C;&#x819C;&#x62DC;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="linkedlist.html" class="navigation navigation-prev " aria-label="Previous page: LinkedList">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../design/" class="navigation navigation-next " aria-label="Next page: 消息队列">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"HashMap","level":"2.2.3","depth":2,"next":{"title":"消息队列","level":"2.3","depth":1,"path":"doc/design/README.md","ref":"doc/design/README.md","articles":[]},"previous":{"title":"LinkedList","level":"2.2.2","depth":2,"path":"doc/container/linkedlist.md","ref":"doc/container/linkedlist.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-lunr","-search","chapter-fold","lightbox","search-pro","pageview-count"],"pluginsConfig":{"chapter-fold":{},"lightbox":{"jquery":true,"sameUuid":false},"search-pro":{},"pageview-count":{},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/container/hashmap.md","mtime":"2021-07-30T08:42:30.996Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-30T08:44:58.072Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
