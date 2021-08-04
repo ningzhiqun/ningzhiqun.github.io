@@ -135,7 +135,20 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.1.1" data-path="../design/status_machine.html">
+        <li class="chapter " data-level="2.1.1" data-path="../design/design.html">
+            
+                <a href="../design/design.html">
+            
+                    
+                    24 种设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../design/status_machine.html">
             
                 <a href="../design/status_machine.html">
             
@@ -309,7 +322,7 @@
 <p>LinkedList&#x662F;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x4E86;List&#x63A5;&#x53E3;&#x548C;Deque&#x63A5;&#x53E3;&#x7684;&#x53CC;&#x7AEF;&#x94FE;&#x8868;&#x3002; LinkedList&#x5E95;&#x5C42;&#x7684;&#x94FE;&#x8868;&#x7ED3;&#x6784;&#x4F7F;&#x5B83;&#x652F;&#x6301;&#x9AD8;&#x6548;&#x7684;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#xFF0C;&#x53E6;&#x5916;&#x5B83;&#x5B9E;&#x73B0;&#x4E86;Deque&#x63A5;&#x53E3;&#xFF0C;&#x4F7F;&#x5F97;LinkedList&#x7C7B;&#x4E5F;&#x5177;&#x6709;&#x961F;&#x5217;&#x7684;&#x7279;&#x6027;; LinkedList&#x4E0D;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x4F7F;LinkedList&#x53D8;&#x6210;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x8C03;&#x7528;&#x9759;&#x6001;&#x7C7B;Collections&#x7C7B;&#x4E2D;&#x7684;synchronizedList&#x65B9;&#x6CD5;&#xFF1A;</p>
 <pre><code>List list=Collections.synchronizedList(new LinkedList(...));
 </code></pre><h3 id="2-&#x5185;&#x90E8;&#x7ED3;&#x6784;&#x2014;&#x2014;&#x53CC;&#x5411;&#x94FE;&#x8868;"><p id="">2. &#x5185;&#x90E8;&#x7ED3;&#x6784;&#x2014;&#x2014;&#x53CC;&#x5411;&#x94FE;&#x8868;</p></h3>
-<p><a href="https://gitee.com/SnailClimb/JavaGuide/raw/master/docs/java/collection/images/linkedlist/LinkedList%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png" data-lightbox="9baadb18-d5bd-40a3-83fa-6134980e9646" data-title="img" target="_blank"><img src="https://gitee.com/SnailClimb/JavaGuide/raw/master/docs/java/collection/images/linkedlist/LinkedList%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png" alt="img"></a></p>
+<p><a href="https://gitee.com/SnailClimb/JavaGuide/raw/master/docs/java/collection/images/linkedlist/LinkedList%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png" data-lightbox="59400ede-4730-40ca-8516-fdbd9cbff608" data-title="img" target="_blank"><img src="https://gitee.com/SnailClimb/JavaGuide/raw/master/docs/java/collection/images/linkedlist/LinkedList%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png" alt="img"></a></p>
 <p>&#x770B;&#x5B8C;&#x4E86;&#x56FE;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x770B;LinkedList&#x7C7B;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;<strong>&#x5185;&#x90E8;&#x79C1;&#x6709;&#x7C7B;Node</strong>&#x5C31;&#x5F88;&#x597D;&#x7406;&#x89E3;&#x4E86;&#xFF1A;</p>
 <pre><code>private static class Node&lt;E&gt; {
         E item;//&#x8282;&#x70B9;&#x503C;
@@ -667,7 +680,7 @@ public E pollLast() {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"LinkedList","level":"2.3.2","depth":2,"next":{"title":"HashMap","level":"2.3.3","depth":2,"path":"doc/container/hashmap.md","ref":"doc/container/hashmap.md","articles":[]},"previous":{"title":"ArrayList","level":"2.3.1","depth":2,"path":"doc/container/arraylist.md","ref":"doc/container/arraylist.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-lunr","-search","chapter-fold","lightbox","search-pro","pageview-count"],"pluginsConfig":{"chapter-fold":{},"lightbox":{"jquery":true,"sameUuid":false},"search-pro":{},"pageview-count":{},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/container/linkedlist.md","mtime":"2021-07-30T01:35:19.592Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-03T06:37:07.230Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"LinkedList","level":"2.3.2","depth":2,"next":{"title":"HashMap","level":"2.3.3","depth":2,"path":"doc/container/hashmap.md","ref":"doc/container/hashmap.md","articles":[]},"previous":{"title":"ArrayList","level":"2.3.1","depth":2,"path":"doc/container/arraylist.md","ref":"doc/container/arraylist.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-lunr","-search","chapter-fold","lightbox","search-pro","pageview-count"],"pluginsConfig":{"chapter-fold":{},"lightbox":{"jquery":true,"sameUuid":false},"search-pro":{},"pageview-count":{},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/container/linkedlist.md","mtime":"2021-07-30T01:35:19.592Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-04T08:04:26.690Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
