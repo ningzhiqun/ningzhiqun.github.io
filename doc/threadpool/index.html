@@ -1,0 +1,1575 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>线程池 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="../messagequeue/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    我的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../design/">
+            
+                <a href="../design/">
+            
+                    
+                    设计模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../design/design.html">
+            
+                <a href="../design/design.html">
+            
+                    
+                    24 种设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../design/status_machine.html">
+            
+                <a href="../design/status_machine.html">
+            
+                    
+                    状态机模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../io/">
+            
+                <a href="../io/">
+            
+                    
+                    java io
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../io/niodesc.html">
+            
+                <a href="../io/niodesc.html">
+            
+                    
+                    java nio 三大组件 Buffer、Channel 和 Selector
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../container/">
+            
+                <a href="../container/">
+            
+                    
+                    java 容器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../container/arraylist.html">
+            
+                <a href="../container/arraylist.html">
+            
+                    
+                    ArrayList
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../container/linkedlist.html">
+            
+                <a href="../container/linkedlist.html">
+            
+                    
+                    LinkedList
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.3" data-path="../container/hashmap.html">
+            
+                <a href="../container/hashmap.html">
+            
+                    
+                    HashMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../messagequeue/">
+            
+                <a href="../messagequeue/">
+            
+                    
+                    消息队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >线程池</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>&#x7EBF;&#x7A0B;&#x6C60;&#x662F;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x8981;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x597D;&#x7684;&#x5DE5;&#x7A0B;&#x5E08;&#xFF0C;&#x8FD8;&#x662F;&#x5F97;&#x6BD4;&#x8F83;&#x597D;&#x5730;&#x638C;&#x63E1;&#x8FD9;&#x4E2A;&#x77E5;&#x8BC6;&#xFF0C;&#x5F88;&#x591A;&#x7EBF;&#x4E0A;&#x95EE;&#x9898;&#x90FD;&#x662F;&#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x7528;&#x597D;&#x7EBF;&#x7A0B;&#x6C60;&#x5BFC;&#x81F4;&#x7684;&#x3002;</p>
+<p>&#x6211;&#x76F8;&#x4FE1;&#x5927;&#x5BB6;&#x90FD;&#x770B;&#x8FC7;&#x5F88;&#x591A;&#x7684;&#x5173;&#x4E8E;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x6587;&#x7AE0;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x4E5F;&#x662F;&#x9762;&#x8BD5;&#x7684;&#x65F6;&#x5019;&#x5FC5;&#x95EE;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5728;&#x770B;&#x8FC7;&#x5F88;&#x591A;&#x6587;&#x7AE0;&#x4EE5;&#x540E;&#xFF0C;&#x8FD8;&#x662F;&#x4E00;&#x77E5;&#x534A;&#x89E3;&#x7684;&#xFF0C;&#x90A3;&#x5E0C;&#x671B;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x80FD;&#x8BA9;&#x4F60;&#x771F;&#x6B63;&#x7684;&#x638C;&#x63E1;&#x597D; Java &#x7EBF;&#x7A0B;&#x6C60;&#x3002;</p>
+<h2 id="&#x603B;&#x89C8;">&#x603B;&#x89C8;</h2>
+<p>&#x5F00;&#x7BC7;&#x6765;&#x4E00;&#x4E9B;&#x5E9F;&#x8BDD;&#x3002;&#x4E0B;&#x56FE;&#x662F; java &#x7EBF;&#x7A0B;&#x6C60;&#x51E0;&#x4E2A;&#x76F8;&#x5173;&#x7C7B;&#x7684;&#x7EE7;&#x627F;&#x7ED3;&#x6784;&#xFF1A;</p>
+<p><a href="../../images/threadpool/1.jpeg" data-lightbox="33b4bf09-d401-45c2-9299-c7f1de75f0f3" data-title="1"><img src="../../images/threadpool/1.jpeg" alt="1"></a></p>
+<p>&#x5148;&#x7B80;&#x5355;&#x8BF4;&#x8BF4;&#x8FD9;&#x4E2A;&#x7EE7;&#x627F;&#x7ED3;&#x6784;&#xFF0C;Executor &#x4F4D;&#x4E8E;&#x6700;&#x9876;&#x5C42;&#xFF0C;&#x4E5F;&#x662F;&#x6700;&#x7B80;&#x5355;&#x7684;&#xFF0C;&#x5C31;&#x4E00;&#x4E2A; execute(Runnable runnable) &#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x5B9A;&#x4E49;&#x3002;</p>
+<p>ExecutorService &#x4E5F;&#x662F;&#x63A5;&#x53E3;&#xFF0C;&#x5728; Executor &#x63A5;&#x53E3;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x6DFB;&#x52A0;&#x4E86;&#x5F88;&#x591A;&#x7684;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;<strong>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#x6211;&#x4EEC;&#x4F1A;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;</strong>&#x3002;</p>
+<p>&#x7136;&#x540E;&#x518D;&#x4E0B;&#x6765;&#x4E00;&#x5C42;&#x662F; AbstractExecutorService&#xFF0C;&#x4ECE;&#x540D;&#x5B57;&#x6211;&#x4EEC;&#x5C31;&#x77E5;&#x9053;&#xFF0C;&#x8FD9;&#x662F;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x8FD9;&#x91CC;&#x5B9E;&#x73B0;&#x4E86;&#x975E;&#x5E38;&#x6709;&#x7528;&#x7684;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#x4F9B;&#x5B50;&#x7C7B;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#xFF0C;&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x518D;&#x7EC6;&#x8BF4;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x624D;&#x5230;&#x6211;&#x4EEC;&#x7684;&#x91CD;&#x70B9;&#x90E8;&#x5206; ThreadPoolExecutor &#x7C7B;&#xFF0C;&#x8FD9;&#x4E2A;&#x7C7B;&#x63D0;&#x4F9B;&#x4E86;&#x5173;&#x4E8E;&#x7EBF;&#x7A0B;&#x6C60;&#x6240;&#x9700;&#x7684;&#x975E;&#x5E38;&#x4E30;&#x5BCC;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x6D89;&#x53CA;&#x5230;&#x4E0B;&#x56FE;&#x4E2D;&#x7684;&#x8FD9;&#x4E9B;&#x7C7B;&#xFF1A;</p>
+<p><a href="../../images/threadpool/others.png" data-lightbox="f8c4a62e-d4e7-41fb-913f-a4e2fdee3708" data-title="others"><img src="../../images/threadpool/others.png" alt="others"></a></p>
+<p>&#x540C;&#x5728;&#x5E76;&#x53D1;&#x5305;&#x4E2D;&#x7684; Executors &#x7C7B;&#xFF0C;&#x7C7B;&#x540D;&#x4E2D;&#x5E26;&#x5B57;&#x6BCD; s&#xFF0C;&#x6211;&#x4EEC;&#x731C;&#x5230;&#x8FD9;&#x4E2A;&#x662F;&#x5DE5;&#x5177;&#x7C7B;&#xFF0C;&#x91CC;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#x90FD;&#x662F;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#xFF0C;&#x5982;&#x4EE5;&#x4E0B;&#x6211;&#x4EEC;&#x6700;&#x5E38;&#x7528;&#x7684;&#x7528;&#x4E8E;&#x751F;&#x6210; ThreadPoolExecutor &#x7684;&#x5B9E;&#x4F8B;&#x7684;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newCachedThreadPool</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreadPoolExecutor(<span class="hljs-number">0</span>, Integer.MAX_VALUE,
+                                  <span class="hljs-number">60L</span>, TimeUnit.SECONDS,
+                                  <span class="hljs-keyword">new</span> SynchronousQueue&lt;Runnable&gt;());
+}
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newFixedThreadPool</span><span class="hljs-params">(<span class="hljs-keyword">int</span> nThreads)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,
+                                  <span class="hljs-number">0L</span>, TimeUnit.MILLISECONDS,
+                                  <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());
+}
+</code></pre>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x7531;&#x4E8E;&#x7EBF;&#x7A0B;&#x6C60;&#x652F;&#x6301;<strong>&#x83B7;&#x53D6;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x7684;&#x7ED3;&#x679C;</strong>&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x5F15;&#x5165;&#x4E86; Future &#x63A5;&#x53E3;&#xFF0C;RunnableFuture &#x7EE7;&#x627F;&#x81EA;&#x6B64;&#x63A5;&#x53E3;&#xFF0C;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x6700;&#x9700;&#x8981;&#x5173;&#x5FC3;&#x7684;&#x5C31;&#x662F;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x7C7B; FutureTask&#x3002;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x8BB0;&#x4F4F;&#x8FD9;&#x4E2A;&#x6982;&#x5FF5;&#xFF0C;&#x5728;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x4F7F;&#x7528;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x5F80;&#x7EBF;&#x7A0B;&#x6C60;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#xFF08;task&#xFF09;&#xFF0C;&#x4F7F;&#x7528;&#x8FC7;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x90FD;&#x77E5;&#x9053;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x4EA4;&#x7684;&#x6BCF;&#x4E2A;&#x4EFB;&#x52A1;&#x662F;&#x5B9E;&#x73B0;&#x4E86; Runnable &#x63A5;&#x53E3;&#x7684;&#xFF0C;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x5148;&#x5C06; Runnable &#x7684;&#x4EFB;&#x52A1;&#x5305;&#x88C5;&#x6210; FutureTask&#xFF0C;&#x7136;&#x540E;&#x518D;&#x63D0;&#x4EA4;&#x5230;&#x7EBF;&#x7A0B;&#x6C60;&#x3002;&#x8FD9;&#x6837;&#xFF0C;&#x8BFB;&#x8005;&#x624D;&#x80FD;&#x6BD4;&#x8F83;&#x5BB9;&#x6613;&#x8BB0;&#x4F4F; FutureTask &#x8FD9;&#x4E2A;&#x7C7B;&#x540D;&#xFF1A;&#x5B83;&#x9996;&#x5148;&#x662F;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF08;Task&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x5177;&#x6709; Future &#x63A5;&#x53E3;&#x7684;&#x8BED;&#x4E49;&#xFF0C;&#x5373;&#x53EF;&#x4EE5;&#x5728;&#x5C06;&#x6765;&#xFF08;Future&#xFF09;&#x5F97;&#x5230;&#x6267;&#x884C;&#x7684;&#x7ED3;&#x679C;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684; BlockingQueue &#x4E5F;&#x662F;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6570;&#x8FBE;&#x5230; corePoolSize&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x6BCF;&#x4E2A;&#x4EFB;&#x52A1;&#x4F1A;&#x63D0;&#x4EA4;&#x5230;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6765;&#x53D6;&#x4EFB;&#x52A1;&#x5E76;&#x6267;&#x884C;&#x3002;&#x8FD9;&#x91CC;&#x7684; BlockingQueue &#x901A;&#x5E38;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x5176;&#x5B9E;&#x73B0;&#x7C7B; LinkedBlockingQueue&#x3001;ArrayBlockingQueue &#x548C; SynchronousQueue&#xFF0C;&#x6BCF;&#x4E2A;&#x5B9E;&#x73B0;&#x7C7B;&#x90FD;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x7279;&#x5F81;&#xFF0C;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x540E;&#x4F1A;&#x6162;&#x6162;&#x5206;&#x6790;&#x3002;&#x60F3;&#x8981;&#x8BE6;&#x7EC6;&#x4E86;&#x89E3;&#x5404;&#x4E2A; BlockingQueue &#x7684;&#x8BFB;&#x8005;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x6211;&#x7684;&#x524D;&#x9762;&#x7684;&#x4E00;&#x7BC7;&#x5BF9; BlockingQueue &#x7684;&#x5404;&#x4E2A;&#x5B9E;&#x73B0;&#x7C7B;&#x8FDB;&#x884C;&#x8BE6;&#x7EC6;&#x5206;&#x6790;&#x7684;&#x6587;&#x7AE0;&#x3002;</p>
+<blockquote>
+<p>&#x628A;&#x4E8B;&#x60C5;&#x8BF4;&#x5B8C;&#x6574;&#xFF1A;&#x9664;&#x4E86;&#x4E0A;&#x9762;&#x8BF4;&#x7684;&#x8FD9;&#x4E9B;&#x7C7B;&#x5916;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x5F88;&#x91CD;&#x8981;&#x7684;&#x7C7B;&#xFF0C;&#x5C31;&#x662F;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x5B9E;&#x73B0;&#x7C7B; ScheduledThreadPoolExecutor&#xFF0C;&#x5B83;&#x7EE7;&#x627F;&#x81EA;&#x672C;&#x6587;&#x8981;&#x91CD;&#x70B9;&#x8BB2;&#x89E3;&#x7684; ThreadPoolExecutor&#xFF0C;&#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x5B9A;&#x65F6;&#x6267;&#x884C;&#x3002;&#x4E0D;&#x8FC7;&#x672C;&#x6587;&#x4E0D;&#x4F1A;&#x4ECB;&#x7ECD;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x6211;&#x76F8;&#x4FE1;&#x8BFB;&#x8005;&#x770B;&#x5B8C;&#x672C;&#x6587;&#x540E;&#x53EF;&#x4EE5;&#x6BD4;&#x8F83;&#x5BB9;&#x6613;&#x5730;&#x770B;&#x61C2;&#x5B83;&#x7684;&#x6E90;&#x7801;&#x3002;</p>
+</blockquote>
+<p>&#x4EE5;&#x4E0A;&#x5C31;&#x662F;&#x672C;&#x6587;&#x8981;&#x4ECB;&#x7ECD;&#x7684;&#x77E5;&#x8BC6;&#xFF0C;&#x5E9F;&#x8BDD;&#x4E0D;&#x591A;&#x8BF4;&#xFF0C;&#x5F00;&#x59CB;&#x8FDB;&#x5165;&#x6B63;&#x6587;&#x3002;</p>
+<h2 id="executor-&#x63A5;&#x53E3;">Executor &#x63A5;&#x53E3;</h2>
+<pre><code class="lang-java"><span class="hljs-comment">/* 
+ * @since 1.5
+ * @author Doug Lea
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Executor</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Runnable command)</span></span>;
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230; Executor &#x63A5;&#x53E3;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x4E00;&#x4E2A; <code>void execute(Runnable command)</code> &#x65B9;&#x6CD5;&#xFF0C;&#x4EE3;&#x8868;&#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x3002;&#x4E3A;&#x4E86;&#x8BA9;&#x5927;&#x5BB6;&#x7406;&#x89E3; java &#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x6574;&#x4E2A;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;&#xFF0C;&#x6211;&#x4F1A;&#x6309;&#x7167; Doug Lea &#x7684;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#x6765;&#x591A;&#x8BF4;&#x4E00;&#x4E9B;&#x76F8;&#x5173;&#x7684;&#x4E1C;&#x897F;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x8FD9;&#x6837;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable(){
+  <span class="hljs-comment">// do something</span>
+}).start();
+</code></pre>
+<p>&#x7528;&#x4E86;&#x7EBF;&#x7A0B;&#x6C60; Executor &#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x50CF;&#x4E0B;&#x9762;&#x8FD9;&#x4E48;&#x4F7F;&#x7528;&#xFF1A;</p>
+<pre><code class="lang-java">Executor executor = anExecutor;
+executor.execute(<span class="hljs-keyword">new</span> RunnableTask1());
+executor.execute(<span class="hljs-keyword">new</span> RunnableTask2());
+</code></pre>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x7EBF;&#x7A0B;&#x6C60;&#x540C;&#x6B65;&#x6267;&#x884C;&#x6BCF;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FD9;&#x4E48;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DirectExecutor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Executor</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Runnable r)</span> </span>{
+        r.run();<span class="hljs-comment">// &#x8FD9;&#x91CC;&#x4E0D;&#x662F;&#x7528;&#x7684;new Thread(r).start()&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x6CA1;&#x6709;&#x542F;&#x52A8;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</span>
+    }
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x6BCF;&#x4E2A;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x8FDB;&#x6765;&#x540E;&#xFF0C;&#x76F4;&#x63A5;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#x6765;&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FD9;&#x4E48;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadPerTaskExecutor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Executor</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Runnable r)</span> </span>{
+        <span class="hljs-keyword">new</span> Thread(r).start();  <span class="hljs-comment">// &#x6BCF;&#x4E2A;&#x4EFB;&#x52A1;&#x90FD;&#x7528;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#x6765;&#x6267;&#x884C;</span>
+    }
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x518D;&#x6765;&#x770B;&#x4E0B;&#x600E;&#x4E48;&#x7EC4;&#x5408;&#x4E24;&#x4E2A; Executor &#x6765;&#x4F7F;&#x7528;&#xFF0C;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x5B9E;&#x73B0;&#x662F;&#x5C06;&#x6240;&#x6709;&#x7684;&#x4EFB;&#x52A1;&#x90FD;&#x52A0;&#x5230;&#x4E00;&#x4E2A; queue &#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x4ECE; queue &#x4E2D;&#x53D6;&#x4EFB;&#x52A1;&#xFF0C;&#x4EA4;&#x7ED9;&#x771F;&#x6B63;&#x7684;&#x6267;&#x884C;&#x5668;&#x6267;&#x884C;&#xFF0C;&#x8FD9;&#x91CC;&#x91C7;&#x7528; synchronized &#x8FDB;&#x884C;&#x5E76;&#x53D1;&#x63A7;&#x5236;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SerialExecutor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Executor</span> </span>{
+    <span class="hljs-comment">// &#x4EFB;&#x52A1;&#x961F;&#x5217;</span>
+    <span class="hljs-keyword">final</span> Queue&lt;Runnable&gt; tasks = <span class="hljs-keyword">new</span> ArrayDeque&lt;Runnable&gt;();
+    <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x624D;&#x662F;&#x771F;&#x6B63;&#x7684;&#x6267;&#x884C;&#x5668;</span>
+    <span class="hljs-keyword">final</span> Executor executor;
+    <span class="hljs-comment">// &#x5F53;&#x524D;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;</span>
+    Runnable active;
+
+    <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6307;&#x5B9A;&#x6267;&#x884C;&#x5668;</span>
+    SerialExecutor(Executor executor) {
+        <span class="hljs-keyword">this</span>.executor = executor;
+    }
+
+    <span class="hljs-comment">// &#x6DFB;&#x52A0;&#x4EFB;&#x52A1;&#x5230;&#x7EBF;&#x7A0B;&#x6C60;: &#x5C06;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x5230;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#xFF0C;scheduleNext &#x89E6;&#x53D1;&#x6267;&#x884C;&#x5668;&#x53BB;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x53D6;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Runnable r)</span> </span>{
+        tasks.offer(<span class="hljs-keyword">new</span> Runnable() {
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                <span class="hljs-keyword">try</span> {
+                    r.run();
+                } <span class="hljs-keyword">finally</span> {
+                    scheduleNext();
+                }
+            }
+        });
+        <span class="hljs-keyword">if</span> (active == <span class="hljs-keyword">null</span>) {
+            scheduleNext();
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">scheduleNext</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> ((active = tasks.poll()) != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-comment">// &#x5177;&#x4F53;&#x7684;&#x6267;&#x884C;&#x8F6C;&#x7ED9;&#x771F;&#x6B63;&#x7684;&#x6267;&#x884C;&#x5668; executor</span>
+            executor.execute(active);
+        }
+    }
+}
+</code></pre>
+<p>&#x5F53;&#x7136;&#x4E86;&#xFF0C;Executor &#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x53EA;&#x6709;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x592A;&#x7B80;&#x5355;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x66F4;&#x4E30;&#x5BCC;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x60F3;&#x77E5;&#x9053;&#x6267;&#x884C;&#x7ED3;&#x679C;&#x3001;&#x6211;&#x4EEC;&#x60F3;&#x77E5;&#x9053;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6C60;&#x6709;&#x591A;&#x5C11;&#x4E2A;&#x7EBF;&#x7A0B;&#x6D3B;&#x7740;&#x3001;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#x591A;&#x5C11;&#x4EFB;&#x52A1;&#x7B49;&#x7B49;&#xFF0C;&#x8FD9;&#x4E9B;&#x90FD;&#x662F;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x4E0D;&#x8DB3;&#x7684;&#x5730;&#x65B9;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x8981;&#x4ECB;&#x7ECD;&#x7684;&#x662F;&#x7EE7;&#x627F;&#x81EA; <code>Executor</code> &#x63A5;&#x53E3;&#x7684; <code>ExecutorService</code> &#x63A5;&#x53E3;&#xFF0C;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x63D0;&#x4F9B;&#x4E86;&#x6BD4;&#x8F83;&#x4E30;&#x5BCC;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x4E5F;&#x662F;&#x6211;&#x4EEC;&#x6700;&#x5E38;&#x4F7F;&#x7528;&#x5230;&#x7684;&#x63A5;&#x53E3;&#x3002;</p>
+<h2 id="executorservice">ExecutorService</h2>
+<p>&#x4E00;&#x822C;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5F80;&#x5F80;&#x90FD;&#x662F;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#xFF1A;</p>
+<pre><code class="lang-java">ExecutorService executor = Executors.newFixedThreadPool(args...);
+ExecutorService executor = Executors.newCachedThreadPool(args...);
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x4E00;&#x7CFB;&#x5217;&#x65B9;&#x6CD5;&#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#x4E0B;&#x5DF2;&#x7ECF;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;&#x6211;&#x4EEC;&#x7684;&#x9700;&#x8981;&#x4E86;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x7B80;&#x5355;&#x521D;&#x7565;&#x5730;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x4E2D;&#x90FD;&#x6709;&#x54EA;&#x4E9B;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ExecutorService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Executor</span> </span>{
+
+    <span class="hljs-comment">// &#x5173;&#x95ED;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x5DF2;&#x63D0;&#x4EA4;&#x7684;&#x4EFB;&#x52A1;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#xFF0C;&#x4E0D;&#x63A5;&#x53D7;&#x7EE7;&#x7EED;&#x63D0;&#x4EA4;&#x65B0;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">shutdown</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// &#x5173;&#x95ED;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x5C1D;&#x8BD5;&#x505C;&#x6B62;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;&#x6240;&#x6709;&#x4EFB;&#x52A1;&#xFF0C;&#x4E0D;&#x63A5;&#x53D7;&#x7EE7;&#x7EED;&#x63D0;&#x4EA4;&#x65B0;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-comment">// &#x5B83;&#x548C;&#x524D;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#x76F8;&#x6BD4;&#xFF0C;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x5355;&#x8BCD;&#x201C;now&#x201D;&#xFF0C;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x5B83;&#x4F1A;&#x53BB;&#x505C;&#x6B62;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x8FDB;&#x884C;&#x7684;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-function">List&lt;Runnable&gt; <span class="hljs-title">shutdownNow</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// &#x7EBF;&#x7A0B;&#x6C60;&#x662F;&#x5426;&#x5DF2;&#x5173;&#x95ED;</span>
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isShutdown</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x8C03;&#x7528;&#x4E86; shutdown() &#x6216; shutdownNow() &#x65B9;&#x6CD5;&#x540E;&#xFF0C;&#x6240;&#x6709;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x8FD4;&#x56DE;true</span>
+    <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5FC5;&#x987B;&#x5728;&#x8C03;&#x7528;shutdown&#x6216;shutdownNow&#x65B9;&#x6CD5;&#x4E4B;&#x540E;&#x8C03;&#x7528;&#x624D;&#x4F1A;&#x8FD4;&#x56DE;true</span>
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isTerminated</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// &#x7B49;&#x5F85;&#x6240;&#x6709;&#x4EFB;&#x52A1;&#x5B8C;&#x6210;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#x65F6;&#x95F4;</span>
+    <span class="hljs-comment">// &#x6211;&#x4EEC;&#x8FD9;&#x4E48;&#x7406;&#x89E3;&#xFF0C;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#x662F;&#xFF0C;&#x5148;&#x8C03;&#x7528; shutdown &#x6216; shutdownNow&#xFF0C;</span>
+    <span class="hljs-comment">// &#x7136;&#x540E;&#x518D;&#x8C03;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x7B49;&#x5F85;&#x6240;&#x6709;&#x7684;&#x7EBF;&#x7A0B;&#x771F;&#x6B63;&#x5730;&#x5B8C;&#x6210;&#xFF0C;&#x8FD4;&#x56DE;&#x503C;&#x610F;&#x5473;&#x7740;&#x6709;&#x6CA1;&#x6709;&#x8D85;&#x65F6;</span>
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">awaitTermination</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span>
+            <span class="hljs-keyword">throws</span> InterruptedException</span>;
+
+    <span class="hljs-comment">// &#x63D0;&#x4EA4;&#x4E00;&#x4E2A; Callable &#x4EFB;&#x52A1;</span>
+    &lt;T&gt; <span class="hljs-function">Future&lt;T&gt; <span class="hljs-title">submit</span><span class="hljs-params">(Callable&lt;T&gt; task)</span></span>;
+
+    <span class="hljs-comment">// &#x63D0;&#x4EA4;&#x4E00;&#x4E2A; Runnable &#x4EFB;&#x52A1;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x5C06;&#x4F1A;&#x653E;&#x5230; Future &#x4E2D;&#xFF0C;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;</span>
+    <span class="hljs-comment">// &#x56E0;&#x4E3A; Runnable &#x7684; run &#x65B9;&#x6CD5;&#x672C;&#x8EAB;&#x5E76;&#x4E0D;&#x8FD4;&#x56DE;&#x4EFB;&#x4F55;&#x4E1C;&#x897F;</span>
+    &lt;T&gt; <span class="hljs-function">Future&lt;T&gt; <span class="hljs-title">submit</span><span class="hljs-params">(Runnable task, T result)</span></span>;
+
+    <span class="hljs-comment">// &#x63D0;&#x4EA4;&#x4E00;&#x4E2A; Runnable &#x4EFB;&#x52A1;</span>
+    Future&lt;?&gt; submit(Runnable task);
+
+    <span class="hljs-comment">// &#x6267;&#x884C;&#x6240;&#x6709;&#x4EFB;&#x52A1;&#xFF0C;&#x8FD4;&#x56DE; Future &#x7C7B;&#x578B;&#x7684;&#x4E00;&#x4E2A; list</span>
+    &lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)
+            <span class="hljs-keyword">throws</span> InterruptedException;
+
+    <span class="hljs-comment">// &#x4E5F;&#x662F;&#x6267;&#x884C;&#x6240;&#x6709;&#x4EFB;&#x52A1;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x91CC;&#x8BBE;&#x7F6E;&#x4E86;&#x8D85;&#x65F6;&#x65F6;&#x95F4;</span>
+    &lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,
+                                  <span class="hljs-keyword">long</span> timeout, TimeUnit unit)
+            <span class="hljs-keyword">throws</span> InterruptedException;
+
+    <span class="hljs-comment">// &#x53EA;&#x6709;&#x5176;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;&#x4E86;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#xFF0C;&#x8FD4;&#x56DE;&#x6267;&#x884C;&#x5B8C;&#x7684;&#x90A3;&#x4E2A;&#x4EFB;&#x52A1;&#x7684;&#x7ED3;&#x679C;</span>
+    &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">invokeAny</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</span>
+            <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException</span>;
+
+    <span class="hljs-comment">// &#x540C;&#x4E0A;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x53EA;&#x6709;&#x5176;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;&#x4E86;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#xFF0C;&#x8FD4;&#x56DE;&#x6267;&#x884C;&#x5B8C;&#x7684;&#x90A3;&#x4E2A;&#x4EFB;&#x52A1;&#x7684;&#x7ED3;&#x679C;&#xFF0C;</span>
+    <span class="hljs-comment">// &#x4E0D;&#x8FC7;&#x8FD9;&#x4E2A;&#x5E26;&#x8D85;&#x65F6;&#xFF0C;&#x8D85;&#x8FC7;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x629B;&#x51FA; TimeoutException &#x5F02;&#x5E38;</span>
+    &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">invokeAny</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,
+                    <span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span>
+            <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException</span>;
+}
+</code></pre>
+<p>&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x90FD;&#x5F88;&#x597D;&#x7406;&#x89E3;&#xFF0C;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#x4E3B;&#x8981;&#x5C31;&#x662F;&#x8FD9;&#x4E9B;&#x529F;&#x80FD;&#xFF0C;&#x80FD;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#xFF0C;&#x80FD;&#x83B7;&#x53D6;&#x7ED3;&#x679C;&#xFF0C;&#x80FD;&#x5173;&#x95ED;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x7528;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x539F;&#x56E0;&#x3002;</p>
+<div id="FutureTask"></div>
+
+<h2 id="futuretask">FutureTask</h2>
+<p>&#x5728;&#x7EE7;&#x7EED;&#x5F80;&#x4E0B;&#x5C42;&#x4ECB;&#x7ECD; ExecutorService &#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x4E4B;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x8BF4;&#x8BF4;&#x76F8;&#x5173;&#x7684;&#x7C7B; FutureTask&#x3002;</p>
+<pre><code class="lang-java">Future      Runnable
+   \           /
+    \         /
+   RunnableFuture
+          |
+          |
+      FutureTask
+
+FutureTask &#x901A;&#x8FC7; RunnableFuture &#x95F4;&#x63A5;&#x5B9E;&#x73B0;&#x4E86; Runnable &#x63A5;&#x53E3;&#xFF0C;
+&#x6240;&#x4EE5;&#x6BCF;&#x4E2A; Runnable &#x901A;&#x5E38;&#x90FD;&#x5148;&#x5305;&#x88C5;&#x6210; FutureTask&#xFF0C;
+&#x7136;&#x540E;&#x8C03;&#x7528; executor.execute(Runnable command) &#x5C06;&#x5176;&#x63D0;&#x4EA4;&#x7ED9;&#x7EBF;&#x7A0B;&#x6C60;
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;Runnable &#x7684; void run() &#x65B9;&#x6CD5;&#x662F;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x901A;&#x5E38;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x5728; submit &#x4E2D;&#x6307;&#x5B9A;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;&#xFF1A;</p>
+<pre><code class="lang-java">&lt;T&gt; <span class="hljs-function">Future&lt;T&gt; <span class="hljs-title">submit</span><span class="hljs-params">(Runnable task, T result)</span></span>;
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x5230;&#x65F6;&#x5019;&#x4F1A;&#x901A;&#x8FC7;&#x8FD9;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5C06;&#x5176;&#x5305;&#x88C5;&#x6210; Callable&#x3002;&#x5B83;&#x548C; Runnable &#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E; run() &#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x800C; Callable &#x7684; call() &#x65B9;&#x6CD5;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x540C;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x8FD0;&#x884C;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#xFF0C;call() &#x65B9;&#x6CD5;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">V</span>&gt; </span>{
+
+    <span class="hljs-function">V <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception</span>;
+}
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x5C31;&#x4E0D;&#x5C55;&#x5F00;&#x8BF4; FutureTask &#x7C7B;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x672C;&#x6587;&#x7BC7;&#x5E45;&#x672C;&#x6765;&#x5C31;&#x591F;&#x5927;&#x4E86;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x77E5;&#x9053;&#x600E;&#x4E48;&#x7528;&#x5C31;&#x884C;&#x4E86;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B; <code>ExecutorService</code> &#x7684;&#x62BD;&#x8C61;&#x5B9E;&#x73B0; <code>AbstractExecutorService</code> &#x3002;</p>
+<h2 id="abstractexecutorservice">AbstractExecutorService</h2>
+<p>AbstractExecutorService &#x62BD;&#x8C61;&#x7C7B;&#x6D3E;&#x751F;&#x81EA; ExecutorService &#x63A5;&#x53E3;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x5176;&#x57FA;&#x7840;&#x4E0A;&#x5B9E;&#x73B0;&#x4E86;&#x51E0;&#x4E2A;&#x5B9E;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x63D0;&#x4F9B;&#x7ED9;&#x5B50;&#x7C7B;&#x8FDB;&#x884C;&#x8C03;&#x7528;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x62BD;&#x8C61;&#x7C7B;&#x5B9E;&#x73B0;&#x4E86; invokeAny &#x65B9;&#x6CD5;&#x548C; invokeAll &#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;&#x4E24;&#x4E2A; newTaskFor &#x65B9;&#x6CD5;&#x4E5F;&#x6BD4;&#x8F83;&#x6709;&#x7528;&#xFF0C;&#x7528;&#x4E8E;&#x5C06;&#x4EFB;&#x52A1;&#x5305;&#x88C5;&#x6210; FutureTask&#x3002;&#x5B9A;&#x4E49;&#x4E8E;&#x6700;&#x4E0A;&#x5C42;&#x63A5;&#x53E3; Executor&#x4E2D;&#x7684; <code>void execute(Runnable command)</code> &#x7531;&#x4E8E;&#x4E0D;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x7ED3;&#x679C;&#xFF0C;&#x4E0D;&#x4F1A;&#x8FDB;&#x884C; FutureTask &#x7684;&#x5305;&#x88C5;&#x3002;</p>
+<blockquote>
+<p>&#x9700;&#x8981;&#x83B7;&#x53D6;&#x7ED3;&#x679C;&#xFF08;FutureTask&#xFF09;&#xFF0C;&#x7528; submit &#x65B9;&#x6CD5;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x7ED3;&#x679C;&#xFF0C;&#x53EF;&#x4EE5;&#x7528; execute &#x65B9;&#x6CD5;&#x3002;</p>
+</blockquote>
+<p>&#x4E0B;&#x9762;&#xFF0C;&#x6211;&#x5C06;&#x4E00;&#x884C;&#x4E00;&#x884C;&#x6E90;&#x7801;&#x5730;&#x6765;&#x5206;&#x6790;&#x8FD9;&#x4E2A;&#x7C7B;&#xFF0C;&#x8DDF;&#x7740;&#x6E90;&#x7801;&#x6765;&#x770B;&#x770B;&#x5176;&#x5B9E;&#x73B0;&#x5427;&#xFF1A;</p>
+<blockquote>
+<p>Tips: invokeAny &#x548C; invokeAll &#x65B9;&#x6CD5;&#x5360;&#x4E86;&#x8FD9;&#x6574;&#x4E2A;&#x7C7B;&#x7684;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x7BC7;&#x5E45;&#xFF0C;&#x8BFB;&#x8005;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x9002;&#x5F53;&#x8DF3;&#x8FC7;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x53EF;&#x80FD;&#x5728;&#x4F60;&#x7684;&#x5B9E;&#x8DF5;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x9891;&#x6B21;&#x6BD4;&#x8F83;&#x4F4E;&#xFF0C;&#x800C;&#x4E14;&#x5B83;&#x4EEC;&#x4E0D;&#x5E26;&#x6709;&#x627F;&#x524D;&#x542F;&#x540E;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#x4F1A;&#x6F0F;&#x6389;&#x4EC0;&#x4E48;&#x5BFC;&#x81F4;&#x770B;&#x4E0D;&#x61C2;&#x540E;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+</blockquote>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractExecutorService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ExecutorService</span> </span>{
+
+    <span class="hljs-comment">// RunnableFuture &#x662F;&#x7528;&#x4E8E;&#x83B7;&#x53D6;&#x6267;&#x884C;&#x7ED3;&#x679C;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x5E38;&#x7528;&#x5B83;&#x7684;&#x5B50;&#x7C7B; FutureTask</span>
+    <span class="hljs-comment">// &#x4E0B;&#x9762;&#x4E24;&#x4E2A; newTaskFor &#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x5C06;&#x6211;&#x4EEC;&#x7684;&#x4EFB;&#x52A1;&#x5305;&#x88C5;&#x6210; FutureTask &#x63D0;&#x4EA4;&#x5230;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x6267;&#x884C;</span>
+    <span class="hljs-keyword">protected</span> &lt;T&gt; <span class="hljs-function">RunnableFuture&lt;T&gt; <span class="hljs-title">newTaskFor</span><span class="hljs-params">(Runnable runnable, T value)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FutureTask&lt;T&gt;(runnable, value);
+    }
+
+    <span class="hljs-keyword">protected</span> &lt;T&gt; <span class="hljs-function">RunnableFuture&lt;T&gt; <span class="hljs-title">newTaskFor</span><span class="hljs-params">(Callable&lt;T&gt; callable)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FutureTask&lt;T&gt;(callable);
+    }
+
+    <span class="hljs-comment">// &#x63D0;&#x4EA4;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-keyword">public</span> Future&lt;?&gt; submit(Runnable task) {
+        <span class="hljs-keyword">if</span> (task == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+        <span class="hljs-comment">// 1. &#x5C06;&#x4EFB;&#x52A1;&#x5305;&#x88C5;&#x6210; FutureTask</span>
+        RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, <span class="hljs-keyword">null</span>);
+        <span class="hljs-comment">// 2. &#x4EA4;&#x7ED9;&#x6267;&#x884C;&#x5668;&#x6267;&#x884C;&#xFF0C;execute &#x65B9;&#x6CD5;&#x7531;&#x5177;&#x4F53;&#x7684;&#x5B50;&#x7C7B;&#x6765;&#x5B9E;&#x73B0;</span>
+        <span class="hljs-comment">// &#x524D;&#x9762;&#x4E5F;&#x8BF4;&#x4E86;&#xFF0C;FutureTask &#x95F4;&#x63A5;&#x5B9E;&#x73B0;&#x4E86;Runnable &#x63A5;&#x53E3;&#x3002;</span>
+        execute(ftask);
+        <span class="hljs-keyword">return</span> ftask;
+    }
+
+    <span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">Future&lt;T&gt; <span class="hljs-title">submit</span><span class="hljs-params">(Runnable task, T result)</span> </span>{
+        <span class="hljs-keyword">if</span> (task == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+        <span class="hljs-comment">// 1. &#x5C06;&#x4EFB;&#x52A1;&#x5305;&#x88C5;&#x6210; FutureTask</span>
+        RunnableFuture&lt;T&gt; ftask = newTaskFor(task, result);
+        <span class="hljs-comment">// 2. &#x4EA4;&#x7ED9;&#x6267;&#x884C;&#x5668;&#x6267;&#x884C;</span>
+        execute(ftask);
+        <span class="hljs-keyword">return</span> ftask;
+    }
+
+    <span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">Future&lt;T&gt; <span class="hljs-title">submit</span><span class="hljs-params">(Callable&lt;T&gt; task)</span> </span>{
+        <span class="hljs-keyword">if</span> (task == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+        <span class="hljs-comment">// 1. &#x5C06;&#x4EFB;&#x52A1;&#x5305;&#x88C5;&#x6210; FutureTask</span>
+        RunnableFuture&lt;T&gt; ftask = newTaskFor(task);
+        <span class="hljs-comment">// 2. &#x4EA4;&#x7ED9;&#x6267;&#x884C;&#x5668;&#x6267;&#x884C;</span>
+        execute(ftask);
+        <span class="hljs-keyword">return</span> ftask;
+    }
+
+    <span class="hljs-comment">// &#x6B64;&#x65B9;&#x6CD5;&#x76EE;&#x7684;&#xFF1A;&#x5C06; tasks &#x96C6;&#x5408;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x5230;&#x7EBF;&#x7A0B;&#x6C60;&#x6267;&#x884C;&#xFF0C;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x5B8C;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x7ED3;&#x675F;&#x4E86;</span>
+    <span class="hljs-comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570; timed &#x4EE3;&#x8868;&#x662F;&#x5426;&#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#x673A;&#x5236;&#xFF0C;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x4E3A;&#x7B2C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;</span>
+    <span class="hljs-comment">// &#x5982;&#x679C; timed &#x4E3A; true&#xFF0C;&#x540C;&#x65F6;&#x8D85;&#x65F6;&#x4E86;&#x8FD8;&#x6CA1;&#x6709;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF0C;&#x90A3;&#x4E48;&#x629B;&#x51FA; TimeoutException &#x5F02;&#x5E38;</span>
+    <span class="hljs-keyword">private</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">doInvokeAny</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,
+                            <span class="hljs-keyword">boolean</span> timed, <span class="hljs-keyword">long</span> nanos)</span>
+        <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException </span>{
+        <span class="hljs-keyword">if</span> (tasks == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+        <span class="hljs-comment">// &#x4EFB;&#x52A1;&#x6570;</span>
+        <span class="hljs-keyword">int</span> ntasks = tasks.size();
+        <span class="hljs-keyword">if</span> (ntasks == <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException();
+        <span class="hljs-comment">// </span>
+        List&lt;Future&lt;T&gt;&gt; futures= <span class="hljs-keyword">new</span> ArrayList&lt;Future&lt;T&gt;&gt;(ntasks);
+
+        <span class="hljs-comment">// ExecutorCompletionService &#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x771F;&#x6B63;&#x7684;&#x6267;&#x884C;&#x5668;&#xFF0C;&#x53C2;&#x6570; this &#x624D;&#x662F;&#x771F;&#x6B63;&#x7684;&#x6267;&#x884C;&#x5668;</span>
+        <span class="hljs-comment">// &#x5B83;&#x5BF9;&#x6267;&#x884C;&#x5668;&#x8FDB;&#x884C;&#x4E86;&#x5305;&#x88C5;&#xFF0C;&#x6BCF;&#x4E2A;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x5C06;&#x7ED3;&#x679C;&#x4FDD;&#x5B58;&#x5230;&#x5185;&#x90E8;&#x7684;&#x4E00;&#x4E2A; completionQueue &#x961F;&#x5217;&#x4E2D;</span>
+        <span class="hljs-comment">// &#x8FD9;&#x4E5F;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E2A;&#x7C7B;&#x7684;&#x540D;&#x5B57;&#x91CC;&#x9762;&#x6709;&#x4E2A; Completion &#x7684;&#x539F;&#x56E0;&#x5427;&#x3002;</span>
+        ExecutorCompletionService&lt;T&gt; ecs =
+            <span class="hljs-keyword">new</span> ExecutorCompletionService&lt;T&gt;(<span class="hljs-keyword">this</span>);
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-comment">// &#x7528;&#x4E8E;&#x4FDD;&#x5B58;&#x5F02;&#x5E38;&#x4FE1;&#x606F;&#xFF0C;&#x6B64;&#x65B9;&#x6CD5;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5F97;&#x5230;&#x4EFB;&#x4F55;&#x6709;&#x6548;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x629B;&#x51FA;&#x6700;&#x540E;&#x5F97;&#x5230;&#x7684;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;</span>
+            ExecutionException ee = <span class="hljs-keyword">null</span>;
+            <span class="hljs-keyword">long</span> lastTime = timed ? System.nanoTime() : <span class="hljs-number">0</span>;
+            Iterator&lt;? extends Callable&lt;T&gt;&gt; it = tasks.iterator();
+
+            <span class="hljs-comment">// &#x9996;&#x5148;&#x5148;&#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x540E;&#x9762;&#x7684;&#x4EFB;&#x52A1;&#x5230;&#x4E0B;&#x9762;&#x7684; for &#x5FAA;&#x73AF;&#x4E00;&#x4E2A;&#x4E2A;&#x63D0;&#x4EA4;</span>
+            futures.add(ecs.submit(it.next()));
+            <span class="hljs-comment">// &#x63D0;&#x4EA4;&#x4E86;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x6240;&#x4EE5;&#x4EFB;&#x52A1;&#x6570;&#x91CF;&#x51CF; 1</span>
+            --ntasks;
+            <span class="hljs-comment">// &#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;&#x6570;(&#x63D0;&#x4EA4;&#x7684;&#x65F6;&#x5019; +1&#xFF0C;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;&#x7684;&#x65F6;&#x5019; -1)</span>
+            <span class="hljs-keyword">int</span> active = <span class="hljs-number">1</span>;
+
+            <span class="hljs-keyword">for</span> (;;) {
+                <span class="hljs-comment">// ecs &#x4E0A;&#x9762;&#x8BF4;&#x4E86;&#xFF0C;&#x5176;&#x5185;&#x90E8;&#x6709;&#x4E00;&#x4E2A; completionQueue &#x7528;&#x4E8E;&#x4FDD;&#x5B58;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x7684;&#x7ED3;&#x679C;</span>
+                <span class="hljs-comment">// BlockingQueue &#x7684; poll &#x65B9;&#x6CD5;&#x4E0D;&#x963B;&#x585E;&#xFF0C;&#x8FD4;&#x56DE; null &#x4EE3;&#x8868;&#x961F;&#x5217;&#x4E3A;&#x7A7A;</span>
+                Future&lt;T&gt; f = ecs.poll();
+                <span class="hljs-comment">// &#x4E3A; null&#xFF0C;&#x8BF4;&#x660E;&#x521A;&#x521A;&#x63D0;&#x4EA4;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8FD8;&#x6CA1;&#x6709;&#x6267;&#x884C;&#x5B8C;&#x6210;</span>
+                <span class="hljs-comment">// &#x5728;&#x524D;&#x9762;&#x5148;&#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x52A0;&#x4E0A;&#x8FD9;&#x91CC;&#x505A;&#x4E00;&#x6B21;&#x68C0;&#x67E5;&#xFF0C;&#x4E5F;&#x662F;&#x4E3A;&#x4E86;&#x63D0;&#x9AD8;&#x6027;&#x80FD;</span>
+                <span class="hljs-keyword">if</span> (f == <span class="hljs-keyword">null</span>) {
+                    <span class="hljs-keyword">if</span> (ntasks &gt; <span class="hljs-number">0</span>) {
+                        --ntasks;
+                        futures.add(ecs.submit(it.next()));
+                        ++active;
+                    }
+                    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x662F; else if&#xFF0C;&#x4E0D;&#x662F; if&#x3002;&#x8FD9;&#x91CC;&#x8BF4;&#x660E;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#x4E86;&#xFF0C;&#x540C;&#x65F6; active &#x4E3A; 0 &#x8BF4;&#x660E;</span>
+                    <span class="hljs-comment">// &#x4EFB;&#x52A1;&#x90FD;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x4E86;&#x3002;&#x5176;&#x5B9E;&#x6211;&#x4E5F;&#x6CA1;&#x7406;&#x89E3;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x91CC;&#x505A;&#x4E00;&#x6B21; break&#xFF1F;</span>
+                    <span class="hljs-comment">// &#x56E0;&#x4E3A;&#x6211;&#x8BA4;&#x4E3A; active &#x4E3A; 0 &#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5FC5;&#x7136;&#x4ECE;&#x4E0B;&#x9762;&#x7684; f.get() &#x8FD4;&#x56DE;&#x4E86;</span>
+
+                    <span class="hljs-comment">// 2018-02-23 &#x611F;&#x8C22;&#x8BFB;&#x8005; newmicro &#x7684; comment&#xFF0C;</span>
+                    <span class="hljs-comment">//  &#x8FD9;&#x91CC;&#x7684; active == 0&#xFF0C;&#x8BF4;&#x660E;&#x6240;&#x6709;&#x7684;&#x4EFB;&#x52A1;&#x90FD;&#x6267;&#x884C;&#x5931;&#x8D25;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x91CC;&#x662F; for &#x5FAA;&#x73AF;&#x51FA;&#x53E3;</span>
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (active == <span class="hljs-number">0</span>)
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x4E5F;&#x662F; else if&#x3002;&#x8FD9;&#x91CC;&#x8BF4;&#x7684;&#x662F;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x8BBE;&#x7F6E;&#x4E86;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF0C;&#x8FD9;&#x91CC;&#x68C0;&#x6D4B;&#x662F;&#x5426;&#x8D85;&#x65F6;</span>
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (timed) {
+                        <span class="hljs-comment">// &#x5E26;&#x7B49;&#x5F85;&#x7684; poll &#x65B9;&#x6CD5;</span>
+                        f = ecs.poll(nanos, TimeUnit.NANOSECONDS);
+                        <span class="hljs-comment">// &#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x8D85;&#x65F6;&#xFF0C;&#x629B;&#x51FA; TimeoutException &#x5F02;&#x5E38;&#xFF0C;&#x8FD9;&#x6574;&#x4E2A;&#x65B9;&#x6CD5;&#x5C31;&#x7ED3;&#x675F;&#x4E86;</span>
+                        <span class="hljs-keyword">if</span> (f == <span class="hljs-keyword">null</span>)
+                            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> TimeoutException();
+                        <span class="hljs-keyword">long</span> now = System.nanoTime();
+                        nanos -= now - lastTime;
+                        lastTime = now;
+                    }
+                    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x662F; else&#x3002;&#x8BF4;&#x660E;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#x9700;&#x8981;&#x63D0;&#x4EA4;&#xFF0C;&#x4F46;&#x662F;&#x6C60;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#x6CA1;&#x6709;&#x5B8C;&#x6210;&#xFF0C;&#x8FD8;&#x6CA1;&#x6709;&#x8D85;&#x65F6;(&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E86;&#x8D85;&#x65F6;)</span>
+                    <span class="hljs-comment">// take() &#x65B9;&#x6CD5;&#x4F1A;&#x963B;&#x585E;&#xFF0C;&#x76F4;&#x5230;&#x6709;&#x5143;&#x7D20;&#x8FD4;&#x56DE;&#xFF0C;&#x8BF4;&#x660E;&#x6709;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;&#x4E86;</span>
+                    <span class="hljs-keyword">else</span>
+                        f = ecs.take();
+                }
+                <span class="hljs-comment">/*
+                 * &#x6211;&#x611F;&#x89C9;&#x4E0A;&#x9762;&#x8FD9;&#x4E00;&#x6BB5;&#x5E76;&#x4E0D;&#x662F;&#x5F88;&#x597D;&#x7406;&#x89E3;&#xFF0C;&#x8FD9;&#x91CC;&#x7B80;&#x5355;&#x8BF4;&#x4E0B;&#x3002;
+                 * 1. &#x9996;&#x5148;&#xFF0C;&#x8FD9;&#x5728;&#x4E00;&#x4E2A; for &#x5FAA;&#x73AF;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x8BBE;&#x60F3;&#x6BCF;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x90FD;&#x6CA1;&#x90A3;&#x4E48;&#x5FEB;&#x7ED3;&#x675F;&#xFF0C;
+                 *     &#x90A3;&#x4E48;&#xFF0C;&#x6BCF;&#x4E00;&#x6B21;&#x90FD;&#x4F1A;&#x8FDB;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x5206;&#x652F;&#xFF0C;&#x8FDB;&#x884C;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#xFF0C;&#x76F4;&#x5230;&#x5C06;&#x6240;&#x6709;&#x7684;&#x4EFB;&#x52A1;&#x90FD;&#x63D0;&#x4EA4;&#x4E86;
+                 * 2. &#x4EFB;&#x52A1;&#x90FD;&#x63D0;&#x4EA4;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E86;&#x8D85;&#x65F6;&#xFF0C;&#x90A3;&#x4E48; for &#x5FAA;&#x73AF;&#x5176;&#x5B9E;&#x8FDB;&#x5165;&#x4E86;&#x201C;&#x4E00;&#x76F4;&#x68C0;&#x6D4B;&#x662F;&#x5426;&#x8D85;&#x65F6;&#x201D;
+                       &#x8FD9;&#x4EF6;&#x4E8B;&#x60C5;&#x4E0A;
+                 * 3. &#x5982;&#x679C;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#x673A;&#x5236;&#xFF0C;&#x90A3;&#x4E48;&#x4E0D;&#x5FC5;&#x8981;&#x68C0;&#x6D4B;&#x8D85;&#x65F6;&#xFF0C;&#x90A3;&#x5C31;&#x4F1A;&#x963B;&#x585E;&#x5728; ecs.take() &#x65B9;&#x6CD5;&#x4E0A;&#xFF0C;
+                       &#x7B49;&#x5F85;&#x83B7;&#x53D6;&#x7B2C;&#x4E00;&#x4E2A;&#x6267;&#x884C;&#x7ED3;&#x679C;
+                 * 4. &#x5982;&#x679C;&#x6240;&#x6709;&#x7684;&#x4EFB;&#x52A1;&#x90FD;&#x6267;&#x884C;&#x5931;&#x8D25;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4; future &#x90FD;&#x8FD4;&#x56DE;&#x4E86;&#xFF0C;
+                       &#x4F46;&#x662F; f.get() &#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x4ECE; active == 0 &#x5206;&#x652F;&#x51FA;&#x53BB;(&#x611F;&#x8C22; newmicro &#x63D0;&#x51FA;)
+                         // &#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E2A;&#x9700;&#x8981;&#x770B;&#x4E0B;&#x9762;&#x7684; if &#x5206;&#x652F;&#x3002;
+                 */</span>
+
+
+
+                <span class="hljs-comment">// &#x6709;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;&#x4E86;</span>
+                <span class="hljs-keyword">if</span> (f != <span class="hljs-keyword">null</span>) {
+                    --active;
+                    <span class="hljs-keyword">try</span> {
+                        <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x6267;&#x884C;&#x7ED3;&#x679C;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x5F02;&#x5E38;&#xFF0C;&#x90FD;&#x5305;&#x88C5;&#x6210; ExecutionException</span>
+                        <span class="hljs-keyword">return</span> f.get();
+                    } <span class="hljs-keyword">catch</span> (ExecutionException eex) {
+                        ee = eex;
+                    } <span class="hljs-keyword">catch</span> (RuntimeException rex) {
+                        ee = <span class="hljs-keyword">new</span> ExecutionException(rex);
+                    }
+                }
+            }<span class="hljs-comment">// &#x6CE8;&#x610F;&#x770B; for &#x5FAA;&#x73AF;&#x7684;&#x8303;&#x56F4;&#xFF0C;&#x4E00;&#x76F4;&#x5230;&#x8FD9;&#x91CC;</span>
+
+            <span class="hljs-keyword">if</span> (ee == <span class="hljs-keyword">null</span>)
+                ee = <span class="hljs-keyword">new</span> ExecutionException();
+            <span class="hljs-keyword">throw</span> ee;
+
+        } <span class="hljs-keyword">finally</span> {
+            <span class="hljs-comment">// &#x65B9;&#x6CD5;&#x9000;&#x51FA;&#x4E4B;&#x524D;&#xFF0C;&#x53D6;&#x6D88;&#x5176;&#x4ED6;&#x7684;&#x4EFB;&#x52A1;</span>
+            <span class="hljs-keyword">for</span> (Future&lt;T&gt; f : futures)
+                f.cancel(<span class="hljs-keyword">true</span>);
+        }
+    }
+
+    <span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">invokeAny</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</span>
+        <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException </span>{
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">return</span> doInvokeAny(tasks, <span class="hljs-keyword">false</span>, <span class="hljs-number">0</span>);
+        } <span class="hljs-keyword">catch</span> (TimeoutException cannotHappen) {
+            <span class="hljs-keyword">assert</span> <span class="hljs-keyword">false</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        }
+    }
+
+    <span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">invokeAny</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,
+                           <span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span>
+        <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException </span>{
+        <span class="hljs-keyword">return</span> doInvokeAny(tasks, <span class="hljs-keyword">true</span>, unit.toNanos(timeout));
+    }
+
+    <span class="hljs-comment">// &#x6267;&#x884C;&#x6240;&#x6709;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x8FD4;&#x56DE;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;&#x3002;</span>
+    <span class="hljs-comment">// &#x5148;&#x4E0D;&#x8981;&#x770B;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x60F3;&#x60F3;&#xFF0C;&#x5176;&#x5B9E;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x5230;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x4E5F;&#x662F;&#x60F3;&#x8981;&#x7EBF;&#x7A0B;&#x6C60;&#x6267;&#x884C;&#x6240;&#x6709;&#x7684;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-comment">// &#x53EA;&#x4E0D;&#x8FC7;&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x6BCF;&#x6B21; submit &#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x8FD9;&#x91CC;&#x4EE5;&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x63D0;&#x4EA4;</span>
+    <span class="hljs-keyword">public</span> &lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)
+        <span class="hljs-keyword">throws</span> InterruptedException {
+        <span class="hljs-keyword">if</span> (tasks == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+        List&lt;Future&lt;T&gt;&gt; futures = <span class="hljs-keyword">new</span> ArrayList&lt;Future&lt;T&gt;&gt;(tasks.size());
+        <span class="hljs-keyword">boolean</span> done = <span class="hljs-keyword">false</span>;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x5F88;&#x7B80;&#x5355;</span>
+            <span class="hljs-keyword">for</span> (Callable&lt;T&gt; t : tasks) {
+                <span class="hljs-comment">// &#x5305;&#x88C5;&#x6210; FutureTask</span>
+                RunnableFuture&lt;T&gt; f = newTaskFor(t);
+                futures.add(f);
+                <span class="hljs-comment">// &#x63D0;&#x4EA4;&#x4EFB;&#x52A1;</span>
+                execute(f);
+            }
+            <span class="hljs-keyword">for</span> (Future&lt;T&gt; f : futures) {
+                <span class="hljs-keyword">if</span> (!f.isDone()) {
+                    <span class="hljs-keyword">try</span> {
+                        <span class="hljs-comment">// &#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x963B;&#x585E;&#x65B9;&#x6CD5;&#xFF0C;&#x76F4;&#x5230;&#x83B7;&#x53D6;&#x5230;&#x503C;&#xFF0C;&#x6216;&#x629B;&#x51FA;&#x4E86;&#x5F02;&#x5E38;</span>
+                        <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x6709;&#x4E2A;&#x5C0F;&#x7EC6;&#x8282;&#xFF0C;&#x5176;&#x5B9E; get &#x65B9;&#x6CD5;&#x7B7E;&#x540D;&#x4E0A;&#x662F;&#x4F1A;&#x629B;&#x51FA; InterruptedException &#x7684;</span>
+                        <span class="hljs-comment">// &#x53EF;&#x662F;&#x8FD9;&#x91CC;&#x6CA1;&#x6709;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x800C;&#x662F;&#x629B;&#x7ED9;&#x5916;&#x5C42;&#x53BB;&#x4E86;&#x3002;&#x6B64;&#x5F02;&#x5E38;&#x53D1;&#x751F;&#x4E8E;&#x8FD8;&#x6CA1;&#x6267;&#x884C;&#x5B8C;&#x7684;&#x4EFB;&#x52A1;&#x88AB;&#x53D6;&#x6D88;&#x4E86;</span>
+                        f.get();
+                    } <span class="hljs-keyword">catch</span> (CancellationException ignore) {
+                    } <span class="hljs-keyword">catch</span> (ExecutionException ignore) {
+                    }
+                }
+            }
+            done = <span class="hljs-keyword">true</span>;
+            <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#xFF0C;&#x4E0D;&#x50CF;&#x5176;&#x4ED6;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x8FD4;&#x56DE; List&lt;Future&gt;&#xFF0C;&#x5176;&#x5B9E;&#x6267;&#x884C;&#x7ED3;&#x679C;&#x8FD8;&#x6CA1;&#x51FA;&#x6765;</span>
+            <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x662F;&#x771F;&#x6B63;&#x7684;&#x8FD4;&#x56DE;&#xFF0C;&#x4EFB;&#x52A1;&#x90FD;&#x7ED3;&#x675F;&#x4E86;</span>
+            <span class="hljs-keyword">return</span> futures;
+        } <span class="hljs-keyword">finally</span> {
+            <span class="hljs-comment">// &#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8FD9;&#x4E2A;&#xFF1F;&#x5C31;&#x662F;&#x4E0A;&#x9762;&#x8BF4;&#x7684;&#x6709;&#x5F02;&#x5E38;&#x7684;&#x60C5;&#x51B5;</span>
+            <span class="hljs-keyword">if</span> (!done)
+                <span class="hljs-keyword">for</span> (Future&lt;T&gt; f : futures)
+                    f.cancel(<span class="hljs-keyword">true</span>);
+        }
+    }
+
+    <span class="hljs-comment">// &#x5E26;&#x8D85;&#x65F6;&#x7684; invokeAll&#xFF0C;&#x6211;&#x4EEC;&#x627E;&#x4E0D;&#x540C;&#x5427;</span>
+    <span class="hljs-keyword">public</span> &lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,
+                                         <span class="hljs-keyword">long</span> timeout, TimeUnit unit)
+        <span class="hljs-keyword">throws</span> InterruptedException {
+        <span class="hljs-keyword">if</span> (tasks == <span class="hljs-keyword">null</span> || unit == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+        <span class="hljs-keyword">long</span> nanos = unit.toNanos(timeout);
+        List&lt;Future&lt;T&gt;&gt; futures = <span class="hljs-keyword">new</span> ArrayList&lt;Future&lt;T&gt;&gt;(tasks.size());
+        <span class="hljs-keyword">boolean</span> done = <span class="hljs-keyword">false</span>;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">for</span> (Callable&lt;T&gt; t : tasks)
+                futures.add(newTaskFor(t));
+
+            <span class="hljs-keyword">long</span> lastTime = System.nanoTime();
+
+            Iterator&lt;Future&lt;T&gt;&gt; it = futures.iterator();
+            <span class="hljs-comment">// &#x6BCF;&#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x68C0;&#x6D4B;&#x4E00;&#x6B21;&#x662F;&#x5426;&#x8D85;&#x65F6;</span>
+            <span class="hljs-keyword">while</span> (it.hasNext()) {
+                execute((Runnable)(it.next()));
+                <span class="hljs-keyword">long</span> now = System.nanoTime();
+                nanos -= now - lastTime;
+                lastTime = now;
+                <span class="hljs-comment">// &#x8D85;&#x65F6;</span>
+                <span class="hljs-keyword">if</span> (nanos &lt;= <span class="hljs-number">0</span>)
+                    <span class="hljs-keyword">return</span> futures;
+            }
+
+            <span class="hljs-keyword">for</span> (Future&lt;T&gt; f : futures) {
+                <span class="hljs-keyword">if</span> (!f.isDone()) {
+                    <span class="hljs-keyword">if</span> (nanos &lt;= <span class="hljs-number">0</span>)
+                        <span class="hljs-keyword">return</span> futures;
+                    <span class="hljs-keyword">try</span> {
+                        <span class="hljs-comment">// &#x8C03;&#x7528;&#x5E26;&#x8D85;&#x65F6;&#x7684; get &#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;&#x53C2;&#x6570; nanos &#x662F;&#x5269;&#x4F59;&#x7684;&#x65F6;&#x95F4;&#xFF0C;</span>
+                        <span class="hljs-comment">// &#x56E0;&#x4E3A;&#x4E0A;&#x9762;&#x5176;&#x5B9E;&#x5DF2;&#x7ECF;&#x7528;&#x6389;&#x4E86;&#x4E00;&#x4E9B;&#x65F6;&#x95F4;&#x4E86;</span>
+                        f.get(nanos, TimeUnit.NANOSECONDS);
+                    } <span class="hljs-keyword">catch</span> (CancellationException ignore) {
+                    } <span class="hljs-keyword">catch</span> (ExecutionException ignore) {
+                    } <span class="hljs-keyword">catch</span> (TimeoutException toe) {
+                        <span class="hljs-keyword">return</span> futures;
+                    }
+                    <span class="hljs-keyword">long</span> now = System.nanoTime();
+                    nanos -= now - lastTime;
+                    lastTime = now;
+                }
+            }
+            done = <span class="hljs-keyword">true</span>;
+            <span class="hljs-keyword">return</span> futures;
+        } <span class="hljs-keyword">finally</span> {
+            <span class="hljs-keyword">if</span> (!done)
+                <span class="hljs-keyword">for</span> (Future&lt;T&gt; f : futures)
+                    f.cancel(<span class="hljs-keyword">true</span>);
+        }
+    }
+
+}
+</code></pre>
+<p>&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#xFF0C;&#x8FD9;&#x4E2A;&#x62BD;&#x8C61;&#x7C7B;&#x5305;&#x88C5;&#x4E86;&#x4E00;&#x4E9B;&#x57FA;&#x672C;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x662F;&#x50CF; submit&#x3001;invokeAny&#x3001;invokeAll &#x7B49;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x6CA1;&#x6709;&#x771F;&#x6B63;&#x5F00;&#x542F;&#x7EBF;&#x7A0B;&#x6765;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x53EA;&#x662F;&#x5728;&#x65B9;&#x6CD5;&#x5185;&#x90E8;&#x8C03;&#x7528;&#x4E86; execute &#x65B9;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;&#x6700;&#x91CD;&#x8981;&#x7684; execute(Runnable runnable) &#x65B9;&#x6CD5;&#x8FD8;&#x6CA1;&#x51FA;&#x73B0;&#xFF0C;&#x9700;&#x8981;&#x7B49;&#x5177;&#x4F53;&#x6267;&#x884C;&#x5668;&#x6765;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;&#x6700;&#x91CD;&#x8981;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x8981;&#x8BF4;&#x7684;&#x5C31;&#x662F; ThreadPoolExecutor &#x7C7B;&#x4E86;&#x3002;</p>
+<blockquote>
+<p>&#x9274;&#x4E8E;&#x672C;&#x6587;&#x7684;&#x7BC7;&#x5E45;&#xFF0C;&#x6211;&#x89C9;&#x5F97;&#x770B;&#x5230;&#x8FD9;&#x91CC;&#x7684;&#x8BFB;&#x8005;&#x5E94;&#x8BE5;&#x5DF2;&#x7ECF;&#x4E0D;&#x591A;&#x4E86;&#xFF0C;&#x5927;&#x5BB6;&#x90FD;&#x4E60;&#x60EF;&#x4E86;&#x5FEB;&#x9910;&#x6587;&#x5316;&#x3002;&#x6211;&#x5199;&#x7684;&#x6BCF;&#x7BC7;&#x6587;&#x7AE0;&#x90FD;&#x529B;&#x6C42;&#x8BA9;&#x8BFB;&#x8005;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6211;&#x7684;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x800C;&#x5BF9;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#x6709;&#x5168;&#x9762;&#x7684;&#x4E86;&#x89E3;&#xFF0C;&#x6240;&#x4EE5;&#x7BC7;&#x5E45;&#x4E0D;&#x514D;&#x957F;&#x4E86;&#x4E9B;&#x3002;</p>
+</blockquote>
+<h2 id="threadpoolexecutor">ThreadPoolExecutor</h2>
+<p>ThreadPoolExecutor &#x662F; JDK &#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#x5B9E;&#x73B0;&#xFF0C;&#x8FD9;&#x4E2A;&#x7C7B;&#x5B9E;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#x9700;&#x8981;&#x7684;&#x5404;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x5B9E;&#x73B0;&#x4E86;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x3001;&#x7EBF;&#x7A0B;&#x7BA1;&#x7406;&#x3001;&#x76D1;&#x63A7;&#x7B49;&#x7B49;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x57FA;&#x4E8E;&#x5B83;&#x6765;&#x8FDB;&#x884C;&#x4E1A;&#x52A1;&#x4E0A;&#x7684;&#x6269;&#x5C55;&#xFF0C;&#x4EE5;&#x5B9E;&#x73B0;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7684;&#x5176;&#x4ED6;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;&#x5B9E;&#x73B0;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7684;&#x7C7B; ScheduledThreadPoolExecutor &#x5C31;&#x7EE7;&#x627F;&#x81EA; ThreadPoolExecutor&#x3002;&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E0D;&#x662F;&#x672C;&#x6587;&#x5173;&#x6CE8;&#x7684;&#x91CD;&#x70B9;&#xFF0C;&#x4E0B;&#x9762;&#xFF0C;&#x8FD8;&#x662F;&#x8D76;&#x7D27;&#x8FDB;&#x884C;&#x6E90;&#x7801;&#x5206;&#x6790;&#x5427;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B;&#x7EBF;&#x7A0B;&#x6C60;&#x5B9E;&#x73B0;&#x4E2D;&#x7684;&#x51E0;&#x4E2A;&#x6982;&#x5FF5;&#x548C;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5148;&#x56DE;&#x987E;&#x4E0B;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x7684;&#x51E0;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> Future&lt;?&gt; submit(Runnable task) {
+    <span class="hljs-keyword">if</span> (task == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+    RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, <span class="hljs-keyword">null</span>);
+    execute(ftask);
+    <span class="hljs-keyword">return</span> ftask;
+}
+<span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">Future&lt;T&gt; <span class="hljs-title">submit</span><span class="hljs-params">(Runnable task, T result)</span> </span>{
+    <span class="hljs-keyword">if</span> (task == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+    RunnableFuture&lt;T&gt; ftask = newTaskFor(task, result);
+    execute(ftask);
+    <span class="hljs-keyword">return</span> ftask;
+}
+<span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">Future&lt;T&gt; <span class="hljs-title">submit</span><span class="hljs-params">(Callable&lt;T&gt; task)</span> </span>{
+    <span class="hljs-keyword">if</span> (task == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+    RunnableFuture&lt;T&gt; ftask = newTaskFor(task);
+    execute(ftask);
+    <span class="hljs-keyword">return</span> ftask;
+}
+</code></pre>
+<p>&#x4E00;&#x4E2A;&#x6700;&#x57FA;&#x672C;&#x7684;&#x6982;&#x5FF5;&#x662F;&#xFF0C;submit &#x65B9;&#x6CD5;&#x4E2D;&#xFF0C;&#x53C2;&#x6570;&#x662F; Runnable &#x7C7B;&#x578B;&#xFF08;&#x4E5F;&#x6709;Callable &#x7C7B;&#x578B;&#xFF09;&#xFF0C;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x4E0D;&#x662F;&#x7528;&#x4E8E; new Thread(<strong>runnable</strong>).start() &#x4E2D;&#x7684;&#xFF0C;&#x6B64;&#x5904;&#x7684;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x4E0D;&#x662F;&#x7528;&#x4E8E;&#x542F;&#x52A8;&#x7EBF;&#x7A0B;&#x7684;&#xFF0C;&#x8FD9;&#x91CC;&#x6307;&#x7684;&#x662F;<strong>&#x4EFB;&#x52A1;</strong>&#xFF0C;&#x4EFB;&#x52A1;&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x662F; run() &#x65B9;&#x6CD5;&#x91CC;&#x9762;&#x5B9A;&#x4E49;&#x7684;&#x6216; Callable &#x4E2D;&#x7684; call() &#x65B9;&#x6CD5;&#x91CC;&#x9762;&#x5B9A;&#x4E49;&#x7684;&#x3002;</p>
+<p>&#x521D;&#x5B66;&#x8005;&#x5F80;&#x5F80;&#x4F1A;&#x641E;&#x6DF7;&#x8FD9;&#x4E2A;&#xFF0C;&#x56E0;&#x4E3A; Runnable &#x603B;&#x662F;&#x5728;&#x5404;&#x4E2A;&#x5730;&#x65B9;&#x51FA;&#x73B0;&#xFF0C;&#x7ECF;&#x5E38;&#x628A;&#x4E00;&#x4E2A; Runnable &#x5305;&#x5230;&#x53E6;&#x4E00;&#x4E2A; Runnable &#x4E2D;&#x3002;&#x8BF7;&#x628A;&#x5B83;&#x60F3;&#x8C61;&#x6210;&#x6709;&#x4E2A; Task &#x63A5;&#x53E3;&#xFF0C;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x91CC;&#x9762;&#x6709;&#x4E00;&#x4E2A; run() &#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x56DE;&#x8FC7;&#x795E;&#x6765;&#x7EE7;&#x7EED;&#x5F80;&#x4E0B;&#x770B;&#xFF0C;&#x6211;&#x753B;&#x4E86;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x793A;&#x610F;&#x56FE;&#x6765;&#x63CF;&#x8FF0;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x4E3B;&#x8981;&#x7684;&#x6784;&#x4EF6;&#xFF1A;</p>
+<p><a href="../../images/threadpool/pool-1.png" data-lightbox="8022894a-973c-4b3d-b73d-8adb163a92a9" data-title="pool-1"><img src="../../images/threadpool/pool-1.png" alt="pool-1"></a></p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x4E0A;&#x56FE;&#x6CA1;&#x6709;&#x8003;&#x8651;&#x961F;&#x5217;&#x662F;&#x5426;&#x6709;&#x754C;&#xFF0C;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x65F6;&#x961F;&#x5217;&#x6EE1;&#x4E86;&#x600E;&#x4E48;&#x529E;&#xFF1F;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4E0B;&#x4F1A;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#xFF1F;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x65F6;&#x7EBF;&#x7A0B;&#x6C60;&#x6EE1;&#x4E86;&#x600E;&#x4E48;&#x529E;&#xFF1F;&#x7A7A;&#x95F2;&#x7EBF;&#x7A0B;&#x600E;&#x4E48;&#x5173;&#x6389;&#xFF1F;&#x8FD9;&#x4E9B;&#x95EE;&#x9898;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x4F1A;&#x4E00;&#x4E00;&#x89E3;&#x51B3;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x4F1A;&#x4F7F;&#x7528; <code>Executors</code> &#x8FD9;&#x4E2A;&#x5DE5;&#x5177;&#x7C7B;&#x6765;&#x5FEB;&#x901F;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x5BF9;&#x4E8E;&#x521D;&#x5B66;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x8FD9;&#x79CD;&#x5DE5;&#x5177;&#x7C7B;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#xFF0C;&#x5F00;&#x53D1;&#x8005;&#x4E0D;&#x9700;&#x8981;&#x5173;&#x6CE8;&#x592A;&#x591A;&#x7684;&#x7EC6;&#x8282;&#xFF0C;&#x53EA;&#x8981;&#x77E5;&#x9053;&#x81EA;&#x5DF1;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x4EC5;&#x4EC5;&#x63D0;&#x4F9B;&#x5FC5;&#x9700;&#x7684;&#x53C2;&#x6570;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF0C;&#x5176;&#x4ED6;&#x53C2;&#x6570;&#x90FD;&#x91C7;&#x7528;&#x4F5C;&#x8005;&#x63D0;&#x4F9B;&#x7684;&#x9ED8;&#x8BA4;&#x503C;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newFixedThreadPool</span><span class="hljs-params">(<span class="hljs-keyword">int</span> nThreads)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,
+                                  <span class="hljs-number">0L</span>, TimeUnit.MILLISECONDS,
+                                  <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());
+}
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newCachedThreadPool</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreadPoolExecutor(<span class="hljs-number">0</span>, Integer.MAX_VALUE,
+                                  <span class="hljs-number">60L</span>, TimeUnit.SECONDS,
+                                  <span class="hljs-keyword">new</span> SynchronousQueue&lt;Runnable&gt;());
+}
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x5148;&#x4E0D;&#x8BF4;&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;&#xFF0C;&#x5B83;&#x4EEC;&#x6700;&#x7EC8;&#x90FD;&#x4F1A;&#x5BFC;&#x5411;&#x8FD9;&#x4E2A;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ThreadPoolExecutor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> corePoolSize,
+                              <span class="hljs-keyword">int</span> maximumPoolSize,
+                              <span class="hljs-keyword">long</span> keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue&lt;Runnable&gt; workQueue,
+                              ThreadFactory threadFactory,
+                              RejectedExecutionHandler handler)</span> </span>{
+        <span class="hljs-keyword">if</span> (corePoolSize &lt; <span class="hljs-number">0</span> ||
+            maximumPoolSize &lt;= <span class="hljs-number">0</span> ||
+            maximumPoolSize &lt; corePoolSize ||
+            keepAliveTime &lt; <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException();
+        <span class="hljs-comment">// &#x8FD9;&#x51E0;&#x4E2A;&#x53C2;&#x6570;&#x90FD;&#x662F;&#x5FC5;&#x987B;&#x8981;&#x6709;&#x7684;</span>
+        <span class="hljs-keyword">if</span> (workQueue == <span class="hljs-keyword">null</span> || threadFactory == <span class="hljs-keyword">null</span> || handler == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+
+        <span class="hljs-keyword">this</span>.corePoolSize = corePoolSize;
+        <span class="hljs-keyword">this</span>.maximumPoolSize = maximumPoolSize;
+        <span class="hljs-keyword">this</span>.workQueue = workQueue;
+        <span class="hljs-keyword">this</span>.keepAliveTime = unit.toNanos(keepAliveTime);
+        <span class="hljs-keyword">this</span>.threadFactory = threadFactory;
+        <span class="hljs-keyword">this</span>.handler = handler;
+    }
+</code></pre>
+<p>&#x57FA;&#x672C;&#x4E0A;&#xFF0C;&#x4E0A;&#x9762;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x4E2D;&#x5217;&#x51FA;&#x4E86;&#x6211;&#x4EEC;&#x6700;&#x9700;&#x8981;&#x5173;&#x5FC3;&#x7684;&#x51E0;&#x4E2A;&#x5C5E;&#x6027;&#x4E86;&#xFF0C;&#x4E0B;&#x9762;&#x9010;&#x4E2A;&#x4ECB;&#x7ECD;&#x4E0B;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x8FD9;&#x51E0;&#x4E2A;&#x5C5E;&#x6027;&#xFF1A;</p>
+<ul>
+<li><p>corePoolSize</p>
+<blockquote>
+<p>&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x4E0D;&#x8981;&#x62A0;&#x5B57;&#x773C;&#xFF0C;&#x53CD;&#x6B63;&#x5148;&#x8BB0;&#x7740;&#x6709;&#x8FD9;&#x4E48;&#x4E2A;&#x5C5E;&#x6027;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>maximumPoolSize</p>
+<blockquote>
+<p>&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x5141;&#x8BB8;&#x521B;&#x5EFA;&#x7684;&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>workQueue</p>
+<blockquote>
+<p>&#x4EFB;&#x52A1;&#x961F;&#x5217;&#xFF0C;BlockingQueue &#x63A5;&#x53E3;&#x7684;&#x67D0;&#x4E2A;&#x5B9E;&#x73B0;&#xFF08;&#x5E38;&#x4F7F;&#x7528; ArrayBlockingQueue &#x548C; LinkedBlockingQueue&#xFF09;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>keepAliveTime</p>
+<blockquote>
+<p>&#x7A7A;&#x95F2;&#x7EBF;&#x7A0B;&#x7684;&#x4FDD;&#x6D3B;&#x65F6;&#x95F4;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x7EBF;&#x7A0B;&#x7684;&#x7A7A;&#x95F2;&#x65F6;&#x95F4;&#x8D85;&#x8FC7;&#x8FD9;&#x4E2A;&#x503C;&#x90FD;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#x7ED9;&#x5B83;&#x505A;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x88AB;&#x5173;&#x95ED;&#x4E86;&#x3002;&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x503C;&#x5E76;&#x4E0D;&#x4F1A;&#x5BF9;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x8D77;&#x4F5C;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#x5C11;&#x4E8E;&#x7B49;&#x4E8E;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570; corePoolSize&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E9B;&#x7EBF;&#x7A0B;&#x4E0D;&#x4F1A;&#x56E0;&#x4E3A;&#x7A7A;&#x95F2;&#x592A;&#x957F;&#x65F6;&#x95F4;&#x800C;&#x88AB;&#x5173;&#x95ED;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8C03;&#x7528; <code>allowCoreThreadTimeOut(true)</code>&#x4F7F;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x5185;&#x7684;&#x7EBF;&#x7A0B;&#x4E5F;&#x53EF;&#x4EE5;&#x88AB;&#x56DE;&#x6536;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>threadFactory</p>
+<blockquote>
+<p>&#x7528;&#x4E8E;&#x751F;&#x6210;&#x7EBF;&#x7A0B;&#xFF0C;&#x4E00;&#x822C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x9ED8;&#x8BA4;&#x7684;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5B83;&#x5C06;&#x6211;&#x4EEC;&#x7684;&#x7EBF;&#x7A0B;&#x7684;&#x540D;&#x5B57;&#x8BBE;&#x7F6E;&#x5F97;&#x6BD4;&#x8F83;&#x53EF;&#x8BFB;&#x4E00;&#x4E9B;&#xFF0C;&#x5982; Message-Thread-1&#xFF0C; Message-Thread-2 &#x7C7B;&#x4F3C;&#x8FD9;&#x6837;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>handler&#xFF1A;</p>
+<blockquote>
+<p>&#x5F53;&#x7EBF;&#x7A0B;&#x6C60;&#x5DF2;&#x7ECF;&#x6EE1;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x53C8;&#x6709;&#x65B0;&#x7684;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8BE5;&#x91C7;&#x53D6;&#x4EC0;&#x4E48;&#x7B56;&#x7565;&#x7531;&#x8FD9;&#x4E2A;&#x6765;&#x6307;&#x5B9A;&#x3002;&#x6709;&#x51E0;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4F9B;&#x9009;&#x62E9;&#xFF0C;&#x50CF;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3001;&#x76F4;&#x63A5;&#x62D2;&#x7EDD;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x7B49;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x5B9E;&#x73B0;&#x76F8;&#x5E94;&#x7684;&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E4B;&#x540E;&#x518D;&#x8BF4;&#x3002;</p>
+</blockquote>
+</li>
+</ul>
+<p>&#x9664;&#x4E86;&#x4E0A;&#x9762;&#x51E0;&#x4E2A;&#x5C5E;&#x6027;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x770B;&#x770B;&#x5176;&#x4ED6;&#x91CD;&#x8981;&#x7684;&#x5C5E;&#x6027;&#x3002;</p>
+<p>Doug Lea &#x91C7;&#x7528;&#x4E00;&#x4E2A; 32 &#x4F4D;&#x7684;&#x6574;&#x6570;&#x6765;&#x5B58;&#x653E;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x72B6;&#x6001;&#x548C;&#x5F53;&#x524D;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x5176;&#x4E2D;&#x9AD8; 3 &#x4F4D;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#xFF0C;&#x4F4E; 29 &#x4F4D;&#x8868;&#x793A;&#x7EBF;&#x7A0B;&#x6570;&#xFF08;&#x5373;&#x4F7F;&#x53EA;&#x6709; 29 &#x4F4D;&#xFF0C;&#x4E5F;&#x5DF2;&#x7ECF;&#x4E0D;&#x5C0F;&#x4E86;&#xFF0C;&#x5927;&#x6982; 5 &#x4EBF;&#x591A;&#xFF0C;&#x73B0;&#x5728;&#x8FD8;&#x6CA1;&#x6709;&#x54EA;&#x4E2A;&#x673A;&#x5668;&#x80FD;&#x8D77;&#x8FD9;&#x4E48;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x5427;&#xFF09;&#x3002;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;java &#x8BED;&#x8A00;&#x5728;&#x6574;&#x6570;&#x7F16;&#x7801;&#x4E0A;&#x662F;&#x7EDF;&#x4E00;&#x7684;&#xFF0C;&#x90FD;&#x662F;&#x91C7;&#x7528;&#x8865;&#x7801;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x4E0B;&#x9762;&#x662F;&#x7B80;&#x5355;&#x7684;&#x79FB;&#x4F4D;&#x64CD;&#x4F5C;&#x548C;&#x5E03;&#x5C14;&#x64CD;&#x4F5C;&#xFF0C;&#x90FD;&#x662F;&#x633A;&#x7B80;&#x5355;&#x7684;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> AtomicInteger ctl = <span class="hljs-keyword">new</span> AtomicInteger(ctlOf(RUNNING, <span class="hljs-number">0</span>));
+
+<span class="hljs-comment">// &#x8FD9;&#x91CC; COUNT_BITS &#x8BBE;&#x7F6E;&#x4E3A; 29(32-3)&#xFF0C;&#x610F;&#x5473;&#x7740;&#x524D;&#x4E09;&#x4F4D;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#xFF0C;&#x540E;29&#x4F4D;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x7EBF;&#x7A0B;&#x6570;</span>
+<span class="hljs-comment">// &#x5F88;&#x591A;&#x521D;&#x5B66;&#x8005;&#x5F88;&#x559C;&#x6B22;&#x5728;&#x81EA;&#x5DF1;&#x7684;&#x4EE3;&#x7801;&#x4E2D;&#x5199;&#x5F88;&#x591A; 29 &#x8FD9;&#x79CD;&#x6570;&#x5B57;&#xFF0C;&#x6216;&#x8005;&#x67D0;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x7136;&#x540E;&#x5206;&#x5E03;&#x5728;&#x5404;&#x4E2A;&#x5730;&#x65B9;&#xFF0C;&#x8FD9;&#x662F;&#x975E;&#x5E38;&#x7CDF;&#x7CD5;&#x7684;</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> COUNT_BITS = Integer.SIZE - <span class="hljs-number">3</span>;
+
+<span class="hljs-comment">// 000 11111111111111111111111111111</span>
+<span class="hljs-comment">// &#x8FD9;&#x91CC;&#x5F97;&#x5230;&#x7684;&#x662F; 29 &#x4E2A; 1&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#x662F; 2^29-1=536870911</span>
+<span class="hljs-comment">// &#x4EE5;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x7684;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#xFF0C;&#x8FD9;&#x4E2A;&#x6570;&#x91CF;&#x8FD8;&#x662F;&#x591F;&#x7528;&#x7684;</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> CAPACITY   = (<span class="hljs-number">1</span> &lt;&lt; COUNT_BITS) - <span class="hljs-number">1</span>;
+
+<span class="hljs-comment">// &#x6211;&#x4EEC;&#x8BF4;&#x4E86;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x72B6;&#x6001;&#x5B58;&#x653E;&#x5728;&#x9AD8; 3 &#x4F4D;&#x4E2D;</span>
+<span class="hljs-comment">// &#x8FD0;&#x7B97;&#x7ED3;&#x679C;&#x4E3A; 111&#x8DDF;29&#x4E2A;0&#xFF1A;111 00000000000000000000000000000</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> RUNNING    = -<span class="hljs-number">1</span> &lt;&lt; COUNT_BITS;
+<span class="hljs-comment">// 000 00000000000000000000000000000</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> SHUTDOWN   =  <span class="hljs-number">0</span> &lt;&lt; COUNT_BITS;
+<span class="hljs-comment">// 001 00000000000000000000000000000</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> STOP       =  <span class="hljs-number">1</span> &lt;&lt; COUNT_BITS;
+<span class="hljs-comment">// 010 00000000000000000000000000000</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TIDYING    =  <span class="hljs-number">2</span> &lt;&lt; COUNT_BITS;
+<span class="hljs-comment">// 011 00000000000000000000000000000</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TERMINATED =  <span class="hljs-number">3</span> &lt;&lt; COUNT_BITS;
+
+<span class="hljs-comment">// &#x5C06;&#x6574;&#x6570; c &#x7684;&#x4F4E; 29 &#x4F4D;&#x4FEE;&#x6539;&#x4E3A; 0&#xFF0C;&#x5C31;&#x5F97;&#x5230;&#x4E86;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x72B6;&#x6001;</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">runStateOf</span><span class="hljs-params">(<span class="hljs-keyword">int</span> c)</span>     </span>{ <span class="hljs-keyword">return</span> c &amp; ~CAPACITY; }
+<span class="hljs-comment">// &#x5C06;&#x6574;&#x6570; c &#x7684;&#x9AD8; 3 &#x4E3A;&#x4FEE;&#x6539;&#x4E3A; 0&#xFF0C;&#x5C31;&#x5F97;&#x5230;&#x4E86;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6570;</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">workerCountOf</span><span class="hljs-params">(<span class="hljs-keyword">int</span> c)</span>  </span>{ <span class="hljs-keyword">return</span> c &amp; CAPACITY; }
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">ctlOf</span><span class="hljs-params">(<span class="hljs-keyword">int</span> rs, <span class="hljs-keyword">int</span> wc)</span> </span>{ <span class="hljs-keyword">return</span> rs | wc; }
+
+<span class="hljs-comment">/*
+ * Bit field accessors that don&apos;t require unpacking ctl.
+ * These depend on the bit layout and on workerCount being never negative.
+ */</span>
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">runStateLessThan</span><span class="hljs-params">(<span class="hljs-keyword">int</span> c, <span class="hljs-keyword">int</span> s)</span> </span>{
+    <span class="hljs-keyword">return</span> c &lt; s;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">runStateAtLeast</span><span class="hljs-params">(<span class="hljs-keyword">int</span> c, <span class="hljs-keyword">int</span> s)</span> </span>{
+    <span class="hljs-keyword">return</span> c &gt;= s;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isRunning</span><span class="hljs-params">(<span class="hljs-keyword">int</span> c)</span> </span>{
+    <span class="hljs-keyword">return</span> c &lt; SHUTDOWN;
+}
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x5C31;&#x662F;&#x5BF9;&#x4E00;&#x4E2A;&#x6574;&#x6570;&#x7684;&#x7B80;&#x5355;&#x7684;&#x4F4D;&#x64CD;&#x4F5C;&#xFF0C;&#x51E0;&#x4E2A;&#x64CD;&#x4F5C;&#x65B9;&#x6CD5;&#x5C06;&#x4F1A;&#x5728;&#x540E;&#x9762;&#x7684;&#x6E90;&#x7801;&#x4E2D;&#x4E00;&#x76F4;&#x51FA;&#x73B0;&#xFF0C;&#x6240;&#x4EE5;&#x8BFB;&#x8005;&#x6700;&#x597D;&#x628A;&#x65B9;&#x6CD5;&#x540D;&#x5B57;&#x548C;&#x5176;&#x4EE3;&#x8868;&#x7684;&#x529F;&#x80FD;&#x8BB0;&#x4F4F;&#xFF0C;&#x770B;&#x6E90;&#x7801;&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x6765;&#x6765;&#x56DE;&#x56DE;&#x7FFB;&#x4E86;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x4ECB;&#x7ECD;&#x4E0B;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x5404;&#x4E2A;&#x72B6;&#x6001;&#x548C;&#x72B6;&#x6001;&#x53D8;&#x5316;&#x7684;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<ul>
+<li>RUNNING&#xFF1A;&#x8FD9;&#x4E2A;&#x6CA1;&#x4EC0;&#x4E48;&#x597D;&#x8BF4;&#x7684;&#xFF0C;&#x8FD9;&#x662F;&#x6700;&#x6B63;&#x5E38;&#x7684;&#x72B6;&#x6001;&#xFF1A;&#x63A5;&#x53D7;&#x65B0;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x5904;&#x7406;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;</li>
+<li>SHUTDOWN&#xFF1A;&#x4E0D;&#x63A5;&#x53D7;&#x65B0;&#x7684;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#xFF0C;&#x4F46;&#x662F;&#x4F1A;&#x7EE7;&#x7EED;&#x5904;&#x7406;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;</li>
+<li>STOP&#xFF1A;&#x4E0D;&#x63A5;&#x53D7;&#x65B0;&#x7684;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#xFF0C;&#x4E0D;&#x518D;&#x5904;&#x7406;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x4E2D;&#x65AD;&#x6B63;&#x5728;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#x7684;&#x7EBF;&#x7A0B;</li>
+<li>TIDYING&#xFF1A;&#x6240;&#x6709;&#x7684;&#x4EFB;&#x52A1;&#x90FD;&#x9500;&#x6BC1;&#x4E86;&#xFF0C;workCount &#x4E3A; 0&#x3002;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x72B6;&#x6001;&#x5728;&#x8F6C;&#x6362;&#x4E3A; TIDYING &#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x4F1A;&#x6267;&#x884C;&#x94A9;&#x5B50;&#x65B9;&#x6CD5; terminated()</li>
+<li>TERMINATED&#xFF1A;terminated() &#x65B9;&#x6CD5;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x72B6;&#x6001;&#x5C31;&#x4F1A;&#x53D8;&#x6210;&#x8FD9;&#x4E2A;</li>
+</ul>
+<blockquote>
+<p>RUNNING &#x5B9A;&#x4E49;&#x4E3A; -1&#xFF0C;SHUTDOWN &#x5B9A;&#x4E49;&#x4E3A; 0&#xFF0C;&#x5176;&#x4ED6;&#x7684;&#x90FD;&#x6BD4; 0 &#x5927;&#xFF0C;&#x6240;&#x4EE5;&#x7B49;&#x4E8E; 0 &#x7684;&#x65F6;&#x5019;&#x4E0D;&#x80FD;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#xFF0C;&#x5927;&#x4E8E; 0 &#x7684;&#x8BDD;&#xFF0C;&#x8FDE;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;&#x4E5F;&#x9700;&#x8981;&#x4E2D;&#x65AD;&#x3002;</p>
+</blockquote>
+<p>&#x770B;&#x4E86;&#x8FD9;&#x51E0;&#x79CD;&#x72B6;&#x6001;&#x7684;&#x4ECB;&#x7ECD;&#xFF0C;&#x8BFB;&#x8005;&#x5927;&#x4F53;&#x4E5F;&#x53EF;&#x4EE5;&#x731C;&#x5230;&#x5341;&#x4E4B;&#x516B;&#x4E5D;&#x7684;&#x72B6;&#x6001;&#x8F6C;&#x6362;&#x4E86;&#xFF0C;&#x5404;&#x4E2A;&#x72B6;&#x6001;&#x7684;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#xFF1A;</p>
+<ul>
+<li>RUNNING -&gt; SHUTDOWN&#xFF1A;&#x5F53;&#x8C03;&#x7528;&#x4E86; shutdown() &#x540E;&#xFF0C;&#x4F1A;&#x53D1;&#x751F;&#x8FD9;&#x4E2A;&#x72B6;&#x6001;&#x8F6C;&#x6362;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x6700;&#x91CD;&#x8981;&#x7684;</li>
+<li>(RUNNING or SHUTDOWN) -&gt; STOP&#xFF1A;&#x5F53;&#x8C03;&#x7528; shutdownNow() &#x540E;&#xFF0C;&#x4F1A;&#x53D1;&#x751F;&#x8FD9;&#x4E2A;&#x72B6;&#x6001;&#x8F6C;&#x6362;&#xFF0C;&#x8FD9;&#x4E0B;&#x8981;&#x6E05;&#x695A; shutDown() &#x548C; shutDownNow() &#x7684;&#x533A;&#x522B;&#x4E86;</li>
+<li>SHUTDOWN -&gt; TIDYING&#xFF1A;&#x5F53;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x548C;&#x7EBF;&#x7A0B;&#x6C60;&#x90FD;&#x6E05;&#x7A7A;&#x540E;&#xFF0C;&#x4F1A;&#x7531; SHUTDOWN &#x8F6C;&#x6362;&#x4E3A; TIDYING</li>
+<li>STOP -&gt; TIDYING&#xFF1A;&#x5F53;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x6E05;&#x7A7A;&#x540E;&#xFF0C;&#x53D1;&#x751F;&#x8FD9;&#x4E2A;&#x8F6C;&#x6362;</li>
+<li>TIDYING -&gt; TERMINATED&#xFF1A;&#x8FD9;&#x4E2A;&#x524D;&#x9762;&#x8BF4;&#x4E86;&#xFF0C;&#x5F53; terminated() &#x65B9;&#x6CD5;&#x7ED3;&#x675F;&#x540E;</li>
+</ul>
+<p>&#x4E0A;&#x9762;&#x7684;&#x51E0;&#x4E2A;&#x8BB0;&#x4F4F;&#x6838;&#x5FC3;&#x7684;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF0C;&#x5C24;&#x5176;&#x7B2C;&#x4E00;&#x4E2A;&#x548C;&#x7B2C;&#x4E8C;&#x4E2A;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x8981;&#x770B;&#x770B;&#x4E00;&#x4E2A;&#x5185;&#x90E8;&#x7C7B; Worker&#xFF0C;&#x56E0;&#x4E3A; Doug Lea &#x628A;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x5305;&#x88C5;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x4E2A; Worker&#xFF0C;&#x7FFB;&#x8BD1;&#x6210;&#x5DE5;&#x4EBA;&#xFF0C;&#x5C31;&#x662F;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x505A;&#x4EFB;&#x52A1;&#x7684;&#x7EBF;&#x7A0B;&#x3002;&#x6240;&#x4EE5;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x77E5;&#x9053;<strong>&#x4EFB;&#x52A1;&#x662F; Runnable&#xFF08;&#x5185;&#x90E8;&#x53D8;&#x91CF;&#x540D;&#x53EB; task &#x6216; command&#xFF09;&#xFF0C;&#x7EBF;&#x7A0B;&#x662F; Worker</strong>&#x3002;</p>
+<p>Worker &#x8FD9;&#x91CC;&#x53C8;&#x7528;&#x5230;&#x4E86;&#x62BD;&#x8C61;&#x7C7B; AbstractQueuedSynchronizer&#x3002;&#x9898;&#x5916;&#x8BDD;&#xFF0C;AQS &#x5728;&#x5E76;&#x53D1;&#x4E2D;&#x771F;&#x7684;&#x662F;&#x5230;&#x5904;&#x51FA;&#x73B0;&#xFF0C;&#x800C;&#x4E14;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#x4F7F;&#x7528;&#xFF0C;&#x5199;&#x5C11;&#x91CF;&#x7684;&#x4EE3;&#x7801;&#x5C31;&#x80FD;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x9700;&#x8981;&#x7684;&#x540C;&#x6B65;&#x65B9;&#x5F0F;&#xFF08;&#x5BF9; AQS &#x6E90;&#x7801;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x8BFB;&#x8005;&#x8BF7;&#x53C2;&#x770B;&#x6211;&#x4E4B;&#x524D;&#x5199;&#x7684;&#x51E0;&#x7BC7;&#x6587;&#x7AE0;&#xFF09;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Worker</span>
+    <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractQueuedSynchronizer</span>
+    <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span>
+</span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">6138294804551838833L</span>;
+
+    <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x662F;&#x771F;&#x6B63;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x4EFB;&#x52A1;&#x9760;&#x4F60;&#x5566;</span>
+    <span class="hljs-keyword">final</span> Thread thread;
+
+    <span class="hljs-comment">// &#x524D;&#x9762;&#x8BF4;&#x4E86;&#xFF0C;&#x8FD9;&#x91CC;&#x7684; Runnable &#x662F;&#x4EFB;&#x52A1;&#x3002;&#x4E3A;&#x4EC0;&#x4E48;&#x53EB; firstTask&#xFF1F;&#x56E0;&#x4E3A;&#x5728;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;&#x540C;&#x65F6;&#x6307;&#x5B9A;&#x4E86;</span>
+    <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x8D77;&#x6765;&#x4EE5;&#x540E;&#x9700;&#x8981;&#x6267;&#x884C;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x5C31;&#x662F;&#x5B58;&#x653E;&#x5728;&#x8FD9;&#x91CC;&#x7684;(&#x7EBF;&#x7A0B;&#x53EF;&#x4E0D;&#x6B62;&#x6267;&#x884C;&#x8FD9;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;)</span>
+    <span class="hljs-comment">// &#x5F53;&#x7136;&#x4E86;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4E3A; null&#xFF0C;&#x8FD9;&#x6837;&#x7EBF;&#x7A0B;&#x8D77;&#x6765;&#x4E86;&#xFF0C;&#x81EA;&#x5DF1;&#x5230;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#xFF08;BlockingQueue&#xFF09;&#x4E2D;&#x53D6;&#x4EFB;&#x52A1;&#xFF08;getTask &#x65B9;&#x6CD5;&#xFF09;&#x5C31;&#x884C;&#x4E86;</span>
+    Runnable firstTask;
+
+    <span class="hljs-comment">// &#x7528;&#x4E8E;&#x5B58;&#x653E;&#x6B64;&#x7EBF;&#x7A0B;&#x5B8C;&#x6210;&#x7684;&#x4EFB;&#x52A1;&#x6570;&#xFF0C;&#x6CE8;&#x610F;&#x4E86;&#xFF0C;&#x8FD9;&#x91CC;&#x7528;&#x4E86; volatile&#xFF0C;&#x4FDD;&#x8BC1;&#x53EF;&#x89C1;&#x6027;</span>
+    <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">long</span> completedTasks;
+
+    <span class="hljs-comment">// Worker &#x53EA;&#x6709;&#x8FD9;&#x4E00;&#x4E2A;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#xFF0C;&#x4F20;&#x5165; firstTask&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F20; null</span>
+    Worker(Runnable firstTask) {
+        setState(-<span class="hljs-number">1</span>); <span class="hljs-comment">// inhibit interrupts until runWorker</span>
+        <span class="hljs-keyword">this</span>.firstTask = firstTask;
+        <span class="hljs-comment">// &#x8C03;&#x7528; ThreadFactory &#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;</span>
+        <span class="hljs-keyword">this</span>.thread = getThreadFactory().newThread(<span class="hljs-keyword">this</span>);
+    }
+
+    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x8C03;&#x7528;&#x4E86;&#x5916;&#x90E8;&#x7C7B;&#x7684; runWorker &#x65B9;&#x6CD5;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+        runWorker(<span class="hljs-keyword">this</span>);
+    }
+
+    ...<span class="hljs-comment">// &#x5176;&#x4ED6;&#x51E0;&#x4E2A;&#x65B9;&#x6CD5;&#x6CA1;&#x4EC0;&#x4E48;&#x597D;&#x770B;&#x7684;&#xFF0C;&#x5C31;&#x662F;&#x7528; AQS &#x64CD;&#x4F5C;&#xFF0C;&#x6765;&#x83B7;&#x53D6;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x6267;&#x884C;&#x6743;&#xFF0C;&#x7528;&#x4E86;&#x72EC;&#x5360;&#x9501;</span>
+}
+</code></pre>
+<p>&#x524D;&#x9762;&#x867D;&#x7136;&#x5570;&#x55E6;&#xFF0C;&#x4F46;&#x662F;&#x7B80;&#x5355;&#x3002;&#x6709;&#x4E86;&#x4E0A;&#x9762;&#x7684;&#x8FD9;&#x4E9B;&#x57FA;&#x7840;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x7EC8;&#x4E8E;&#x53EF;&#x4EE5;&#x770B;&#x770B; ThreadPoolExecutor &#x7684; execute &#x65B9;&#x6CD5;&#x4E86;&#xFF0C;&#x524D;&#x9762;&#x6E90;&#x7801;&#x5206;&#x6790;&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x8BF4;&#x4E86;&#xFF0C;&#x5404;&#x79CD;&#x65B9;&#x6CD5;&#x90FD;&#x6700;&#x7EC8;&#x4F9D;&#x8D56;&#x4E8E; execute &#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Runnable command)</span> </span>{
+    <span class="hljs-keyword">if</span> (command == <span class="hljs-keyword">null</span>)
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+
+    <span class="hljs-comment">// &#x524D;&#x9762;&#x8BF4;&#x7684;&#x90A3;&#x4E2A;&#x8868;&#x793A; &#x201C;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x201D; &#x548C; &#x201C;&#x7EBF;&#x7A0B;&#x6570;&#x201D; &#x7684;&#x6574;&#x6570;</span>
+    <span class="hljs-keyword">int</span> c = ctl.get();
+
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x5C11;&#x4E8E;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x76F4;&#x63A5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A; worker &#x6765;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#xFF0C;</span>
+    <span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x5E76;&#x628A;&#x5F53;&#x524D;&#x4EFB;&#x52A1; command &#x4F5C;&#x4E3A;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;(firstTask)</span>
+    <span class="hljs-keyword">if</span> (workerCountOf(c) &lt; corePoolSize) {
+        <span class="hljs-comment">// &#x6DFB;&#x52A0;&#x4EFB;&#x52A1;&#x6210;&#x529F;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x7ED3;&#x675F;&#x4E86;&#x3002;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x561B;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x5DF2;&#x7ECF;&#x63A5;&#x53D7;&#x4E86;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4E5F;&#x5C31;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x4E86;</span>
+        <span class="hljs-comment">// &#x81F3;&#x4E8E;&#x6267;&#x884C;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x5230;&#x65F6;&#x5019;&#x4F1A;&#x5305;&#x88C5;&#x5230; FutureTask &#x4E2D;&#x3002;</span>
+        <span class="hljs-comment">// &#x8FD4;&#x56DE; false &#x4EE3;&#x8868;&#x7EBF;&#x7A0B;&#x6C60;&#x4E0D;&#x5141;&#x8BB8;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;</span>
+        <span class="hljs-keyword">if</span> (addWorker(command, <span class="hljs-keyword">true</span>))
+            <span class="hljs-keyword">return</span>;
+        c = ctl.get();
+    }
+    <span class="hljs-comment">// &#x5230;&#x8FD9;&#x91CC;&#x8BF4;&#x660E;&#xFF0C;&#x8981;&#x4E48;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x8981;&#x4E48;&#x521A;&#x521A; addWorker &#x5931;&#x8D25;&#x4E86;</span>
+
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x4E8E; RUNNING &#x72B6;&#x6001;&#xFF0C;&#x628A;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x5230;&#x4EFB;&#x52A1;&#x961F;&#x5217; workQueue &#x4E2D;</span>
+    <span class="hljs-keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) {
+        <span class="hljs-comment">/* &#x8FD9;&#x91CC;&#x9762;&#x8BF4;&#x7684;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x4EFB;&#x52A1;&#x8FDB;&#x5165;&#x4E86; workQueue&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x5426;&#x9700;&#x8981;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;
+         * &#x56E0;&#x4E3A;&#x7EBF;&#x7A0B;&#x6570;&#x5728; [0, corePoolSize) &#x662F;&#x65E0;&#x6761;&#x4EF6;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;
+         * &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6570;&#x5DF2;&#x7ECF;&#x5927;&#x4E8E;&#x7B49;&#x4E8E; corePoolSize&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x5230;&#x8FD9;&#x91CC;
+         */</span>
+        <span class="hljs-keyword">int</span> recheck = ctl.get();
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x5DF2;&#x4E0D;&#x5904;&#x4E8E; RUNNING &#x72B6;&#x6001;&#xFF0C;&#x90A3;&#x4E48;&#x79FB;&#x9664;&#x5DF2;&#x7ECF;&#x5165;&#x961F;&#x7684;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x4E14;&#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;</span>
+        <span class="hljs-keyword">if</span> (! isRunning(recheck) &amp;&amp; remove(command))
+            reject(command);
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x8FD8;&#x662F; RUNNING &#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x7EBF;&#x7A0B;&#x6570;&#x4E3A; 0&#xFF0C;&#x90A3;&#x4E48;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;</span>
+        <span class="hljs-comment">// &#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x4E86;&#xFF0C;&#x8FD9;&#x5757;&#x4EE3;&#x7801;&#x7684;&#x771F;&#x6B63;&#x610F;&#x56FE;&#x662F;&#xFF1A;&#x62C5;&#x5FC3;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x5230;&#x961F;&#x5217;&#x4E2D;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x7EBF;&#x7A0B;&#x90FD;&#x5173;&#x95ED;&#x4E86;</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (workerCountOf(recheck) == <span class="hljs-number">0</span>)
+            addWorker(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>);
+    }
+    <span class="hljs-comment">// &#x5982;&#x679C; workQueue &#x961F;&#x5217;&#x6EE1;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x8FDB;&#x5165;&#x5230;&#x8FD9;&#x4E2A;&#x5206;&#x652F;</span>
+    <span class="hljs-comment">// &#x4EE5; maximumPoolSize &#x4E3A;&#x754C;&#x521B;&#x5EFA;&#x65B0;&#x7684; worker&#xFF0C;</span>
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x5931;&#x8D25;&#xFF0C;&#x8BF4;&#x660E;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x5DF2;&#x7ECF;&#x8FBE;&#x5230; maximumPoolSize&#xFF0C;&#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!addWorker(command, <span class="hljs-keyword">false</span>))
+        reject(command);
+}
+</code></pre>
+<blockquote>
+<p>&#x5BF9;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x7684;&#x9519;&#x8BEF;&#x7406;&#x89E3;&#xFF1A;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6570;&#x5C11;&#x4E8E; corePoolSize&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6570;&#x5728; [corePoolSize, maximumPoolSize] &#x4E4B;&#x95F4;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x6216;&#x590D;&#x7528;&#x7A7A;&#x95F2;&#x7EBF;&#x7A0B;&#xFF0C;keepAliveTime &#x5BF9;&#x8FD9;&#x4E2A;&#x533A;&#x95F4;&#x7684;&#x7EBF;&#x7A0B;&#x6709;&#x6548;&#x3002;</p>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x51E0;&#x4E2A;&#x5206;&#x652F;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x4E0A;&#x9762;&#x7684;&#x8FD9;&#x6BB5;&#x8BDD;&#x662F;&#x9519;&#x8BEF;&#x7684;&#x3002;</p>
+</blockquote>
+<p>&#x4E0A;&#x9762;&#x8FD9;&#x4E9B;&#x4E00;&#x65F6;&#x534A;&#x4F1A;&#x4E5F;&#x4E0D;&#x53EF;&#x80FD;&#x5168;&#x90E8;&#x6D88;&#x5316;&#x641E;&#x5B9A;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x7EE7;&#x7EED;&#x5F80;&#x4E0B;&#x5427;&#xFF0C;&#x5230;&#x65F6;&#x5019;&#x518D;&#x56DE;&#x5934;&#x770B;&#x51E0;&#x904D;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x975E;&#x5E38;&#x91CD;&#x8981; addWorker(Runnable firstTask, boolean core) &#x65B9;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x770B;&#x770B;&#x5B83;&#x662F;&#x600E;&#x4E48;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#x7684;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x51C6;&#x5907;&#x63D0;&#x4EA4;&#x7ED9;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x4E4B;&#x524D;&#x8BF4;&#x4E86;&#xFF0C;&#x53EF;&#x4EE5;&#x4E3A; null</span>
+<span class="hljs-comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x4E3A; true &#x4EE3;&#x8868;&#x4F7F;&#x7528;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570; corePoolSize &#x4F5C;&#x4E3A;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x7684;&#x754C;&#x9650;&#xFF0C;&#x4E5F;&#x5C31;&#x8BF4;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x65F6;&#x5019;&#xFF0C;</span>
+<span class="hljs-comment">//         &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x603B;&#x6570;&#x5DF2;&#x7ECF;&#x8FBE;&#x5230; corePoolSize&#xFF0C;&#x90A3;&#x4E48;&#x4E0D;&#x80FD;&#x54CD;&#x5E94;&#x8FD9;&#x6B21;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x7684;&#x8BF7;&#x6C42;</span>
+<span class="hljs-comment">//         &#x5982;&#x679C;&#x662F; false&#xFF0C;&#x4EE3;&#x8868;&#x4F7F;&#x7528;&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570; maximumPoolSize &#x4F5C;&#x4E3A;&#x754C;&#x9650;</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">addWorker</span><span class="hljs-params">(Runnable firstTask, <span class="hljs-keyword">boolean</span> core)</span> </span>{
+    retry:
+    <span class="hljs-keyword">for</span> (;;) {
+        <span class="hljs-keyword">int</span> c = ctl.get();
+        <span class="hljs-keyword">int</span> rs = runStateOf(c);
+
+        <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x975E;&#x5E38;&#x4E0D;&#x597D;&#x7406;&#x89E3;</span>
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x5DF2;&#x5173;&#x95ED;&#xFF0C;&#x5E76;&#x6EE1;&#x8DB3;&#x4EE5;&#x4E0B;&#x6761;&#x4EF6;&#x4E4B;&#x4E00;&#xFF0C;&#x90A3;&#x4E48;&#x4E0D;&#x521B;&#x5EFA;&#x65B0;&#x7684; worker&#xFF1A;</span>
+        <span class="hljs-comment">// 1. &#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x5927;&#x4E8E; SHUTDOWN&#xFF0C;&#x5176;&#x5B9E;&#x4E5F;&#x5C31;&#x662F; STOP, TIDYING, &#x6216; TERMINATED</span>
+        <span class="hljs-comment">// 2. firstTask != null</span>
+        <span class="hljs-comment">// 3. workQueue.isEmpty()</span>
+        <span class="hljs-comment">// &#x7B80;&#x5355;&#x5206;&#x6790;&#x4E0B;&#xFF1A;</span>
+        <span class="hljs-comment">// &#x8FD8;&#x662F;&#x72B6;&#x6001;&#x63A7;&#x5236;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5F53;&#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x4E8E; SHUTDOWN &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#xFF0C;&#x4F46;&#x662F;&#x5DF2;&#x6709;&#x7684;&#x4EFB;&#x52A1;&#x7EE7;&#x7EED;&#x6267;&#x884C;</span>
+        <span class="hljs-comment">// &#x5F53;&#x72B6;&#x6001;&#x5927;&#x4E8E; SHUTDOWN &#x65F6;&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#xFF0C;&#x4E14;&#x4E2D;&#x65AD;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;</span>
+        <span class="hljs-comment">// &#x591A;&#x8BF4;&#x4E00;&#x53E5;&#xFF1A;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x4E8E; SHUTDOWN&#xFF0C;&#x4F46;&#x662F; firstTask &#x4E3A; null&#xFF0C;&#x4E14; workQueue &#x975E;&#x7A7A;&#xFF0C;&#x90A3;&#x4E48;&#x662F;&#x5141;&#x8BB8;&#x521B;&#x5EFA; worker &#x7684;</span>
+        <span class="hljs-comment">// &#x8FD9;&#x662F;&#x56E0;&#x4E3A; SHUTDOWN &#x7684;&#x8BED;&#x4E49;&#xFF1A;&#x4E0D;&#x5141;&#x8BB8;&#x63D0;&#x4EA4;&#x65B0;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x4F46;&#x662F;&#x8981;&#x628A;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x5230; workQueue &#x7684;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x5B8C;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x662F;&#x5141;&#x8BB8;&#x521B;&#x5EFA;&#x65B0;&#x7684; Worker &#x7684;</span>
+        <span class="hljs-keyword">if</span> (rs &gt;= SHUTDOWN &amp;&amp;
+            ! (rs == SHUTDOWN &amp;&amp;
+               firstTask == <span class="hljs-keyword">null</span> &amp;&amp;
+               ! workQueue.isEmpty()))
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+
+        <span class="hljs-keyword">for</span> (;;) {
+            <span class="hljs-keyword">int</span> wc = workerCountOf(c);
+            <span class="hljs-keyword">if</span> (wc &gt;= CAPACITY ||
+                wc &gt;= (core ? corePoolSize : maximumPoolSize))
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            <span class="hljs-comment">// &#x5982;&#x679C;&#x6210;&#x529F;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x662F;&#x6240;&#x6709;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x524D;&#x7684;&#x6761;&#x4EF6;&#x6821;&#x9A8C;&#x90FD;&#x6EE1;&#x8DB3;&#x4E86;&#xFF0C;&#x51C6;&#x5907;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#x4E86;</span>
+            <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x5931;&#x8D25;&#x7684;&#x8BDD;&#xFF0C;&#x8BF4;&#x660E;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4E5F;&#x5728;&#x5C1D;&#x8BD5;&#x5F80;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;</span>
+            <span class="hljs-keyword">if</span> (compareAndIncrementWorkerCount(c))
+                <span class="hljs-keyword">break</span> retry;
+            <span class="hljs-comment">// &#x7531;&#x4E8E;&#x6709;&#x5E76;&#x53D1;&#xFF0C;&#x91CD;&#x65B0;&#x518D;&#x8BFB;&#x53D6;&#x4E00;&#x4E0B; ctl</span>
+            c = ctl.get();
+            <span class="hljs-comment">// &#x6B63;&#x5E38;&#x5982;&#x679C;&#x662F; CAS &#x5931;&#x8D25;&#x7684;&#x8BDD;&#xFF0C;&#x8FDB;&#x5230;&#x4E0B;&#x4E00;&#x4E2A;&#x91CC;&#x5C42;&#x7684;for&#x5FAA;&#x73AF;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;</span>
+            <span class="hljs-comment">// &#x53EF;&#x662F;&#x5982;&#x679C;&#x662F;&#x56E0;&#x4E3A;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5BFC;&#x81F4;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x72B6;&#x6001;&#x53D1;&#x751F;&#x4E86;&#x53D8;&#x66F4;&#xFF0C;&#x5982;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x5173;&#x95ED;&#x4E86;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;</span>
+            <span class="hljs-comment">// &#x90A3;&#x4E48;&#x9700;&#x8981;&#x56DE;&#x5230;&#x5916;&#x5C42;&#x7684;for&#x5FAA;&#x73AF;</span>
+            <span class="hljs-keyword">if</span> (runStateOf(c) != rs)
+                <span class="hljs-keyword">continue</span> retry;
+            <span class="hljs-comment">// else CAS failed due to workerCount change; retry inner loop</span>
+        }
+    }
+
+    <span class="hljs-comment">/* 
+     * &#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x8BA4;&#x4E3A;&#x5728;&#x5F53;&#x524D;&#x8FD9;&#x4E2A;&#x65F6;&#x523B;&#xFF0C;&#x53EF;&#x4EE5;&#x5F00;&#x59CB;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x6765;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#x4E86;&#xFF0C;
+     * &#x56E0;&#x4E3A;&#x8BE5;&#x6821;&#x9A8C;&#x7684;&#x90FD;&#x6821;&#x9A8C;&#x4E86;&#xFF0C;&#x81F3;&#x4E8E;&#x4EE5;&#x540E;&#x4F1A;&#x53D1;&#x751F;&#x4EC0;&#x4E48;&#xFF0C;&#x90A3;&#x662F;&#x4EE5;&#x540E;&#x7684;&#x4E8B;&#xFF0C;&#x81F3;&#x5C11;&#x5F53;&#x524D;&#x662F;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;
+     */</span>
+
+    <span class="hljs-comment">// worker &#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x542F;&#x52A8;</span>
+    <span class="hljs-keyword">boolean</span> workerStarted = <span class="hljs-keyword">false</span>;
+    <span class="hljs-comment">// &#x662F;&#x5426;&#x5DF2;&#x5C06;&#x8FD9;&#x4E2A; worker &#x6DFB;&#x52A0;&#x5230; workers &#x8FD9;&#x4E2A; HashSet &#x4E2D;</span>
+    <span class="hljs-keyword">boolean</span> workerAdded = <span class="hljs-keyword">false</span>;
+    Worker w = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">final</span> ReentrantLock mainLock = <span class="hljs-keyword">this</span>.mainLock;
+        <span class="hljs-comment">// &#x628A; firstTask &#x4F20;&#x7ED9; worker &#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;</span>
+        w = <span class="hljs-keyword">new</span> Worker(firstTask);
+        <span class="hljs-comment">// &#x53D6; worker &#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x5BF9;&#x8C61;&#xFF0C;&#x4E4B;&#x524D;&#x8BF4;&#x4E86;&#xFF0C;Worker&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x4F1A;&#x8C03;&#x7528; ThreadFactory &#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;</span>
+        <span class="hljs-keyword">final</span> Thread t = w.thread;
+        <span class="hljs-keyword">if</span> (t != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x662F;&#x6574;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x5168;&#x5C40;&#x9501;&#xFF0C;&#x6301;&#x6709;&#x8FD9;&#x4E2A;&#x9501;&#x624D;&#x80FD;&#x8BA9;&#x4E0B;&#x9762;&#x7684;&#x64CD;&#x4F5C;&#x201C;&#x987A;&#x7406;&#x6210;&#x7AE0;&#x201D;&#xFF0C;</span>
+            <span class="hljs-comment">// &#x56E0;&#x4E3A;&#x5173;&#x95ED;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#x9700;&#x8981;&#x8FD9;&#x4E2A;&#x9501;&#xFF0C;&#x81F3;&#x5C11;&#x6211;&#x6301;&#x6709;&#x9501;&#x7684;&#x671F;&#x95F4;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x4E0D;&#x4F1A;&#x88AB;&#x5173;&#x95ED;</span>
+            mainLock.lock();
+            <span class="hljs-keyword">try</span> {
+
+                <span class="hljs-keyword">int</span> c = ctl.get();
+                <span class="hljs-keyword">int</span> rs = runStateOf(c);
+
+                <span class="hljs-comment">// &#x5C0F;&#x4E8E; SHUTTDOWN &#x90A3;&#x5C31;&#x662F; RUNNING&#xFF0C;&#x8FD9;&#x4E2A;&#x81EA;&#x4E0D;&#x5FC5;&#x8BF4;&#xFF0C;&#x662F;&#x6700;&#x6B63;&#x5E38;&#x7684;&#x60C5;&#x51B5;</span>
+                <span class="hljs-comment">// &#x5982;&#x679C;&#x7B49;&#x4E8E; SHUTDOWN&#xFF0C;&#x524D;&#x9762;&#x8BF4;&#x4E86;&#xFF0C;&#x4E0D;&#x63A5;&#x53D7;&#x65B0;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x4F46;&#x662F;&#x4F1A;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;</span>
+                <span class="hljs-keyword">if</span> (rs &lt; SHUTDOWN ||
+                    (rs == SHUTDOWN &amp;&amp; firstTask == <span class="hljs-keyword">null</span>)) {
+                    <span class="hljs-comment">// worker &#x91CC;&#x9762;&#x7684; thread &#x53EF;&#x4E0D;&#x80FD;&#x662F;&#x5DF2;&#x7ECF;&#x542F;&#x52A8;&#x7684;</span>
+                    <span class="hljs-keyword">if</span> (t.isAlive())
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalThreadStateException();
+                    <span class="hljs-comment">// &#x52A0;&#x5230; workers &#x8FD9;&#x4E2A; HashSet &#x4E2D;</span>
+                    workers.add(w);
+                    <span class="hljs-keyword">int</span> s = workers.size();
+                    <span class="hljs-comment">// largestPoolSize &#x7528;&#x4E8E;&#x8BB0;&#x5F55; workers &#x4E2D;&#x7684;&#x4E2A;&#x6570;&#x7684;&#x6700;&#x5927;&#x503C;</span>
+                    <span class="hljs-comment">// &#x56E0;&#x4E3A; workers &#x662F;&#x4E0D;&#x65AD;&#x589E;&#x52A0;&#x51CF;&#x5C11;&#x7684;&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x503C;&#x53EF;&#x4EE5;&#x77E5;&#x9053;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x5927;&#x5C0F;&#x66FE;&#x7ECF;&#x8FBE;&#x5230;&#x7684;&#x6700;&#x5927;&#x503C;</span>
+                    <span class="hljs-keyword">if</span> (s &gt; largestPoolSize)
+                        largestPoolSize = s;
+                    workerAdded = <span class="hljs-keyword">true</span>;
+                }
+            } <span class="hljs-keyword">finally</span> {
+                mainLock.unlock();
+            }
+            <span class="hljs-comment">// &#x6DFB;&#x52A0;&#x6210;&#x529F;&#x7684;&#x8BDD;&#xFF0C;&#x542F;&#x52A8;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;</span>
+            <span class="hljs-keyword">if</span> (workerAdded) {
+                <span class="hljs-comment">// &#x542F;&#x52A8;&#x7EBF;&#x7A0B;</span>
+                t.start();
+                workerStarted = <span class="hljs-keyword">true</span>;
+            }
+        }
+    } <span class="hljs-keyword">finally</span> {
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6CA1;&#x6709;&#x542F;&#x52A8;&#xFF0C;&#x9700;&#x8981;&#x505A;&#x4E00;&#x4E9B;&#x6E05;&#x7406;&#x5DE5;&#x4F5C;&#xFF0C;&#x5982;&#x524D;&#x9762; workCount &#x52A0;&#x4E86; 1&#xFF0C;&#x5C06;&#x5176;&#x51CF;&#x6389;</span>
+        <span class="hljs-keyword">if</span> (! workerStarted)
+            addWorkerFailed(w);
+    }
+    <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x542F;&#x52A8;&#x6210;&#x529F;</span>
+    <span class="hljs-keyword">return</span> workerStarted;
+}
+</code></pre>
+<p>&#x7B80;&#x5355;&#x770B;&#x4E0B; addWorkFailed &#x7684;&#x5904;&#x7406;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// workers &#x4E2D;&#x5220;&#x9664;&#x6389;&#x76F8;&#x5E94;&#x7684; worker</span>
+<span class="hljs-comment">// workCount &#x51CF; 1</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addWorkerFailed</span><span class="hljs-params">(Worker w)</span> </span>{
+    <span class="hljs-keyword">final</span> ReentrantLock mainLock = <span class="hljs-keyword">this</span>.mainLock;
+    mainLock.lock();
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">if</span> (w != <span class="hljs-keyword">null</span>)
+            workers.remove(w);
+        decrementWorkerCount();
+        <span class="hljs-comment">// rechecks for termination, in case the existence of this worker was holding up termination</span>
+        tryTerminate();
+    } <span class="hljs-keyword">finally</span> {
+        mainLock.unlock();
+    }
+}
+</code></pre>
+<p>&#x56DE;&#x8FC7;&#x5934;&#x6765;&#xFF0C;&#x7EE7;&#x7EED;&#x5F80;&#x4E0B;&#x8D70;&#x3002;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;worker &#x4E2D;&#x7684;&#x7EBF;&#x7A0B; start &#x540E;&#xFF0C;&#x5176; run &#x65B9;&#x6CD5;&#x4F1A;&#x8C03;&#x7528; runWorker &#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// Worker &#x7C7B;&#x7684; run() &#x65B9;&#x6CD5;</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+    runWorker(<span class="hljs-keyword">this</span>);
+}
+</code></pre>
+<p>&#x7EE7;&#x7EED;&#x5F80;&#x4E0B;&#x770B; runWorker &#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x6B64;&#x65B9;&#x6CD5;&#x7531; worker &#x7EBF;&#x7A0B;&#x542F;&#x52A8;&#x540E;&#x8C03;&#x7528;&#xFF0C;&#x8FD9;&#x91CC;&#x7528;&#x4E00;&#x4E2A; while &#x5FAA;&#x73AF;&#x6765;&#x4E0D;&#x65AD;&#x5730;&#x4ECE;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x83B7;&#x53D6;&#x4EFB;&#x52A1;&#x5E76;&#x6267;&#x884C;</span>
+<span class="hljs-comment">// &#x524D;&#x9762;&#x8BF4;&#x4E86;&#xFF0C;worker &#x5728;&#x521D;&#x59CB;&#x5316;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A; firstTask&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x4E5F;&#x5C31;&#x53EF;&#x4EE5;&#x4E0D;&#x9700;&#x8981;&#x4ECE;&#x961F;&#x5217;&#x4E2D;&#x83B7;&#x53D6;</span>
+<span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">runWorker</span><span class="hljs-params">(Worker w)</span> </span>{
+    <span class="hljs-comment">// </span>
+    Thread wt = Thread.currentThread();
+    <span class="hljs-comment">// &#x8BE5;&#x7EBF;&#x7A0B;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;(&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;)</span>
+    Runnable task = w.firstTask;
+    w.firstTask = <span class="hljs-keyword">null</span>;
+    w.unlock(); <span class="hljs-comment">// allow interrupts</span>
+    <span class="hljs-keyword">boolean</span> completedAbruptly = <span class="hljs-keyword">true</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">// &#x5FAA;&#x73AF;&#x8C03;&#x7528; getTask &#x83B7;&#x53D6;&#x4EFB;&#x52A1;</span>
+        <span class="hljs-keyword">while</span> (task != <span class="hljs-keyword">null</span> || (task = getTask()) != <span class="hljs-keyword">null</span>) {
+            w.lock();          
+            <span class="hljs-comment">// &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x5927;&#x4E8E;&#x7B49;&#x4E8E; STOP&#xFF0C;&#x90A3;&#x4E48;&#x610F;&#x5473;&#x7740;&#x8BE5;&#x7EBF;&#x7A0B;&#x4E5F;&#x8981;&#x4E2D;&#x65AD;</span>
+            <span class="hljs-keyword">if</span> ((runStateAtLeast(ctl.get(), STOP) ||
+                 (Thread.interrupted() &amp;&amp;
+                  runStateAtLeast(ctl.get(), STOP))) &amp;&amp;
+                !wt.isInterrupted())
+                wt.interrupt();
+            <span class="hljs-keyword">try</span> {
+                <span class="hljs-comment">// &#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x94A9;&#x5B50;&#x65B9;&#x6CD5;&#xFF0C;&#x7559;&#x7ED9;&#x9700;&#x8981;&#x7684;&#x5B50;&#x7C7B;&#x5B9E;&#x73B0;</span>
+                beforeExecute(wt, task);
+                Throwable thrown = <span class="hljs-keyword">null</span>;
+                <span class="hljs-keyword">try</span> {
+                    <span class="hljs-comment">// &#x5230;&#x8FD9;&#x91CC;&#x7EC8;&#x4E8E;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#x4E86;</span>
+                    task.run();
+                } <span class="hljs-keyword">catch</span> (RuntimeException x) {
+                    thrown = x; <span class="hljs-keyword">throw</span> x;
+                } <span class="hljs-keyword">catch</span> (Error x) {
+                    thrown = x; <span class="hljs-keyword">throw</span> x;
+                } <span class="hljs-keyword">catch</span> (Throwable x) {
+                    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x4E0D;&#x5141;&#x8BB8;&#x629B;&#x51FA; Throwable&#xFF0C;&#x6240;&#x4EE5;&#x8F6C;&#x6362;&#x4E3A; Error</span>
+                    thrown = x; <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(x);
+                } <span class="hljs-keyword">finally</span> {
+                    <span class="hljs-comment">// &#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x94A9;&#x5B50;&#x65B9;&#x6CD5;&#xFF0C;&#x5C06; task &#x548C;&#x5F02;&#x5E38;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x7559;&#x7ED9;&#x9700;&#x8981;&#x7684;&#x5B50;&#x7C7B;&#x5B9E;&#x73B0;</span>
+                    afterExecute(task, thrown);
+                }
+            } <span class="hljs-keyword">finally</span> {
+                <span class="hljs-comment">// &#x7F6E;&#x7A7A; task&#xFF0C;&#x51C6;&#x5907; getTask &#x83B7;&#x53D6;&#x4E0B;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;</span>
+                task = <span class="hljs-keyword">null</span>;
+                <span class="hljs-comment">// &#x7D2F;&#x52A0;&#x5B8C;&#x6210;&#x7684;&#x4EFB;&#x52A1;&#x6570;</span>
+                w.completedTasks++;
+                <span class="hljs-comment">// &#x91CA;&#x653E;&#x6389; worker &#x7684;&#x72EC;&#x5360;&#x9501;</span>
+                w.unlock();
+            }
+        }
+        completedAbruptly = <span class="hljs-keyword">false</span>;
+    } <span class="hljs-keyword">finally</span> {
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x9700;&#x8981;&#x6267;&#x884C;&#x7EBF;&#x7A0B;&#x5173;&#x95ED;&#xFF1A;</span>
+        <span class="hljs-comment">// 1. &#x8BF4;&#x660E; getTask &#x8FD4;&#x56DE; null&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x961F;&#x5217;&#x4E2D;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#x9700;&#x8981;&#x6267;&#x884C;&#x4E86;&#xFF0C;&#x6267;&#x884C;&#x5173;&#x95ED;</span>
+        <span class="hljs-comment">// 2. &#x4EFB;&#x52A1;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x53D1;&#x751F;&#x4E86;&#x5F02;&#x5E38;</span>
+        <span class="hljs-comment">// &#x7B2C;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x5DF2;&#x7ECF;&#x5728;&#x4EE3;&#x7801;&#x5904;&#x7406;&#x4E86;&#x5C06; workCount &#x51CF; 1&#xFF0C;&#x8FD9;&#x4E2A;&#x5728; getTask &#x65B9;&#x6CD5;&#x5206;&#x6790;&#x4E2D;&#x4F1A;&#x8BF4;</span>
+        <span class="hljs-comment">// &#x7B2C;&#x4E8C;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;workCount &#x6CA1;&#x6709;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x5728; processWorkerExit &#x4E2D;&#x5904;&#x7406;</span>
+        <span class="hljs-comment">// &#x9650;&#x4E8E;&#x7BC7;&#x5E45;&#xFF0C;&#x6211;&#x4E0D;&#x51C6;&#x5907;&#x5206;&#x6790;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4E86;&#xFF0C;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x8BFB;&#x8005;&#x8BF7;&#x81EA;&#x884C;&#x5206;&#x6790;&#x6E90;&#x7801;</span>
+        processWorkerExit(w, completedAbruptly);
+    }
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x770B;&#x770B; getTask() &#x662F;&#x600E;&#x4E48;&#x83B7;&#x53D6;&#x4EFB;&#x52A1;&#x7684;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5199;&#x5F97;&#x771F;&#x7684;&#x5F88;&#x597D;&#xFF0C;&#x6BCF;&#x4E00;&#x884C;&#x90FD;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x7EC4;&#x5408;&#x8D77;&#x6765;&#x5374;&#x6240;&#x6709;&#x7684;&#x60C5;&#x51B5;&#x90FD;&#x60F3;&#x597D;&#x4E86;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x6B64;&#x65B9;&#x6CD5;&#x6709;&#x4E09;&#x79CD;&#x53EF;&#x80FD;&#xFF1A;</span>
+<span class="hljs-comment">// 1. &#x963B;&#x585E;&#x76F4;&#x5230;&#x83B7;&#x53D6;&#x5230;&#x4EFB;&#x52A1;&#x8FD4;&#x56DE;&#x3002;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;&#x9ED8;&#x8BA4; corePoolSize &#x4E4B;&#x5185;&#x7684;&#x7EBF;&#x7A0B;&#x662F;&#x4E0D;&#x4F1A;&#x88AB;&#x56DE;&#x6536;&#x7684;&#xFF0C;</span>
+<span class="hljs-comment">//      &#x5B83;&#x4EEC;&#x4F1A;&#x4E00;&#x76F4;&#x7B49;&#x5F85;&#x4EFB;&#x52A1;</span>
+<span class="hljs-comment">// 2. &#x8D85;&#x65F6;&#x9000;&#x51FA;&#x3002;keepAliveTime &#x8D77;&#x4F5C;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5982;&#x679C;&#x8FD9;&#x4E48;&#x591A;&#x65F6;&#x95F4;&#x5185;&#x90FD;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#xFF0C;&#x90A3;&#x4E48;&#x5E94;&#x8BE5;&#x6267;&#x884C;&#x5173;&#x95ED;</span>
+<span class="hljs-comment">// 3. &#x5982;&#x679C;&#x53D1;&#x751F;&#x4E86;&#x4EE5;&#x4E0B;&#x6761;&#x4EF6;&#xFF0C;&#x6B64;&#x65B9;&#x6CD5;&#x5FC5;&#x987B;&#x8FD4;&#x56DE; null:</span>
+<span class="hljs-comment">//    - &#x6C60;&#x4E2D;&#x6709;&#x5927;&#x4E8E; maximumPoolSize &#x4E2A; workers &#x5B58;&#x5728;(&#x901A;&#x8FC7;&#x8C03;&#x7528; setMaximumPoolSize &#x8FDB;&#x884C;&#x8BBE;&#x7F6E;)</span>
+<span class="hljs-comment">//    - &#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x4E8E; SHUTDOWN&#xFF0C;&#x800C;&#x4E14; workQueue &#x662F;&#x7A7A;&#x7684;&#xFF0C;&#x524D;&#x9762;&#x8BF4;&#x4E86;&#xFF0C;&#x8FD9;&#x79CD;&#x4E0D;&#x518D;&#x63A5;&#x53D7;&#x65B0;&#x7684;&#x4EFB;&#x52A1;</span>
+<span class="hljs-comment">//    - &#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x4E8E; STOP&#xFF0C;&#x4E0D;&#x4EC5;&#x4E0D;&#x63A5;&#x53D7;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x8FDE; workQueue &#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x4E5F;&#x4E0D;&#x518D;&#x6267;&#x884C;</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> Runnable <span class="hljs-title">getTask</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">boolean</span> timedOut = <span class="hljs-keyword">false</span>; <span class="hljs-comment">// Did the last poll() time out?</span>
+
+    retry:
+    <span class="hljs-keyword">for</span> (;;) {
+        <span class="hljs-keyword">int</span> c = ctl.get();
+        <span class="hljs-keyword">int</span> rs = runStateOf(c);
+        <span class="hljs-comment">// &#x4E24;&#x79CD;&#x53EF;&#x80FD;</span>
+        <span class="hljs-comment">// 1. rs == SHUTDOWN &amp;&amp; workQueue.isEmpty()</span>
+        <span class="hljs-comment">// 2. rs &gt;= STOP</span>
+        <span class="hljs-keyword">if</span> (rs &gt;= SHUTDOWN &amp;&amp; (rs &gt;= STOP || workQueue.isEmpty())) {
+            <span class="hljs-comment">// CAS &#x64CD;&#x4F5C;&#xFF0C;&#x51CF;&#x5C11;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;</span>
+            decrementWorkerCount();
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        }
+
+        <span class="hljs-keyword">boolean</span> timed;      <span class="hljs-comment">// Are workers subject to culling?</span>
+        <span class="hljs-keyword">for</span> (;;) {
+            <span class="hljs-keyword">int</span> wc = workerCountOf(c);
+            <span class="hljs-comment">// &#x5141;&#x8BB8;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x5185;&#x7684;&#x7EBF;&#x7A0B;&#x56DE;&#x6536;&#xFF0C;&#x6216;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x8D85;&#x8FC7;&#x4E86;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x6709;&#x53EF;&#x80FD;&#x53D1;&#x751F;&#x8D85;&#x65F6;&#x5173;&#x95ED;</span>
+            timed = allowCoreThreadTimeOut || wc &gt; corePoolSize;
+
+            <span class="hljs-comment">// &#x8FD9;&#x91CC; break&#xFF0C;&#x662F;&#x4E3A;&#x4E86;&#x4E0D;&#x5F80;&#x4E0B;&#x6267;&#x884C;&#x540E;&#x4E00;&#x4E2A; if (compareAndDecrementWorkerCount(c))</span>
+            <span class="hljs-comment">// &#x4E24;&#x4E2A; if &#x4E00;&#x8D77;&#x770B;&#xFF1A;&#x5982;&#x679C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570; wc &gt; maximumPoolSize&#xFF0C;&#x6216;&#x8005;&#x8D85;&#x65F6;&#xFF0C;&#x90FD;&#x8FD4;&#x56DE; null</span>
+            <span class="hljs-comment">// &#x90A3;&#x8FD9;&#x91CC;&#x7684;&#x95EE;&#x9898;&#x6765;&#x4E86;&#xFF0C;wc &gt; maximumPoolSize &#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8FD4;&#x56DE; null&#xFF1F;</span>
+            <span class="hljs-comment">//    &#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x8FD4;&#x56DE; null &#x610F;&#x5473;&#x7740;&#x5173;&#x95ED;&#x7EBF;&#x7A0B;&#x3002;</span>
+            <span class="hljs-comment">// &#x90A3;&#x662F;&#x56E0;&#x4E3A;&#x6709;&#x53EF;&#x80FD;&#x5F00;&#x53D1;&#x8005;&#x8C03;&#x7528;&#x4E86; setMaximumPoolSize() &#x5C06;&#x7EBF;&#x7A0B;&#x6C60;&#x7684; maximumPoolSize &#x8C03;&#x5C0F;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x591A;&#x4F59;&#x7684; Worker &#x5C31;&#x9700;&#x8981;&#x88AB;&#x5173;&#x95ED;</span>
+            <span class="hljs-keyword">if</span> (wc &lt;= maximumPoolSize &amp;&amp; ! (timedOut &amp;&amp; timed))
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">if</span> (compareAndDecrementWorkerCount(c))
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+            c = ctl.get();  <span class="hljs-comment">// Re-read ctl</span>
+            <span class="hljs-comment">// compareAndDecrementWorkerCount(c) &#x5931;&#x8D25;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#x53D1;&#x751F;&#x4E86;&#x6539;&#x53D8;</span>
+            <span class="hljs-keyword">if</span> (runStateOf(c) != rs)
+                <span class="hljs-keyword">continue</span> retry;
+            <span class="hljs-comment">// else CAS failed due to workerCount change; retry inner loop</span>
+        }
+        <span class="hljs-comment">// wc &lt;= maximumPoolSize &#x540C;&#x65F6;&#x6CA1;&#x6709;&#x8D85;&#x65F6;</span>
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-comment">// &#x5230; workQueue &#x4E2D;&#x83B7;&#x53D6;&#x4EFB;&#x52A1;</span>
+            Runnable r = timed ?
+                workQueue.poll(keepAliveTime, TimeUnit.NANOSECONDS) :
+                workQueue.take();
+            <span class="hljs-keyword">if</span> (r != <span class="hljs-keyword">null</span>)
+                <span class="hljs-keyword">return</span> r;
+            timedOut = <span class="hljs-keyword">true</span>;
+        } <span class="hljs-keyword">catch</span> (InterruptedException retry) {
+            <span class="hljs-comment">// &#x5982;&#x679C;&#x6B64; worker &#x53D1;&#x751F;&#x4E86;&#x4E2D;&#x65AD;&#xFF0C;&#x91C7;&#x53D6;&#x7684;&#x65B9;&#x6848;&#x662F;&#x91CD;&#x8BD5;</span>
+            <span class="hljs-comment">// &#x89E3;&#x91CA;&#x4E0B;&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x53D1;&#x751F;&#x4E2D;&#x65AD;&#xFF0C;&#x8FD9;&#x4E2A;&#x8BFB;&#x8005;&#x8981;&#x53BB;&#x770B; setMaximumPoolSize &#x65B9;&#x6CD5;&#x3002;</span>
+
+            <span class="hljs-comment">// &#x5982;&#x679C;&#x5F00;&#x53D1;&#x8005;&#x5C06; maximumPoolSize &#x8C03;&#x5C0F;&#x4E86;&#xFF0C;&#x5BFC;&#x81F4;&#x5176;&#x5C0F;&#x4E8E;&#x5F53;&#x524D;&#x7684; workers &#x6570;&#x91CF;&#xFF0C;</span>
+            <span class="hljs-comment">// &#x90A3;&#x4E48;&#x610F;&#x5473;&#x7740;&#x8D85;&#x51FA;&#x7684;&#x90E8;&#x5206;&#x7EBF;&#x7A0B;&#x8981;&#x88AB;&#x5173;&#x95ED;&#x3002;&#x91CD;&#x65B0;&#x8FDB;&#x5165; for &#x5FAA;&#x73AF;&#xFF0C;&#x81EA;&#x7136;&#x4F1A;&#x6709;&#x90E8;&#x5206;&#x7EBF;&#x7A0B;&#x4F1A;&#x8FD4;&#x56DE; null</span>
+            timedOut = <span class="hljs-keyword">false</span>;
+        }
+    }
+}
+</code></pre>
+<p>&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x4E5F;&#x8BF4;&#x5B8C;&#x4E86;&#x6574;&#x4E2A;&#x6D41;&#x7A0B;&#xFF0C;&#x8BFB;&#x8005;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5E94;&#x8BE5;&#x56DE;&#x5230; execute(Runnable command) &#x65B9;&#x6CD5;&#xFF0C;&#x770B;&#x770B;&#x5404;&#x4E2A;&#x5206;&#x652F;&#xFF0C;&#x6211;&#x628A;&#x4EE3;&#x7801;&#x8D34;&#x8FC7;&#x6765;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Runnable command)</span> </span>{
+    <span class="hljs-keyword">if</span> (command == <span class="hljs-keyword">null</span>)
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+
+    <span class="hljs-comment">// &#x524D;&#x9762;&#x8BF4;&#x7684;&#x90A3;&#x4E2A;&#x8868;&#x793A; &#x201C;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x201D; &#x548C; &#x201C;&#x7EBF;&#x7A0B;&#x6570;&#x201D; &#x7684;&#x6574;&#x6570;</span>
+    <span class="hljs-keyword">int</span> c = ctl.get();
+
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x5C11;&#x4E8E;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x76F4;&#x63A5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A; worker &#x6765;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#xFF0C;</span>
+    <span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x5E76;&#x628A;&#x5F53;&#x524D;&#x4EFB;&#x52A1; command &#x4F5C;&#x4E3A;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;(firstTask)</span>
+    <span class="hljs-keyword">if</span> (workerCountOf(c) &lt; corePoolSize) {
+        <span class="hljs-comment">// &#x6DFB;&#x52A0;&#x4EFB;&#x52A1;&#x6210;&#x529F;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x7ED3;&#x675F;&#x4E86;&#x3002;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x561B;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x5DF2;&#x7ECF;&#x63A5;&#x53D7;&#x4E86;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4E5F;&#x5C31;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x4E86;</span>
+        <span class="hljs-comment">// &#x81F3;&#x4E8E;&#x6267;&#x884C;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x5230;&#x65F6;&#x5019;&#x4F1A;&#x5305;&#x88C5;&#x5230; FutureTask &#x4E2D;&#x3002;</span>
+        <span class="hljs-comment">// &#x8FD4;&#x56DE; false &#x4EE3;&#x8868;&#x7EBF;&#x7A0B;&#x6C60;&#x4E0D;&#x5141;&#x8BB8;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;</span>
+        <span class="hljs-keyword">if</span> (addWorker(command, <span class="hljs-keyword">true</span>))
+            <span class="hljs-keyword">return</span>;
+        c = ctl.get();
+    }
+    <span class="hljs-comment">// &#x5230;&#x8FD9;&#x91CC;&#x8BF4;&#x660E;&#xFF0C;&#x8981;&#x4E48;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x8981;&#x4E48;&#x521A;&#x521A; addWorker &#x5931;&#x8D25;&#x4E86;</span>
+
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x4E8E; RUNNING &#x72B6;&#x6001;&#xFF0C;&#x628A;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x5230;&#x4EFB;&#x52A1;&#x961F;&#x5217; workQueue &#x4E2D;</span>
+    <span class="hljs-keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) {
+        <span class="hljs-comment">/* &#x8FD9;&#x91CC;&#x9762;&#x8BF4;&#x7684;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x4EFB;&#x52A1;&#x8FDB;&#x5165;&#x4E86; workQueue&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x5426;&#x9700;&#x8981;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;
+         * &#x56E0;&#x4E3A;&#x7EBF;&#x7A0B;&#x6570;&#x5728; [0, corePoolSize) &#x662F;&#x65E0;&#x6761;&#x4EF6;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;
+         * &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6570;&#x5DF2;&#x7ECF;&#x5927;&#x4E8E;&#x7B49;&#x4E8E; corePoolSize&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x5230;&#x8FD9;&#x91CC;
+         */</span>
+        <span class="hljs-keyword">int</span> recheck = ctl.get();
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x5DF2;&#x4E0D;&#x5904;&#x4E8E; RUNNING &#x72B6;&#x6001;&#xFF0C;&#x90A3;&#x4E48;&#x79FB;&#x9664;&#x5DF2;&#x7ECF;&#x5165;&#x961F;&#x7684;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x4E14;&#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;</span>
+        <span class="hljs-keyword">if</span> (! isRunning(recheck) &amp;&amp; remove(command))
+            reject(command);
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x8FD8;&#x662F; RUNNING &#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x7EBF;&#x7A0B;&#x6570;&#x4E3A; 0&#xFF0C;&#x90A3;&#x4E48;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;</span>
+        <span class="hljs-comment">// &#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x4E86;&#xFF0C;&#x8FD9;&#x5757;&#x4EE3;&#x7801;&#x7684;&#x771F;&#x6B63;&#x610F;&#x56FE;&#x662F;&#xFF1A;&#x62C5;&#x5FC3;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x5230;&#x961F;&#x5217;&#x4E2D;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x7EBF;&#x7A0B;&#x90FD;&#x5173;&#x95ED;&#x4E86;</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (workerCountOf(recheck) == <span class="hljs-number">0</span>)
+            addWorker(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>);
+    }
+    <span class="hljs-comment">// &#x5982;&#x679C; workQueue &#x961F;&#x5217;&#x6EE1;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x8FDB;&#x5165;&#x5230;&#x8FD9;&#x4E2A;&#x5206;&#x652F;</span>
+    <span class="hljs-comment">// &#x4EE5; maximumPoolSize &#x4E3A;&#x754C;&#x521B;&#x5EFA;&#x65B0;&#x7684; worker&#xFF0C;</span>
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x5931;&#x8D25;&#xFF0C;&#x8BF4;&#x660E;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x5DF2;&#x7ECF;&#x8FBE;&#x5230; maximumPoolSize&#xFF0C;&#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!addWorker(command, <span class="hljs-keyword">false</span>))
+        reject(command);
+}
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x5404;&#x4E2A;&#x5206;&#x652F;&#x4E2D;&#xFF0C;&#x6709;&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x4F1A;&#x8C03;&#x7528; reject(command) &#x6765;&#x5904;&#x7406;&#x4EFB;&#x52A1;&#xFF0C;&#x56E0;&#x4E3A;&#x6309;&#x7167;&#x6B63;&#x5E38;&#x7684;&#x6D41;&#x7A0B;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x6B64;&#x65F6;&#x4E0D;&#x80FD;&#x63A5;&#x53D7;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x6267;&#x884C;&#x6211;&#x4EEC;&#x7684;&#x62D2;&#x7EDD;&#x7B56;&#x7565;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x8BF4;&#x4E00;&#x8BF4; ThreadPoolExecutor &#x4E2D;&#x7684;&#x62D2;&#x7EDD;&#x7B56;&#x7565;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">reject</span><span class="hljs-params">(Runnable command)</span> </span>{
+    <span class="hljs-comment">// &#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;</span>
+    handler.rejectedExecution(command, <span class="hljs-keyword">this</span>);
+}
+</code></pre>
+<p>&#x6B64;&#x5904;&#x7684; handler &#x6211;&#x4EEC;&#x9700;&#x8981;&#x5728;&#x6784;&#x9020;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x4F20;&#x5165;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5B83;&#x662F; RejectedExecutionHandler &#x7684;&#x5B9E;&#x4F8B;&#x3002;</p>
+<p>RejectedExecutionHandler &#x5728; ThreadPoolExecutor &#x4E2D;&#x6709;&#x56DB;&#x4E2A;&#x5DF2;&#x7ECF;&#x5B9A;&#x4E49;&#x597D;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x53EF;&#x4F9B;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684;&#x7B56;&#x7565;&#xFF0C;&#x4E0D;&#x8FC7;&#x4E00;&#x822C;&#x4E5F;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x53EA;&#x8981;&#x7EBF;&#x7A0B;&#x6C60;&#x6CA1;&#x6709;&#x88AB;&#x5173;&#x95ED;&#xFF0C;&#x90A3;&#x4E48;&#x7531;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x7684;&#x7EBF;&#x7A0B;&#x81EA;&#x5DF1;&#x6765;&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x3002;</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CallerRunsPolicy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RejectedExecutionHandler</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CallerRunsPolicy</span><span class="hljs-params">()</span> </span>{ }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rejectedExecution</span><span class="hljs-params">(Runnable r, ThreadPoolExecutor e)</span> </span>{
+        <span class="hljs-keyword">if</span> (!e.isShutdown()) {
+            r.run();
+        }
+    }
+}
+
+<span class="hljs-comment">// &#x4E0D;&#x7BA1;&#x600E;&#x6837;&#xFF0C;&#x76F4;&#x63A5;&#x629B;&#x51FA; RejectedExecutionException &#x5F02;&#x5E38;</span>
+<span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x662F;&#x9ED8;&#x8BA4;&#x7684;&#x7B56;&#x7565;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x6784;&#x9020;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x4F20;&#x76F8;&#x5E94;&#x7684; handler &#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x5C31;&#x4F1A;&#x6307;&#x5B9A;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbortPolicy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RejectedExecutionHandler</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AbortPolicy</span><span class="hljs-params">()</span> </span>{ }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rejectedExecution</span><span class="hljs-params">(Runnable r, ThreadPoolExecutor e)</span> </span>{
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RejectedExecutionException(<span class="hljs-string">&quot;Task &quot;</span> + r.toString() +
+                                             <span class="hljs-string">&quot; rejected from &quot;</span> +
+                                             e.toString());
+    }
+}
+
+<span class="hljs-comment">// &#x4E0D;&#x505A;&#x4EFB;&#x4F55;&#x5904;&#x7406;&#xFF0C;&#x76F4;&#x63A5;&#x5FFD;&#x7565;&#x6389;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DiscardPolicy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RejectedExecutionHandler</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DiscardPolicy</span><span class="hljs-params">()</span> </span>{ }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rejectedExecution</span><span class="hljs-params">(Runnable r, ThreadPoolExecutor e)</span> </span>{
+    }
+}
+
+<span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x76F8;&#x5BF9;&#x9738;&#x9053;&#x4E00;&#x70B9;&#xFF0C;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x6CA1;&#x6709;&#x88AB;&#x5173;&#x95ED;&#x7684;&#x8BDD;&#xFF0C;</span>
+<span class="hljs-comment">// &#x628A;&#x961F;&#x5217;&#x961F;&#x5934;&#x7684;&#x4EFB;&#x52A1;(&#x4E5F;&#x5C31;&#x662F;&#x7B49;&#x5F85;&#x4E86;&#x6700;&#x957F;&#x65F6;&#x95F4;&#x7684;)&#x76F4;&#x63A5;&#x6254;&#x6389;&#xFF0C;&#x7136;&#x540E;&#x63D0;&#x4EA4;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x5230;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DiscardOldestPolicy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RejectedExecutionHandler</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DiscardOldestPolicy</span><span class="hljs-params">()</span> </span>{ }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rejectedExecution</span><span class="hljs-params">(Runnable r, ThreadPoolExecutor e)</span> </span>{
+        <span class="hljs-keyword">if</span> (!e.isShutdown()) {
+            e.getQueue().poll();
+            e.execute(r);
+        }
+    }
+}
+</code></pre>
+<p>&#x5230;&#x8FD9;&#x91CC;&#xFF0C;ThreadPoolExecutor &#x7684;&#x6E90;&#x7801;&#x7B97;&#x662F;&#x5206;&#x6790;&#x7ED3;&#x675F;&#x4E86;&#x3002;&#x5355;&#x7EAF;&#x4ECE;&#x6E90;&#x7801;&#x7684;&#x96BE;&#x6613;&#x7A0B;&#x5EA6;&#x6765;&#x8BF4;&#xFF0C;ThreadPoolExecutor &#x7684;&#x6E90;&#x7801;&#x8FD8;&#x7B97;&#x662F;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x7684;&#xFF0C;&#x53EA;&#x662F;&#x9700;&#x8981;&#x6211;&#x4EEC;&#x9759;&#x4E0B;&#x5FC3;&#x6765;&#x597D;&#x597D;&#x770B;&#x770B;&#x7F62;&#x4E86;&#x3002;</p>
+<h2 id="executors">Executors</h2>
+<p>&#x8FD9;&#x8282;&#x5176;&#x5B9E;&#x4E5F;&#x4E0D;&#x662F;&#x5206;&#x6790; Executors &#x8FD9;&#x4E2A;&#x7C7B;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EC5;&#x4EC5;&#x662F;&#x5DE5;&#x5177;&#x7C7B;&#xFF0C;&#x5B83;&#x7684;&#x6240;&#x6709;&#x65B9;&#x6CD5;&#x90FD;&#x662F; static &#x7684;&#x3002;</p>
+<ul>
+<li>&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x56FA;&#x5B9A;&#x5927;&#x5C0F;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#xFF1A;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newFixedThreadPool</span><span class="hljs-params">(<span class="hljs-keyword">int</span> nThreads)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,
+                                  <span class="hljs-number">0L</span>, TimeUnit.MILLISECONDS,
+                                  <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());
+}
+</code></pre>
+<p>&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#x8BBE;&#x7F6E;&#x4E3A;&#x4E0E;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x76F8;&#x7B49;&#xFF0C;&#x6B64;&#x65F6; keepAliveTime &#x8BBE;&#x7F6E;&#x4E3A; 0&#xFF08;&#x56E0;&#x4E3A;&#x8FD9;&#x91CC;&#x5B83;&#x662F;&#x6CA1;&#x7528;&#x7684;&#xFF0C;&#x5373;&#x4F7F;&#x4E0D;&#x4E3A; 0&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x9ED8;&#x8BA4;&#x4E5F;&#x4E0D;&#x4F1A;&#x56DE;&#x6536; corePoolSize &#x5185;&#x7684;&#x7EBF;&#x7A0B;&#xFF09;&#xFF0C;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x91C7;&#x7528; LinkedBlockingQueue&#xFF0C;&#x65E0;&#x754C;&#x961F;&#x5217;&#x3002;</p>
+<p>&#x8FC7;&#x7A0B;&#x5206;&#x6790;&#xFF1A;&#x521A;&#x5F00;&#x59CB;&#xFF0C;&#x6BCF;&#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x90FD;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; worker&#xFF0C;&#x5F53; worker &#x7684;&#x6570;&#x91CF;&#x8FBE;&#x5230; nThreads &#x540E;&#xFF0C;&#x4E0D;&#x518D;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x5230; LinkedBlockingQueue &#x4E2D;&#xFF0C;&#x800C;&#x4E14;&#x4E4B;&#x540E;&#x7EBF;&#x7A0B;&#x6570;&#x59CB;&#x7EC8;&#x4E3A; nThreads&#x3002;</p>
+<ul>
+<li>&#x751F;&#x6210;&#x53EA;&#x6709;<strong>&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;</strong>&#x7684;&#x56FA;&#x5B9A;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x8FD9;&#x4E2A;&#x66F4;&#x7B80;&#x5355;&#xFF0C;&#x548C;&#x4E0A;&#x9762;&#x7684;&#x4E00;&#x6837;&#xFF0C;&#x53EA;&#x8981;&#x8BBE;&#x7F6E;&#x7EBF;&#x7A0B;&#x6570;&#x4E3A; 1 &#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF1A;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newSingleThreadExecutor</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FinalizableDelegatedExecutorService
+        (<span class="hljs-keyword">new</span> ThreadPoolExecutor(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>,
+                                <span class="hljs-number">0L</span>, TimeUnit.MILLISECONDS,
+                                <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));
+}
+</code></pre>
+<ul>
+<li>&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x540C;&#x65F6;&#x53EF;&#x4EE5;&#x590D;&#x7528;&#x4E4B;&#x524D;&#x521B;&#x5EFA;&#x7684;&#x7EBF;&#x7A0B;&#xFF08;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x5F53;&#x524D;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#xFF09;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#xFF1A;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newCachedThreadPool</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreadPoolExecutor(<span class="hljs-number">0</span>, Integer.MAX_VALUE,
+                                  <span class="hljs-number">60L</span>, TimeUnit.SECONDS,
+                                  <span class="hljs-keyword">new</span> SynchronousQueue&lt;Runnable&gt;());
+}
+</code></pre>
+<p>&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x4E3A; 0&#xFF0C;&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#x4E3A; Integer.MAX_VALUE&#xFF0C;keepAliveTime &#x4E3A; 60 &#x79D2;&#xFF0C;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x91C7;&#x7528; SynchronousQueue&#x3002;</p>
+<p>&#x8FD9;&#x79CD;&#x7EBF;&#x7A0B;&#x6C60;&#x5BF9;&#x4E8E;&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x6BD4;&#x8F83;&#x5FEB;&#x901F;&#x5730;&#x5B8C;&#x6210;&#x7684;&#x60C5;&#x51B5;&#x6709;&#x6BD4;&#x8F83;&#x597D;&#x7684;&#x6027;&#x80FD;&#x3002;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x7A7A;&#x95F2;&#x4E86; 60 &#x79D2;&#x90FD;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x5173;&#x95ED;&#x6B64;&#x7EBF;&#x7A0B;&#x5E76;&#x4ECE;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x79FB;&#x9664;&#x3002;&#x6240;&#x4EE5;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x7A7A;&#x95F2;&#x4E86;&#x5F88;&#x957F;&#x65F6;&#x95F4;&#x4E5F;&#x4E0D;&#x4F1A;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x56E0;&#x4E3A;&#x968F;&#x7740;&#x6240;&#x6709;&#x7684;&#x7EBF;&#x7A0B;&#x90FD;&#x4F1A;&#x88AB;&#x5173;&#x95ED;&#xFF0C;&#x6574;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#x4E0D;&#x4F1A;&#x5360;&#x7528;&#x4EFB;&#x4F55;&#x7684;&#x7CFB;&#x7EDF;&#x8D44;&#x6E90;&#x3002;</p>
+<p>&#x8FC7;&#x7A0B;&#x5206;&#x6790;&#xFF1A;&#x6211;&#x628A; execute &#x65B9;&#x6CD5;&#x7684;&#x4E3B;&#x4F53;&#x9ECF;&#x8D34;&#x8FC7;&#x6765;&#xFF0C;&#x8BA9;&#x5927;&#x5BB6;&#x770B;&#x5F97;&#x660E;&#x767D;&#x4E9B;&#x3002;&#x9274;&#x4E8E; corePoolSize &#x662F; 0&#xFF0C;&#x90A3;&#x4E48;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x76F4;&#x63A5;&#x5C06;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x5230;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x7531;&#x4E8E;&#x91C7;&#x7528;&#x4E86; SynchronousQueue&#xFF0C;&#x6240;&#x4EE5;&#x5982;&#x679C;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x7684;&#x65F6;&#x5019;&#xFF0C;offer &#x65B9;&#x6CD5;&#x80AF;&#x5B9A;&#x4F1A;&#x8FD4;&#x56DE; false&#xFF0C;&#x56E0;&#x4E3A;&#x6B64;&#x65F6;&#x6CA1;&#x6709;&#x4EFB;&#x4F55; worker &#x5BF9;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x8FDB;&#x884C;&#x63A5;&#x6536;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x8FDB;&#x5165;&#x5230;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5206;&#x652F;&#x6765;&#x521B;&#x5EFA;&#x7B2C;&#x4E00;&#x4E2A; worker&#x3002;&#x4E4B;&#x540E;&#x518D;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x7684;&#x8BDD;&#xFF0C;&#x53D6;&#x51B3;&#x4E8E;&#x662F;&#x5426;&#x6709;&#x7A7A;&#x95F2;&#x4E0B;&#x6765;&#x7684;&#x7EBF;&#x7A0B;&#x5BF9;&#x4EFB;&#x52A1;&#x8FDB;&#x884C;&#x63A5;&#x6536;&#xFF0C;&#x5982;&#x679C;&#x6709;&#xFF0C;&#x4F1A;&#x8FDB;&#x5165;&#x5230;&#x7B2C;&#x4E8C;&#x4E2A; if &#x8BED;&#x53E5;&#x5757;&#x4E2D;&#xFF0C;&#x5426;&#x5219;&#x5C31;&#x662F;&#x548C;&#x7B2C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x4E00;&#x6837;&#xFF0C;&#x8FDB;&#x5230;&#x6700;&#x540E;&#x7684; else if &#x5206;&#x652F;&#x521B;&#x5EFA;&#x65B0;&#x7EBF;&#x7A0B;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">int</span> c = ctl.get();
+<span class="hljs-comment">// corePoolSize &#x4E3A; 0&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x4F1A;&#x8FDB;&#x5230;&#x8FD9;&#x4E2A; if &#x5206;&#x652F;</span>
+<span class="hljs-keyword">if</span> (workerCountOf(c) &lt; corePoolSize) {
+    <span class="hljs-keyword">if</span> (addWorker(command, <span class="hljs-keyword">true</span>))
+        <span class="hljs-keyword">return</span>;
+    c = ctl.get();
+}
+<span class="hljs-comment">// offer &#x5982;&#x679C;&#x6709;&#x7A7A;&#x95F2;&#x7EBF;&#x7A0B;&#x521A;&#x597D;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x6B64;&#x4EFB;&#x52A1;&#xFF0C;&#x90A3;&#x4E48;&#x8FD4;&#x56DE; true&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE; false</span>
+<span class="hljs-keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) {
+    <span class="hljs-keyword">int</span> recheck = ctl.get();
+    <span class="hljs-keyword">if</span> (! isRunning(recheck) &amp;&amp; remove(command))
+        reject(command);
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (workerCountOf(recheck) == <span class="hljs-number">0</span>)
+        addWorker(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>);
+}
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!addWorker(command, <span class="hljs-keyword">false</span>))
+    reject(command);
+</code></pre>
+<blockquote>
+<p>SynchronousQueue &#x662F;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83;&#x7279;&#x6B8A;&#x7684; BlockingQueue&#xFF0C;&#x5176;&#x672C;&#x8EAB;&#x4E0D;&#x50A8;&#x5B58;&#x4EFB;&#x4F55;&#x5143;&#x7D20;&#xFF0C;&#x5B83;&#x6709;&#x4E00;&#x4E2A;&#x865A;&#x62DF;&#x961F;&#x5217;&#xFF08;&#x6216;&#x865A;&#x62DF;&#x6808;&#xFF09;&#xFF0C;&#x4E0D;&#x7BA1;&#x8BFB;&#x64CD;&#x4F5C;&#x8FD8;&#x662F;&#x5199;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x679C;&#x5F53;&#x524D;&#x961F;&#x5217;&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x662F;&#x4E0E;&#x5F53;&#x524D;&#x64CD;&#x4F5C;&#x76F8;&#x540C;&#x6A21;&#x5F0F;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x524D;&#x64CD;&#x4F5C;&#x4E5F;&#x8FDB;&#x5165;&#x961F;&#x5217;&#x4E2D;&#x7B49;&#x5F85;&#xFF1B;&#x5982;&#x679C;&#x662F;&#x76F8;&#x53CD;&#x6A21;&#x5F0F;&#xFF0C;&#x5219;&#x914D;&#x5BF9;&#x6210;&#x529F;&#xFF0C;&#x4ECE;&#x5F53;&#x524D;&#x961F;&#x5217;&#x4E2D;&#x53D6;&#x961F;&#x5934;&#x8282;&#x70B9;&#x3002;&#x5177;&#x4F53;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x6211;&#x7684;&#x53E6;&#x4E00;&#x7BC7;&#x5173;&#x4E8E; BlockingQueue &#x7684;&#x6587;&#x7AE0;&#x3002;</p>
+</blockquote>
+<h2 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h2>
+<ol>
+<li><p>java &#x7EBF;&#x7A0B;&#x6C60;&#x6709;&#x54EA;&#x4E9B;&#x5173;&#x952E;&#x5C5E;&#x6027;&#xFF1F;</p>
+<blockquote>
+<p>corePoolSize&#xFF0C;maximumPoolSize&#xFF0C;workQueue&#xFF0C;keepAliveTime&#xFF0C;rejectedExecutionHandler</p>
+<p>corePoolSize &#x5230; maximumPoolSize &#x4E4B;&#x95F4;&#x7684;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x56DE;&#x6536;&#xFF0C;&#x5F53;&#x7136; corePoolSize &#x7684;&#x7EBF;&#x7A0B;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x800C;&#x5F97;&#x5230;&#x56DE;&#x6536;&#xFF08;allowCoreThreadTimeOut(true)&#xFF09;&#x3002;</p>
+<p>workQueue &#x7528;&#x4E8E;&#x5B58;&#x653E;&#x4EFB;&#x52A1;&#xFF0C;&#x6DFB;&#x52A0;&#x4EFB;&#x52A1;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x8D85;&#x8FC7;&#x4E86; corePoolSize&#xFF0C;&#x90A3;&#x4E48;&#x5F80;&#x8BE5;&#x961F;&#x5217;&#x4E2D;&#x63D2;&#x5165;&#x4EFB;&#x52A1;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x4F1A;&#x8D1F;&#x8D23;&#x5230;&#x961F;&#x5217;&#x4E2D;&#x62C9;&#x53D6;&#x4EFB;&#x52A1;&#x3002;</p>
+<p>keepAliveTime &#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x7A7A;&#x95F2;&#x65F6;&#x95F4;&#xFF0C;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6570;&#x8D85;&#x51FA;&#x4E86; corePoolSize&#xFF0C;&#x5E76;&#x4E14;&#x6709;&#x4E9B;&#x7EBF;&#x7A0B;&#x7684;&#x7A7A;&#x95F2;&#x65F6;&#x95F4;&#x8D85;&#x8FC7;&#x4E86;&#x8FD9;&#x4E2A;&#x503C;&#xFF0C;&#x4F1A;&#x6267;&#x884C;&#x5173;&#x95ED;&#x8FD9;&#x4E9B;&#x7EBF;&#x7A0B;&#x7684;&#x64CD;&#x4F5C;</p>
+<p>rejectedExecutionHandler &#x7528;&#x4E8E;&#x5904;&#x7406;&#x5F53;&#x7EBF;&#x7A0B;&#x6C60;&#x4E0D;&#x80FD;&#x6267;&#x884C;&#x6B64;&#x4EFB;&#x52A1;&#x65F6;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x9ED8;&#x8BA4;&#x6709;<strong>&#x629B;&#x51FA; RejectedExecutionException &#x5F02;&#x5E38;</strong>&#x3001;<strong>&#x5FFD;&#x7565;&#x4EFB;&#x52A1;</strong>&#x3001;<strong>&#x4F7F;&#x7528;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x7684;&#x7EBF;&#x7A0B;&#x6765;&#x6267;&#x884C;&#x6B64;&#x4EFB;&#x52A1;</strong>&#x548C;<strong>&#x5C06;&#x961F;&#x5217;&#x4E2D;&#x7B49;&#x5F85;&#x6700;&#x4E45;&#x7684;&#x4EFB;&#x52A1;&#x5220;&#x9664;&#xFF0C;&#x7136;&#x540E;&#x63D0;&#x4EA4;&#x6B64;&#x4EFB;&#x52A1;</strong>&#x8FD9;&#x56DB;&#x79CD;&#x7B56;&#x7565;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>&#x8BF4;&#x8BF4;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;&#x65F6;&#x673A;&#xFF1F;</p>
+<blockquote>
+<ol>
+<li>&#x5982;&#x679C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x5C11;&#x4E8E; corePoolSize&#xFF0C;&#x90A3;&#x4E48;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x7684;&#x65F6;&#x5019;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x5E76;&#x7531;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6570;&#x5DF2;&#x7ECF;&#x8FBE;&#x5230; corePoolSize&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x63D0;&#x4EA4;&#x7684;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x7B49;&#x5F85;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x53BB;&#x961F;&#x5217;&#x4E2D;&#x53D6;&#x4EFB;&#x52A1;&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x90A3;&#x4E48;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#x6765;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#xFF0C;&#x9700;&#x8981;&#x4FDD;&#x8BC1;&#x6C60;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#x4E0D;&#x4F1A;&#x8D85;&#x8FC7; maximumPoolSize&#xFF0C;&#x5982;&#x679C;&#x6B64;&#x65F6;&#x7EBF;&#x7A0B;&#x6570;&#x8D85;&#x8FC7;&#x4E86; maximumPoolSize&#xFF0C;&#x90A3;&#x4E48;&#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;&#x3002;</li>
+</ol>
+</blockquote>
+<p>* &#x6CE8;&#x610F;&#xFF1A;&#x5982;&#x679C;&#x5C06;&#x961F;&#x5217;&#x8BBE;&#x7F6E;&#x4E3A;&#x65E0;&#x754C;&#x961F;&#x5217;&#xFF0C;&#x90A3;&#x4E48;&#x7EBF;&#x7A0B;&#x6570;&#x8FBE;&#x5230; corePoolSize &#x540E;&#xFF0C;&#x5176;&#x5B9E;&#x7EBF;&#x7A0B;&#x6570;&#x5C31;&#x4E0D;&#x4F1A;&#x518D;&#x589E;&#x957F;&#x4E86;&#x3002;&#x56E0;&#x4E3A;&#x540E;&#x9762;&#x7684;&#x4EFB;&#x52A1;&#x76F4;&#x63A5;&#x5F80;&#x961F;&#x5217;&#x585E;&#x5C31;&#x884C;&#x4E86;&#xFF0C;&#x6B64;&#x65F6; maximumPoolSize &#x53C2;&#x6570;&#x5C31;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x610F;&#x4E49;&#x3002;</p>
+</li>
+<li><p>Executors.newFixedThreadPool(&#x2026;) &#x548C; Executors.newCachedThreadPool() &#x6784;&#x9020;&#x51FA;&#x6765;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#x6709;&#x4EC0;&#x4E48;&#x5DEE;&#x522B;&#xFF1F;</p>
+<blockquote>
+<p>&#x7EC6;&#x8BF4;&#x592A;&#x957F;&#xFF0C;&#x5F80;&#x4E0A;&#x6ED1;&#x4E00;&#x70B9;&#x70B9;&#xFF0C;&#x5728; Executors &#x7684;&#x5C0F;&#x8282;&#x8FDB;&#x884C;&#x4E86;&#x8BE6;&#x5C3D;&#x7684;&#x63CF;&#x8FF0;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x53D1;&#x751F;&#x5F02;&#x5E38;&#x600E;&#x4E48;&#x5904;&#x7406;&#xFF1F;</p>
+<blockquote>
+<p>&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#xFF0C;&#x90A3;&#x4E48;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#x7684;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x5173;&#x95ED;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x7EE7;&#x7EED;&#x63A5;&#x6536;&#x5176;&#x4ED6;&#x4EFB;&#x52A1;&#x3002;&#x7136;&#x540E;&#x4F1A;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#x6765;&#x4EE3;&#x66FF;&#x5B83;&#x3002;</p>
+</blockquote>
+</li>
+<li><p>&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x4F1A;&#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;&#xFF1F;</p>
+<blockquote>
+<ol>
+<li>workers &#x7684;&#x6570;&#x91CF;&#x8FBE;&#x5230;&#x4E86; corePoolSize&#xFF08;&#x4EFB;&#x52A1;&#x6B64;&#x65F6;&#x9700;&#x8981;&#x8FDB;&#x5165;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#xFF09;&#xFF0C;&#x4EFB;&#x52A1;&#x5165;&#x961F;&#x6210;&#x529F;&#xFF0C;&#x4E0E;&#x6B64;&#x540C;&#x65F6;&#x7EBF;&#x7A0B;&#x6C60;&#x88AB;&#x5173;&#x95ED;&#x4E86;&#xFF0C;&#x800C;&#x4E14;&#x5173;&#x95ED;&#x7EBF;&#x7A0B;&#x6C60;&#x5E76;&#x6CA1;&#x6709;&#x5C06;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x51FA;&#x961F;&#xFF0C;&#x90A3;&#x4E48;&#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;&#x3002;&#x8FD9;&#x91CC;&#x8BF4;&#x7684;&#x662F;&#x975E;&#x5E38;&#x8FB9;&#x754C;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5165;&#x961F;&#x548C;&#x5173;&#x95ED;&#x7EBF;&#x7A0B;&#x6C60;&#x5E76;&#x53D1;&#x6267;&#x884C;&#xFF0C;&#x8BFB;&#x8005;&#x4ED4;&#x7EC6;&#x770B;&#x770B; execute &#x65B9;&#x6CD5;&#x662F;&#x600E;&#x4E48;&#x8FDB;&#x5230;&#x7B2C;&#x4E00;&#x4E2A; reject(command) &#x91CC;&#x9762;&#x7684;&#x3002;</li>
+<li>workers &#x7684;&#x6570;&#x91CF;&#x5927;&#x4E8E;&#x7B49;&#x4E8E; corePoolSize&#xFF0C;&#x5C06;&#x4EFB;&#x52A1;&#x52A0;&#x5165;&#x5230;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#xFF0C;&#x53EF;&#x662F;&#x961F;&#x5217;&#x6EE1;&#x4E86;&#xFF0C;&#x4EFB;&#x52A1;&#x5165;&#x961F;&#x5931;&#x8D25;&#xFF0C;&#x90A3;&#x4E48;&#x51C6;&#x5907;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x53EF;&#x662F;&#x7EBF;&#x7A0B;&#x6570;&#x5DF2;&#x7ECF;&#x8FBE;&#x5230; maximumPoolSize&#xFF0C;&#x90A3;&#x4E48;&#x6267;&#x884C;&#x62D2;&#x7EDD;&#x7B56;&#x7565;&#x3002;</li>
+</ol>
+</blockquote>
+</li>
+<li><p>&#x600E;&#x4E48;&#x83B7;&#x53D6;&#x83B7;&#x53D6;&#x7EBF;&#x7A0B;&#x6C60;&#x7EBF;&#x7A0B;&#x7ED3;&#x679C;&#xFF1F;</p>
+<blockquote>
+<p>&#x901A;&#x8FC7; Future &#x7C7B;&#x7684; get &#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x7ED3;&#x679C;&#x3002;</p>
+</blockquote>
+</li>
+</ol>
+<p>&#x672C;&#x6587;&#x7BC7;&#x5E45;&#x662F;&#x6709;&#x70B9;&#x957F;&#xFF0C;&#x5982;&#x679C;&#x8BFB;&#x8005;&#x53D1;&#x73B0;&#x4EC0;&#x4E48;&#x4E0D;&#x5BF9;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x6216;&#x8005;&#x6709;&#x9700;&#x8981;&#x8865;&#x5145;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x8BF7;&#x4E0D;&#x541D;&#x63D0;&#x51FA;&#xFF0C;&#x8C22;&#x8C22;&#x3002;</p>
+<p>&#xFF08;&#x5168;&#x6587;&#x5B8C;&#xFF09;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../messagequeue/" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 消息队列">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"线程池","level":"2.5","depth":1,"previous":{"title":"消息队列","level":"2.4","depth":1,"path":"doc/messagequeue/README.md","ref":"doc/messagequeue/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-lunr","-search","chapter-fold","lightbox","search-pro","pageview-count"],"pluginsConfig":{"chapter-fold":{},"lightbox":{"jquery":true,"sameUuid":false},"search-pro":{},"pageview-count":{},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/threadpool/README.md","mtime":"2021-08-17T06:56:44.367Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-17T06:58:22.241Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
