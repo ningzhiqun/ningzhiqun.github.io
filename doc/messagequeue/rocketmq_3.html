@@ -1,0 +1,1011 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>rocketMQ 消息消费流程 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../threadpool/" />
+    
+    
+    <link rel="prev" href="rocketmq_2.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    我的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../design/">
+            
+                <a href="../design/">
+            
+                    
+                    设计模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../design/design.html">
+            
+                <a href="../design/design.html">
+            
+                    
+                    24 种设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../design/status_machine.html">
+            
+                <a href="../design/status_machine.html">
+            
+                    
+                    状态机模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../io/">
+            
+                <a href="../io/">
+            
+                    
+                    java io
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../io/niodesc.html">
+            
+                <a href="../io/niodesc.html">
+            
+                    
+                    java nio 三大组件 Buffer、Channel 和 Selector
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../container/">
+            
+                <a href="../container/">
+            
+                    
+                    java 容器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../container/arraylist.html">
+            
+                <a href="../container/arraylist.html">
+            
+                    
+                    ArrayList
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../container/linkedlist.html">
+            
+                <a href="../container/linkedlist.html">
+            
+                    
+                    LinkedList
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.3" data-path="../container/hashmap.html">
+            
+                <a href="../container/hashmap.html">
+            
+                    
+                    HashMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    消息队列
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.4.1" data-path="rocketmq_1.html">
+            
+                <a href="rocketmq_1.html">
+            
+                    
+                    rocketMQ 消息发送流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4.2" data-path="rocketmq_2.html">
+            
+                <a href="rocketmq_2.html">
+            
+                    
+                    rocketMQ 消息储存流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.4.3" data-path="rocketmq_3.html">
+            
+                <a href="rocketmq_3.html">
+            
+                    
+                    rocketMQ 消息消费流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../threadpool/">
+            
+                <a href="../threadpool/">
+            
+                    
+                    线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >rocketMQ 消息消费流程</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>&#x672C;&#x7BC7;&#x8BB2;&#x8FF0; RocketMQ &#x6D88;&#x606F;&#x63A5;&#x53D7;&#x6D41;&#x7A0B;</p>
+<h2 id="&#x4E00;&#x3001;&#x6D88;&#x8D39;&#x8005;&#x6CE8;&#x518C;">&#x4E00;&#x3001;&#x6D88;&#x8D39;&#x8005;&#x6CE8;&#x518C;</h2>
+<p><strong>&#x751F;&#x4EA7;&#x8005;</strong>&#x8D1F;&#x8D23;&#x5F80;&#x670D;&#x52A1;&#x5668; Broker &#x53D1;&#x9001;&#x6D88;&#x606F;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x5219;&#x4ECE; Broker &#x83B7;&#x53D6;&#x6D88;&#x606F;&#x3002;&#x6D88;&#x8D39;&#x8005;&#x83B7;&#x53D6;&#x6D88;&#x606F;&#x91C7;&#x7528;&#x7684;&#x662F;<strong>&#x8BA2;&#x9605;&#x8005;&#x6A21;&#x5F0F;</strong>&#xFF0C;&#x5373;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x53EF;&#x4EE5;&#x4EFB;&#x610F;&#x8BA2;&#x9605;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x8BDD;&#x9898;&#x6765;&#x6D88;&#x8D39;&#x6D88;&#x606F;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Consumer</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException, MQClientException </span>{
+        <span class="hljs-comment">/*
+         * &#x8BA2;&#x9605;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x8BDD;&#x9898;
+         */</span>
+        consumer.subscribe(<span class="hljs-string">&quot;TopicTest&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>);
+    }
+}
+</code></pre>
+<p>&#x5F53;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x542F;&#x52A8;&#x4EE5;&#x540E;&#xFF0C;&#x5176;&#x4F1A;&#x6BCF;&#x9694; 30 &#x79D2;&#x4ECE;&#x547D;&#x540D;&#x670D;&#x52A1;&#x5668;&#x67E5;&#x8BE2;&#x4E00;&#x6B21;<strong>&#x7528;&#x6237;&#x8BA2;&#x9605;&#x7684;&#x6240;&#x6709;&#x8BDD;&#x9898;&#x8DEF;&#x7531;&#x4FE1;&#x606F;</strong>:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MQClientInstance</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startScheduledTask</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">this</span>.scheduledExecutorService.scheduleAtFixedRate(<span class="hljs-keyword">new</span> Runnable() {
+                <span class="hljs-meta">@Override</span>
+                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                    <span class="hljs-comment">// &#x4ECE;&#x547D;&#x540D;&#x670D;&#x52A1;&#x5668;&#x62C9;&#x53D6;&#x8BDD;&#x9898;&#x4FE1;&#x606F;</span>
+                    MQClientInstance.<span class="hljs-keyword">this</span>.updateTopicRouteInfoFromNameServer();
+                }
+            }, <span class="hljs-number">10</span>, <span class="hljs-keyword">this</span>.clientConfig.getPollNameServerInterval(), TimeUnit.MILLISECONDS);
+    }
+
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x7531; <a href="https://kunzhao.org/docs/rocketmq/rocketmq-send-message-flow/" target="_blank">RocketMQ &#x6D88;&#x606F;&#x53D1;&#x9001;&#x6D41;&#x7A0B;</a> &#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x77E5;&#x9053; RocketMQ &#x5728;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6BCF;&#x6761;&#x6D88;&#x606F;&#x4F1A;&#x4EE5;&#x8F6E;&#x5FAA;&#x7684;&#x65B9;&#x5F0F;&#x5747;&#x8861;&#x5730;&#x5206;&#x53D1;&#x7684;&#x4E0D;&#x540C; Broker &#x7684;&#x4E0D;&#x540C;&#x961F;&#x5217;&#x4E2D;&#x53BB;&#x3002;&#x7531;&#x6B64;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x547D;&#x540D;&#x670D;&#x52A1;&#x5668;&#x83B7;&#x53D6;&#x4E0B;&#x6765;&#x7684;&#x4FBF;&#x662F;&#x8BDD;&#x9898;&#x7684;&#x6240;&#x6709;&#x6D88;&#x606F;&#x961F;&#x5217;:</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/topic_all_message_queue.png" data-lightbox="828c4328-a93a-4a02-9969-7bbb80ea9bb6" data-title="&#x6240;&#x6709;&#x8BDD;&#x9898;&#x961F;&#x5217;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/topic_all_message_queue.png" alt="&#x6240;&#x6709;&#x8BDD;&#x9898;&#x961F;&#x5217;"></a></p>
+<p>&#x5728;&#x83B7;&#x53D6;&#x8BDD;&#x9898;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x8FD8;&#x4F1A;&#x5C06;&#x8BDD;&#x9898;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x4E2D;&#x7684;<strong>&#x6240;&#x6709; Broker &#x5730;&#x5740;</strong>&#x4FDD;&#x5B58;&#x5230;&#x672C;&#x5730;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MQClientInstance</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">updateTopicRouteInfoFromNameServer</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String topic,
+                                                      <span class="hljs-keyword">boolean</span> isDefault,
+                                                      DefaultMQProducer defaultMQProducer)</span> </span>{
+
+        <span class="hljs-comment">// ...</span>
+
+        <span class="hljs-keyword">if</span> (changed) {
+            TopicRouteData cloneTopicRouteData = topicRouteData.cloneTopicRouteData();
+
+            <span class="hljs-comment">// &#x66F4;&#x65B0; Broker &#x5730;&#x5740;&#x5217;&#x8868;</span>
+            <span class="hljs-keyword">for</span> (BrokerData bd : topicRouteData.getBrokerDatas()) {
+                <span class="hljs-keyword">this</span>.brokerAddrTable.put(bd.getBrokerName(), bd.getBrokerAddrs());
+            }
+
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        }
+
+        <span class="hljs-comment">// ...</span>
+    }
+
+}
+</code></pre>
+<p>&#x5F53;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x83B7;&#x53D6;&#x5230;&#x4E86; Broker &#x5730;&#x5740;&#x5217;&#x8868;&#x4E4B;&#x540E;&#xFF0C;&#x5176;&#x4FBF;&#x4F1A;&#x6BCF;&#x9694; 30 &#x79D2;&#x7ED9;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x9001;&#x4E00;&#x6761;<strong>&#x5FC3;&#x8DF3;&#x6570;&#x636E;&#x5305;</strong>&#xFF0C;&#x544A;&#x77E5;&#x6240;&#x6709; Broker &#x670D;&#x52A1;&#x5668;&#x8FD9;&#x53F0;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x5B58;&#x5728;&#x3002;&#x5728;&#x6BCF;&#x6B21;&#x53D1;&#x9001;&#x5FC3;&#x8DF3;&#x5305;&#x7684;&#x540C;&#x65F6;&#xFF0C;&#x5176;&#x6570;&#x636E;&#x5305;&#x5185;&#x8FD8;&#x4F1A;&#x634E;&#x5E26;&#x8FD9;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x6D88;&#x606F;&#x8BA2;&#x9605;&#x7684;&#x4E00;&#x4E9B;&#x7EC4;&#x4FE1;&#x606F;&#xFF0C;&#x6BD4;&#x5982;&#x7528;&#x6237;&#x8BA2;&#x9605;&#x4E86;&#x54EA;&#x51E0;&#x4E2A;&#x8BDD;&#x9898;&#x7B49;&#xFF0C;&#x4E0E;&#x6B64;&#x76F8;&#x5BF9;&#x5E94;&#xFF0C;&#x6BCF;&#x53F0; Broker &#x670D;&#x52A1;&#x5668;&#x4F1A;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7EF4;&#x62A4;&#x4E00;&#x4EFD;&#x5F53;&#x524D;&#x6240;&#x6709;&#x7684;<strong>&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x5217;&#x8868;&#x4FE1;&#x606F;</strong>:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumerManager</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ConcurrentMap&lt;String<span class="hljs-comment">/* Group */</span>, ConsumerGroupInfo&gt; consumerTable =
+        <span class="hljs-keyword">new</span> ConcurrentHashMap&lt;String, ConsumerGroupInfo&gt;(<span class="hljs-number">1024</span>);
+
+}
+</code></pre>
+<p>&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x4E0E; Broker &#x670D;&#x52A1;&#x5668;&#x8FDB;&#x884C;&#x6C9F;&#x901A;&#x7684;&#x6574;&#x4F53;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF1A;</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/broker_consumer_info.png" data-lightbox="83193a0f-b356-428a-aa25-2b024ed86644" data-title="&#x6D88;&#x8D39;&#x8005;&#x4E0E; Broker &#x6C9F;&#x901A;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/broker_consumer_info.png" alt="&#x6D88;&#x8D39;&#x8005;&#x4E0E; Broker &#x6C9F;&#x901A;"></a></p>
+<h2 id="&#x4E8C;&#x3001;&#x6D88;&#x606F;&#x961F;&#x5217;&#x8D1F;&#x8F7D;&#x5747;&#x8861;">&#x4E8C;&#x3001;&#x6D88;&#x606F;&#x961F;&#x5217;&#x8D1F;&#x8F7D;&#x5747;&#x8861;</h2>
+<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x65E0;&#x8BBA;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x8FD8;&#x662F;&#x63A5;&#x53D7;&#x6D88;&#x606F;&#x90FD;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x6D88;&#x606F;&#x7684;&#x8BDD;&#x9898;&#xFF0C;&#x7136;&#x800C;&#x5B9E;&#x9645;&#x4E0A;&#x6D88;&#x606F;&#x5728; Broker &#x670D;&#x52A1;&#x5668;&#x4E0A;&#x5E76;&#x4E0D;&#x662F;&#x4EE5;&#x8BDD;&#x9898;&#x4E3A;&#x5355;&#x4F4D;&#x8FDB;&#x884C;&#x5B58;&#x50A8;&#x7684;&#xFF0C;&#x800C;&#x662F;&#x91C7;&#x7528;&#x4E86;&#x6BD4;&#x8BDD;&#x9898;&#x66F4;&#x7EC6;&#x7C92;&#x5EA6;&#x7684;&#x961F;&#x5217;&#x6765;&#x8FDB;&#x884C;&#x5B58;&#x50A8;&#x7684;&#x3002;&#x5F53;&#x4F60;&#x53D1;&#x9001;&#x4E86; 10 &#x6761;&#x76F8;&#x540C;&#x8BDD;&#x9898;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x8FD9; 10 &#x6761;&#x8BDD;&#x9898;&#x53EF;&#x80FD;&#x5B58;&#x50A8;&#x5728;&#x4E86;&#x4E0D;&#x540C; Broker &#x670D;&#x52A1;&#x5668;&#x7684;&#x4E0D;&#x540C;&#x961F;&#x5217;&#x4E2D;&#x3002;&#x7531;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x8BF4; RocketMQ &#x7BA1;&#x7406;&#x6D88;&#x606F;&#x7684;&#x5355;&#x4F4D;&#x4E0D;&#x662F;<strong>&#x8BDD;&#x9898;</strong>&#xFF0C;&#x800C;&#x662F;<strong>&#x961F;&#x5217;</strong>&#x3002;</p>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x8BA8;&#x8BBA;&#x6D88;&#x606F;&#x961F;&#x5217;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x8BA8;&#x8BBA;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x7684;&#x6240;&#x6709;&#x961F;&#x5217;&#x5982;&#x4F55;&#x7ED9;&#x6240;&#x6709;&#x6D88;&#x8D39;&#x8005;&#x6D88;&#x8D39;&#x7684;&#x95EE;&#x9898;&#x3002;&#x5728; RocketMQ &#x4E2D;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x6709;&#x4E24;&#x79CD;&#x6D88;&#x8D39;&#x6A21;&#x5F0F;&#xFF0C;&#x4E00;&#x79CD;&#x662F;<strong>&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;</strong>&#xFF0C;&#x53E6;&#x5916;&#x4E00;&#x79CD;&#x662F;<strong>&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;</strong>&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x5047;&#x8BBE;&#x603B;&#x5171;&#x6709;&#x4E24;&#x53F0; Broker &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5047;&#x8BBE;&#x7528;&#x6237;&#x4F7F;&#x7528; Producer &#x5DF2;&#x7ECF;&#x53D1;&#x9001;&#x4E86; 8 &#x6761;&#x6D88;&#x606F;&#xFF0C;&#x8FD9; 8 &#x6761;&#x6D88;&#x606F;&#x73B0;&#x5728;&#x5747;&#x8861;&#x7684;&#x5206;&#x5E03;&#x5728;&#x4E24;&#x53F0; Broker &#x670D;&#x52A1;&#x5668;&#x7684; 8 &#x4E2A;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x6BCF;&#x4E2A;&#x961F;&#x5217;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x3002;&#x73B0;&#x5728;&#x6709; 3 &#x53F0;&#x90FD;&#x8BA2;&#x9605;&#x4E86; Test &#x8BDD;&#x9898;&#x7684;&#x6D88;&#x8D39;&#x8005;&#x5B9E;&#x4F8B;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x5728;&#x4E0D;&#x540C;&#x6D88;&#x8D39;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x6D88;&#x8D39;&#x8005;&#x4F1A;&#x6536;&#x5230;&#x54EA;&#x51E0;&#x6761;&#x6D88;&#x606F;&#x3002;</p>
+<h3 id="1-&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;">(1) &#x5E7F;&#x64AD;&#x6A21;&#x5F0F;</h3>
+<p>&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x662F;&#x6307;&#x6240;&#x6709;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;&#x90FD;&#x4F1A;&#x5E7F;&#x64AD;&#x7ED9;&#x6240;&#x6709;&#x7684;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x90FD;&#x80FD;&#x6536;&#x5230;&#x8FD9; 8 &#x6761;&#x6D88;&#x606F;:</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/broadcasting_mode.png" data-lightbox="36318fe3-6043-4c9e-8a06-eea8e5c7c09f" data-title="&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/broadcasting_mode.png" alt="&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;"></a></p>
+<h3 id="2-&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;">(2) &#x96C6;&#x7FA4;&#x6A21;&#x5F0F;</h3>
+<p>&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;&#x662F;&#x6307;&#x6240;&#x6709;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4F1A;&#x6309;&#x7167;&#x67D0;&#x79CD;&#x5206;&#x914D;&#x7B56;&#x7565;&#x6765;&#x5206;&#x7ED9;&#x4E0D;&#x540C;&#x7684;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x6BD4;&#x5982;&#x6D88;&#x8D39;&#x8005; A &#x6D88;&#x8D39;&#x524D; 3 &#x4E2A;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x6D88;&#x8D39;&#x8005; B &#x6D88;&#x8D39;&#x4E2D;&#x95F4; 3 &#x4E2A;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;&#x7B49;&#x7B49;&#x3002;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x7740;&#x91CD;&#x770B; RocketMQ &#x4E3A;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x7684;&#x4E09;&#x4E2A;&#x6BD4;&#x8F83;&#x91CD;&#x8981;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x5206;&#x914D;&#x7B56;&#x7565;:</p>
+<h4 id="1-&#x5E73;&#x5747;&#x5206;&#x914D;&#x7B56;&#x7565;">1. &#x5E73;&#x5747;&#x5206;&#x914D;&#x7B56;&#x7565;</h4>
+<p>&#x5E73;&#x5747;&#x5206;&#x914D;&#x7B56;&#x7565;&#x4E0B;&#xFF0C;&#x4E09;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x6D88;&#x8D39;&#x60C5;&#x51B5;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<ul>
+<li>Consumer-1 &#x6D88;&#x8D39;&#x524D; 3 &#x4E2A;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;</li>
+<li>Consumer-2 &#x6D88;&#x8D39;&#x4E2D;&#x95F4; 3 &#x4E2A;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;</li>
+<li>Consumer-3 &#x6D88;&#x8D39;&#x6700;&#x540E; 2 &#x4E2A;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;</li>
+</ul>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/allocate_message_queue_strategy_average.png" data-lightbox="24a3cc69-3a3d-4cf4-9d3c-7c21236e7fa4" data-title="&#x5E73;&#x5747;&#x5206;&#x914D;&#x7B56;&#x7565;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/allocate_message_queue_strategy_average.png" alt="&#x5E73;&#x5747;&#x5206;&#x914D;&#x7B56;&#x7565;"></a></p>
+<h4 id="2-&#x5E73;&#x5747;&#x5206;&#x914D;&#x8F6E;&#x5FAA;&#x7B56;&#x7565;">2. &#x5E73;&#x5747;&#x5206;&#x914D;&#x8F6E;&#x5FAA;&#x7B56;&#x7565;</h4>
+<p>&#x5E73;&#x5747;&#x5206;&#x914D;&#x8F6E;&#x5FAA;&#x7B56;&#x7565;&#x4E0B;&#xFF0C;&#x4E09;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x6D88;&#x8D39;&#x60C5;&#x51B5;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<ul>
+<li>Consumer-1 &#x6D88;&#x8D39; 1&#x3001;4&#x3001;7&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;</li>
+<li>Consumer-2 &#x6D88;&#x8D39; 2&#x3001;5&#x3001;8&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;</li>
+<li>Consumer-3 &#x6D88;&#x8D39; 3&#x3001;6&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;</li>
+</ul>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/allocate_messagequeue_averagely_by_circle.png" data-lightbox="3b5652eb-a4ed-4265-a804-dc20f6f651ee" data-title="&#x5E73;&#x5747;&#x5206;&#x914D;&#x8F6E;&#x5FAA;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/allocate_messagequeue_averagely_by_circle.png" alt="&#x5E73;&#x5747;&#x5206;&#x914D;&#x8F6E;&#x5FAA;"></a></p>
+<h4 id="3-&#x4E00;&#x81F4;&#x6027;&#x54C8;&#x5E0C;&#x7B56;&#x7565;">3. &#x4E00;&#x81F4;&#x6027;&#x54C8;&#x5E0C;&#x7B56;&#x7565;</h4>
+<p>&#x4E00;&#x81F4;&#x6027;&#x54C8;&#x5E0C;&#x7B97;&#x6CD5;&#x662F;&#x6839;&#x636E;&#x8FD9;&#x4E09;&#x53F0;&#x6D88;&#x8D39;&#x8005;&#x5404;&#x81EA;&#x7684;&#x67D0;&#x4E2A;&#x6709;&#x4EE3;&#x8868;&#x6027;&#x7684;&#x5C5E;&#x6027;(&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#x5C31;&#x662F;&#x5BA2;&#x6237;&#x7AEF;ID)&#x6765;&#x8BA1;&#x7B97;&#x51FA;&#x4E09;&#x4E2A; Hash &#x503C;&#xFF0C;&#x6B64;&#x5904;&#x4E3A;&#x4E86;&#x51CF;&#x5C11;&#x7531;&#x4E8E; Hash &#x51FD;&#x6570;&#x9009;&#x53D6;&#x7684;&#x4E0D;&#x7406;&#x60F3;&#x7684;&#x60C5;&#x51B5;&#xFF0C; RocketMQ &#x7B97;&#x6CD5;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x901A;&#x8FC7;&#x5728;&#x5BA2;&#x6237;&#x7AEF;ID&#x540E;&#x9762;&#x6DFB;&#x52A0; 1&#x3001;2&#x3001;3 &#x7D22;&#x5F15;&#x6765;&#x4F7F;&#x6BCF;&#x4E00;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x591A;&#x751F;&#x6210;&#x51E0;&#x4E2A;&#x54C8;&#x5E0C;&#x503C;&#x3002;&#x90A3;&#x4E48;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x54C8;&#x5E0C;&#x7684;&#x5C31;&#x662F;&#x4E5D;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;:</p>
+<ul>
+<li>Consumer-1-1</li>
+<li>Consumer-1-2</li>
+<li>Consumer-1-3</li>
+<li>Consumer-2-1</li>
+<li>Consumer-2-2</li>
+<li>Consumer-2-3</li>
+<li>Consumer-3-1</li>
+<li>Consumer-3-2</li>
+<li>Consumer-3-3</li>
+</ul>
+<p>&#x8BA1;&#x7B97;&#x5B8C;&#x8FD9; 9 &#x4E2A;&#x54C8;&#x5E0C;&#x503C;&#x4EE5;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x6309;&#x7167;&#x4ECE;&#x5C0F;&#x5230;&#x5927;&#x7684;&#x987A;&#x5E8F;&#x6765;&#x6392;&#x5217;&#x6210;&#x4E00;&#x4E2A;&#x73AF; (&#x5982;&#x56FE;&#x6240;&#x793A;)&#x3002;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4E00;&#x4E00;&#x5BF9;&#x8FD9; 8 &#x4E2A;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E5F;&#x8981;&#x8BA1;&#x7B97;&#x4E00;&#x4E0B; Hash &#x503C;&#xFF0C;&#x5F53; Hash &#x503C;&#x843D;&#x5728;&#x4E24;&#x4E2A;&#x5708;&#x4E4B;&#x95F4;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x9009;&#x53D6;&#x6CBF;&#x7740;&#x73AF;&#x7684;&#x65B9;&#x5411;&#x7684;&#x90A3;&#x4E2A;&#x8282;&#x70B9;&#x4F5C;&#x4E3A;&#x8FD9;&#x4E2A;&#x6D88;&#x606F;&#x961F;&#x5217;&#x7684;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A; (&#x6CE8;&#x610F;: &#x56FE;&#x53EA;&#x662F;&#x793A;&#x4F8B;&#xFF0C;&#x5E76;&#x975E;&#x771F;&#x6B63;&#x7684;&#x6D88;&#x8D39;&#x60C5;&#x51B5;):</p>
+<p>&#x5728;&#x4E00;&#x81F4;&#x6027;&#x54C8;&#x5E0C;&#x7B56;&#x7565;&#x4E0B;&#xFF0C;&#x4E09;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x6D88;&#x8D39;&#x60C5;&#x51B5;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<ul>
+<li>Consumer-1 &#x6D88;&#x8D39; 1&#x3001;2&#x3001;3&#x3001;4&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;</li>
+<li>Consumer-2 &#x6D88;&#x8D39; 5&#x3001;8&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;</li>
+<li>Consumer-3 &#x6D88;&#x8D39; 6&#x3001;7&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;</li>
+</ul>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/allocate_message_queue_consistent_hash.png" data-lightbox="b1f71405-7a70-4d3d-b4be-d64399fda03c" data-title="&#x4E00;&#x81F4;&#x6027;&#x54C8;&#x5E0C;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/allocate_message_queue_consistent_hash.png" alt="&#x4E00;&#x81F4;&#x6027;&#x54C8;&#x5E0C;"></a></p>
+<p>&#x6D88;&#x606F;&#x961F;&#x5217;&#x7684;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x662F;&#x7531;&#x4E00;&#x4E2A;&#x4E0D;&#x505C;&#x8FD0;&#x884C;&#x7684;<strong>&#x5747;&#x8861;&#x670D;&#x52A1;</strong>&#x6765;&#x5B9A;&#x65F6;&#x6267;&#x884C;&#x7684;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RebalanceService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ServiceThread</span> </span>{
+    <span class="hljs-comment">// &#x9ED8;&#x8BA4; 20 &#x79D2;&#x4E00;&#x6B21;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> waitInterval =
+        Long.parseLong(System.getProperty(<span class="hljs-string">&quot;rocketmq.client.rebalance.waitInterval&quot;</span>, <span class="hljs-string">&quot;20000&quot;</span>));
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">while</span> (!<span class="hljs-keyword">this</span>.isStopped()) {
+            <span class="hljs-keyword">this</span>.waitForRunning(waitInterval);
+            <span class="hljs-comment">// &#x91CD;&#x65B0;&#x6267;&#x884C;&#x6D88;&#x606F;&#x961F;&#x5217;&#x7684;&#x8D1F;&#x8F7D;&#x5747;&#x8861;</span>
+            <span class="hljs-keyword">this</span>.mqClientFactory.doRebalance();
+        }
+    }
+
+}
+</code></pre>
+<p>&#x63A5;&#x7740;&#x5F80;&#x4E0B;&#x770B;&#xFF0C;&#x4F1A;&#x77E5;&#x9053;&#x5728;&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x5F53;&#x524D;&#x8FD9;&#x53F0;&#x6D88;&#x8D39;&#x8005;&#x6D88;&#x8D39;&#x548C;&#x8BDD;&#x9898;&#x76F8;&#x5173;&#x7684;&#x6240;&#x6709;&#x6D88;&#x606F;&#x961F;&#x5217;&#xFF0C;&#x800C;&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;&#x4F1A;&#x5148;&#x6309;&#x7167;&#x67D0;&#x79CD;&#x5206;&#x914D;&#x7B56;&#x7565;&#x6765;&#x8FDB;&#x884C;&#x6D88;&#x606F;&#x961F;&#x5217;&#x7684;&#x5206;&#x914D;&#xFF0C;&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x5C31;&#x662F;&#x5F53;&#x524D;&#x8FD9;&#x53F0;&#x6D88;&#x8D39;&#x8005;&#x9700;&#x8981;&#x6D88;&#x8D39;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RebalanceImpl</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rebalanceByTopic</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String topic, <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> isOrder)</span> </span>{
+        <span class="hljs-keyword">switch</span> (messageModel) {
+            <span class="hljs-comment">// &#x5E7F;&#x64AD;&#x6A21;&#x5F0F;</span>
+        <span class="hljs-keyword">case</span> BROADCASTING: {
+            <span class="hljs-comment">// &#x6D88;&#x8D39;&#x8FD9;&#x4E2A;&#x8BDD;&#x9898;&#x7684;&#x6240;&#x6709;&#x6D88;&#x606F;&#x961F;&#x5217;</span>
+            Set&lt;MessageQueue&gt; mqSet = <span class="hljs-keyword">this</span>.topicSubscribeInfoTable.get(topic);
+            <span class="hljs-keyword">if</span> (mqSet != <span class="hljs-keyword">null</span>) {
+                <span class="hljs-comment">// ...</span>
+            }
+            <span class="hljs-keyword">break</span>;
+        }
+            <span class="hljs-comment">// &#x96C6;&#x7FA4;&#x6A21;&#x5F0F;</span>
+        <span class="hljs-keyword">case</span> CLUSTERING: {
+            <span class="hljs-comment">// ...</span>
+
+            <span class="hljs-comment">// &#x6309;&#x7167;&#x67D0;&#x79CD;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;&#x8FDB;&#x884C;&#x6D88;&#x606F;&#x961F;&#x5217;&#x548C;&#x6D88;&#x8D39;&#x5BA2;&#x6237;&#x7AEF;&#x4E4B;&#x95F4;&#x7684;&#x5206;&#x914D;</span>
+            <span class="hljs-comment">// allocateResult &#x5C31;&#x662F;&#x5F53;&#x524D;&#x8FD9;&#x53F0;&#x6D88;&#x8D39;&#x8005;&#x88AB;&#x5206;&#x914D;&#x5230;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;</span>
+            allocateResult = strategy.allocate(
+                                               <span class="hljs-keyword">this</span>.consumerGroup,
+                                               <span class="hljs-keyword">this</span>.mQClientFactory.getClientId(),
+                                               mqAll,
+                                               cidAll);
+
+            <span class="hljs-comment">// ...</span>
+            }
+            <span class="hljs-keyword">break</span>;
+        }
+
+    }
+
+}
+</code></pre>
+<h2 id="&#x4E09;&#x3001;broker-&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;">&#x4E09;&#x3001;Broker &#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;</h2>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x518D;&#x6765;&#x770B; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;&#x3002;&#x9996;&#x5148;&#x6211;&#x4EEC;&#x5E94;&#x8BE5;&#x77E5;&#x9053;&#xFF0C;&#x6D88;&#x606F;&#x5F80; Broker &#x5B58;&#x50A8;&#x5C31;&#x662F;&#x5728;&#x5411; <code>CommitLog</code> &#x6D88;&#x606F;&#x6587;&#x4EF6;&#x4E2D;&#x5199;&#x5165;&#x6570;&#x636E;&#x7684;&#x4E00;&#x4E2A;&#x8FC7;&#x7A0B;&#x3002;&#x5728; Broker &#x542F;&#x52A8;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5176;&#x4F1A;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x53EB;&#x505A; <code>ReputMessageService</code> &#x7684;&#x670D;&#x52A1;&#xFF0C;&#x8FD9;&#x4E2A;&#x670D;&#x52A1;&#x6BCF;&#x9694; 1 &#x79D2;&#x4F1A;&#x68C0;&#x67E5;&#x4E00;&#x4E0B;&#x8FD9;&#x4E2A; <code>CommitLog</code> &#x662F;&#x5426;&#x6709;&#x65B0;&#x7684;&#x6570;&#x636E;&#x5199;&#x5165;&#x3002;<code>ReputMessageService</code> &#x81EA;&#x8EAB;&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4E2A;&#x504F;&#x79FB;&#x91CF; <code>reputFromOffset</code>&#xFF0C;&#x7528;&#x4EE5;&#x5BF9;&#x6BD4;&#x548C; <code>CommitLog</code> &#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x6D88;&#x606F;&#x603B;&#x504F;&#x79FB;&#x91CF;&#x7684;&#x5DEE;&#x8DDD;&#x3002;&#x5F53;&#x8FD9;&#x4E24;&#x4E2A;&#x504F;&#x79FB;&#x91CF;&#x4E0D;&#x540C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x4EE3;&#x8868;&#x6709;&#x65B0;&#x7684;&#x6D88;&#x606F;&#x5230;&#x6765;&#x4E86;:</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReputMessageService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ServiceThread</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">long</span> reputFromOffset = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isCommitLogAvailable</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">// &#x770B;&#x5F53;&#x524D;&#x6709;&#x6CA1;&#x6709;&#x65B0;&#x7684;&#x6D88;&#x606F;&#x5230;&#x6765;</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.reputFromOffset &lt; DefaultMessageStore.<span class="hljs-keyword">this</span>.commitLog.getMaxOffset();
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">while</span> (!<span class="hljs-keyword">this</span>.isStopped()) {
+            <span class="hljs-keyword">try</span> {
+                Thread.sleep(<span class="hljs-number">1</span>);
+                <span class="hljs-keyword">this</span>.doReput();
+            } <span class="hljs-keyword">catch</span> (Exception e) {
+                DefaultMessageStore.log.warn(<span class="hljs-keyword">this</span>.getServiceName() + <span class="hljs-string">&quot; service has exception. &quot;</span>, e);
+            }
+        }
+    }
+
+}
+</code></pre>
+<p>&#x5728;&#x6709;&#x65B0;&#x7684;&#x6D88;&#x606F;&#x5230;&#x6765;&#x4E4B;&#x540E;&#xFF0C;<code>doReput()</code> &#x51FD;&#x6570;&#x4F1A;&#x53D6;&#x51FA;&#x65B0;&#x5230;&#x6765;&#x7684;&#x6240;&#x6709;&#x6D88;&#x606F;&#xFF0C;&#x6BCF;&#x4E00;&#x6761;&#x6D88;&#x606F;&#x90FD;&#x4F1A;&#x5C01;&#x88C5;&#x4E3A;&#x4E00;&#x4E2A; <code>DispatchRequest</code> &#x8BF7;&#x6C42;&#xFF0C;&#x8FDB;&#x800C;&#x5C06;&#x8FD9;&#x6761;&#x8BF7;&#x6C42;&#x5206;&#x53D1;&#x7ED9;&#x4E0D;&#x540C;&#x7684;&#x8BF7;&#x6C42;&#x6D88;&#x8D39;&#x8005;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#x53EA;&#x4F1A;&#x5173;&#x6CE8;&#x5229;&#x7528;&#x6D88;&#x606F;&#x521B;&#x5EFA;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x7684;&#x670D;&#x52A1; <code>CommitLogDispatcherBuildConsumeQueue</code>:</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReputMessageService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ServiceThread</span> </span>{
+
+    <span class="hljs-comment">// ... &#x90E8;&#x5206;&#x4EE3;&#x7801;&#x6709;&#x5220;&#x51CF;</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doReput</span><span class="hljs-params">()</span> </span>{
+        SelectMappedBufferResult result = DefaultMessageStore.<span class="hljs-keyword">this</span>.commitLog.getData(reputFromOffset);
+        <span class="hljs-keyword">if</span> (result != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">this</span>.reputFromOffset = result.getStartOffset();
+
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> readSize = <span class="hljs-number">0</span>; readSize &lt; result.getSize() &amp;&amp; doNext; ) {
+                <span class="hljs-comment">// &#x8BFB;&#x53D6;&#x4E00;&#x6761;&#x6D88;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x5C01;&#x88C5;&#x4E3A; DispatchRequest</span>
+                DispatchRequest dispatchRequest =
+                    DefaultMessageStore.<span class="hljs-keyword">this</span>.commitLog.checkMessageAndReturnSize(result.getByteBuffer(), <span class="hljs-keyword">false</span>, <span class="hljs-keyword">false</span>);
+                <span class="hljs-keyword">int</span> size = dispatchRequest.getMsgSize();
+
+                <span class="hljs-keyword">if</span> (dispatchRequest.isSuccess()) {
+                    <span class="hljs-comment">// &#x5206;&#x53D1;&#x8FD9;&#x4E2A; DispatchRequest &#x8BF7;&#x6C42;</span>
+                    DefaultMessageStore.<span class="hljs-keyword">this</span>.doDispatch(dispatchRequest);
+                    <span class="hljs-keyword">this</span>.reputFromOffset += size;
+                    readSize += size;
+                }
+
+                <span class="hljs-comment">// ...</span>
+            }
+        }
+    }
+
+}
+</code></pre>
+<p><code>CommitLogDispatcherBuildConsumeQueue</code> &#x670D;&#x52A1;&#x4F1A;&#x6839;&#x636E;&#x8FD9;&#x6761;&#x8BF7;&#x6C42;&#x6309;&#x7167;&#x4E0D;&#x540C;&#x7684;&#x961F;&#x5217; ID &#x521B;&#x5EFA;&#x4E0D;&#x540C;&#x7684;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7EF4;&#x62A4;&#x4E00;&#x4EFD;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x5217;&#x8868;&#x3002;&#x7136;&#x540E;&#x5C06; <code>DispatchRequest</code> &#x8BF7;&#x6C42;&#x4E2D;&#x8FD9;&#x6761;&#x6D88;&#x606F;&#x7684;&#x6D88;&#x606F;&#x504F;&#x79FB;&#x91CF;&#x3001;&#x6D88;&#x606F;&#x5927;&#x5C0F;&#x4EE5;&#x53CA;&#x6D88;&#x606F;&#x5728;&#x53D1;&#x9001;&#x65F6;&#x5019;&#x9644;&#x5E26;&#x7684;&#x6807;&#x7B7E;&#x7684; Hash &#x503C;&#x5199;&#x5165;&#x5230;&#x76F8;&#x5E94;&#x7684;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;&#x4E2D;&#x53BB;&#x3002;</p>
+<p>&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;&#x7684;&#x521B;&#x5EFA;&#x4E0E;<a href="https://kunzhao.org/docs/rocketmq/rocketmq-message-store-flow/#&#x4E8C;&#x6587;&#x4EF6;&#x521B;&#x5EFA;" target="_blank">&#x6D88;&#x606F;&#x5B58;&#x50A8; CommitLog &#x6587;&#x4EF6;&#x7684;&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;</a>&#x662F;&#x4E00;&#x81F4;&#x7684;&#xFF0C;&#x53EA;&#x662F;&#x8DEF;&#x5F84;&#x4E0D;&#x540C;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x3002;</p>
+<p>&#x5BFB;&#x627E;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x7684;&#x4EE3;&#x7801;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DefaultMessageStore</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MessageStore</span> </span>{    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ConcurrentMap&lt;String<span class="hljs-comment">/* topic */</span>, ConcurrentMap&lt;Integer<span class="hljs-comment">/* queueId */</span>, ConsumeQueue&gt;&gt; consumeQueueTable;        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">putMessagePositionInfo</span><span class="hljs-params">(DispatchRequest dispatchRequest)</span> </span>{        ConsumeQueue cq = <span class="hljs-keyword">this</span>.findConsumeQueue(dispatchRequest.getTopic(), dispatchRequest.getQueueId());        cq.putMessagePositionInfoWrapper(dispatchRequest);    }    }
+</code></pre>
+<p>&#x5411;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;&#x4E2D;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x7684;&#x4EE3;&#x7801;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumeQueue</span> </span>{    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">putMessagePositionInfo</span><span class="hljs-params">(<span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> offset, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> size, <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> tagsCode,                                           <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> cqOffset)</span> </span>{        <span class="hljs-comment">// &#x5B58;&#x50A8;&#x504F;&#x79FB;&#x91CF;&#x3001;&#x5927;&#x5C0F;&#x3001;&#x6807;&#x7B7E;&#x7801;        this.byteBufferIndex.flip();        this.byteBufferIndex.limit(CQ_STORE_UNIT_SIZE);        this.byteBufferIndex.putLong(offset);        this.byteBufferIndex.putInt(size);        this.byteBufferIndex.putLong(tagsCode);        // &#x83B7;&#x53D6;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;        final long expectLogicOffset = cqOffset * CQ_STORE_UNIT_SIZE;        MappedFile mappedFile = this.mappedFileQueue.getLastMappedFile(expectLogicOffset);                if (mappedFile != null) {            // ...            return mappedFile.appendMessage(this.byteBufferIndex.array());        }        return false;    }    }</span>
+</code></pre>
+<p>&#x4EE5;&#x4E0A;&#x9610;&#x8FF0;&#x4E86;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x521B;&#x5EFA;&#x5E76;&#x5B58;&#x50A8;&#x6D88;&#x606F;&#x7684;&#x4E00;&#x4E2A;&#x8FC7;&#x7A0B;&#xFF0C;&#x4F46;&#x662F;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x6D88;&#x606F;&#x662F;&#x9700;&#x8981;&#x6301;&#x4E45;&#x5316;&#x5230;&#x78C1;&#x76D8;&#x4E2D;&#x53BB;&#x7684;&#x3002;&#x6301;&#x4E45;&#x5316;&#x7684;&#x8FC7;&#x7A0B;&#x662F;&#x901A;&#x8FC7;&#x540E;&#x53F0;&#x670D;&#x52A1; <code>FlushConsumeQueueService</code> &#x6765;&#x5B9A;&#x65F6;&#x6301;&#x4E45;&#x5316;&#x7684;:</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlushConsumeQueueService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ServiceThread</span> </span>{    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doFlush</span><span class="hljs-params">(<span class="hljs-keyword">int</span> retryTimes)</span> </span>{        <span class="hljs-comment">// ...        ConcurrentMap&lt;String, ConcurrentMap&lt;Integer, ConsumeQueue&gt;&gt; tables = DefaultMessageStore.this.consumeQueueTable;        for (ConcurrentMap&lt;Integer, ConsumeQueue&gt; maps : tables.values()) {            for (ConsumeQueue cq : maps.values()) {                boolean result = false;                for (int i = 0; i &lt; retryTimes &amp;&amp; !result; i++) {                    // &#x5237;&#x65B0;&#x5230;&#x78C1;&#x76D8;                    result = cq.flush(flushConsumeQueueLeastPages);                }            }        }        // ...    }}</span>
+</code></pre>
+<p>&#x4E0A;&#x8FF0;&#x8FC7;&#x7A0B;&#x4F53;&#x73B0;&#x5728;&#x78C1;&#x76D8;&#x6587;&#x4EF6;&#x7684;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;<code>commitLog</code> &#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x9762;&#x5B58;&#x653E;&#x7684;&#x662F;&#x5B8C;&#x6574;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x6765;&#x4E00;&#x6761;&#x6D88;&#x606F;&#xFF0C;&#x5411;&#x6587;&#x4EF6;&#x4E2D;&#x8FFD;&#x52A0;&#x4E00;&#x6761;&#x6D88;&#x606F;&#x3002;&#x540C;&#x65F6;&#xFF0C;&#x6839;&#x636E;&#x8FD9;&#x4E00;&#x6761;&#x6D88;&#x606F;&#x5C5E;&#x4E8E; <code>TopicTest</code> &#x8BDD;&#x9898;&#x4E0B;&#x7684;&#x54EA;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#xFF0C;&#x53C8;&#x4F1A;&#x5F80;&#x76F8;&#x5E94;&#x7684; <code>consumequeue</code> &#x6587;&#x4EF6;&#x4E0B;&#x7684;&#x76F8;&#x5E94;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;&#x4E2D;&#x8FFD;&#x52A0;&#x6D88;&#x606F;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x3001;&#x6D88;&#x606F;&#x5927;&#x5C0F;&#x548C;&#x6807;&#x7B7E;&#x7801;:</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/2018_03_16_11_54_01.png" data-lightbox="b3e1d575-2535-4849-abdb-1c0f96fa2aa1" data-title="&#x6587;&#x4EF6;&#x5B58;&#x50A8;&#x65B9;&#x5F0F;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/2018_03_16_11_54_01.png" alt="&#x6587;&#x4EF6;&#x5B58;&#x50A8;&#x65B9;&#x5F0F;"></a></p>
+<p>&#x603B;&#x6D41;&#x7A0B;&#x56FE;&#x5982;&#x4E0B;&#x6240;&#x793A;:</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/broker_consume_queue.png" data-lightbox="d66bbc09-404c-4d18-8919-0d55644c2f8d" data-title="&#x6D88;&#x8D39;&#x961F;&#x5217;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/broker_consume_queue.png" alt="&#x6D88;&#x8D39;&#x961F;&#x5217;"></a></p>
+<h2 id="&#x56DB;&#x3001;&#x6D88;&#x606F;&#x961F;&#x5217;&#x504F;&#x79FB;&#x91CF;">&#x56DB;&#x3001;&#x6D88;&#x606F;&#x961F;&#x5217;&#x504F;&#x79FB;&#x91CF;</h2>
+<p>Broker &#x670D;&#x52A1;&#x5668;&#x5B58;&#x50A8;&#x4E86;&#x5404;&#x4E2A;&#x6D88;&#x8D39;&#x961F;&#x5217;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x9700;&#x8981;&#x6D88;&#x8D39;&#x6BCF;&#x4E2A;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;&#x3002;&#x6D88;&#x8D39;&#x6A21;&#x5F0F;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x6BCF;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x6240;&#x6D88;&#x8D39;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E5F;&#x4E0D;&#x540C;&#x3002;&#x90A3;&#x4E48;&#x5BA2;&#x6237;&#x7AEF;&#x5982;&#x4F55;&#x8BB0;&#x5F55;&#x81EA;&#x5DF1;&#x6240;&#x6D88;&#x8D39;&#x7684;&#x961F;&#x5217;&#x6D88;&#x8D39;&#x5230;&#x54EA;&#x91CC;&#x4E86;&#x5462;&#xFF1F;&#x7B54;&#x6848;&#x5C31;&#x662F;<strong>&#x6D88;&#x8D39;&#x961F;&#x5217;&#x504F;&#x79FB;&#x91CF;</strong>&#x3002;</p>
+<p>&#x9488;&#x5BF9;&#x540C;&#x4E00;&#x8BDD;&#x9898;&#xFF0C;&#x5728;<strong>&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;</strong>&#x4E0B;&#xFF0C;&#x7531;&#x4E8E;&#x6BCF;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x6240;&#x6D88;&#x8D39;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E0D;&#x540C;&#xFF0C;&#x6240;&#x4EE5;&#x6BCF;&#x4E2A;&#x6D88;&#x606F;&#x961F;&#x5217;&#x5DF2;&#x7ECF;&#x6D88;&#x8D39;&#x5230;&#x54EA;&#x91CC;&#x7684;&#x6D88;&#x8D39;&#x504F;&#x79FB;&#x91CF;&#x662F;<strong>&#x8BB0;&#x5F55;&#x5728; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;</strong>&#x7684;&#x3002;&#x800C;&#x5728;&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x7531;&#x4E8E;&#x6BCF;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x5206;&#x914D;&#x6D88;&#x8D39;&#x8FD9;&#x4E2A;&#x8BDD;&#x9898;&#x7684;&#x6240;&#x6709;&#x6D88;&#x606F;&#x961F;&#x5217;&#xFF0C;&#x6240;&#x4EE5;&#x6BCF;&#x4E2A;&#x6D88;&#x606F;&#x961F;&#x5217;&#x5DF2;&#x7ECF;&#x6D88;&#x8D39;&#x5230;&#x54EA;&#x91CC;&#x7684;&#x6D88;&#x8D39;&#x504F;&#x79FB;&#x91CF;&#x662F;&#x8BB0;&#x5F55;&#x5728;<strong>&#x5BA2;&#x6237;&#x7AEF;&#x672C;&#x5730;</strong>&#x7684;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x5206;&#x522B;&#x8BB2;&#x8FF0;&#x4E24;&#x79CD;&#x6A21;&#x5F0F;&#x4E0B;&#x504F;&#x79FB;&#x91CF;&#x662F;&#x5982;&#x4F55;&#x83B7;&#x53D6;&#x548C;&#x66F4;&#x65B0;&#x7684;:</p>
+<h3 id="1-&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;">(1) &#x96C6;&#x7FA4;&#x6A21;&#x5F0F;</h3>
+<p>&#x5728;&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4E2A; <code>offsetTable</code> &#x8868;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RemoteBrokerOffsetStore</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">OffsetStore</span> </span>{    <span class="hljs-keyword">private</span> ConcurrentMap&lt;MessageQueue, AtomicLong&gt; offsetTable =        <span class="hljs-keyword">new</span> ConcurrentHashMap&lt;MessageQueue, AtomicLong&gt;();    }
+</code></pre>
+<p>&#x540C;&#x6837;&#x5728; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;&#x4E5F;&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4E2A;&#x504F;&#x79FB;&#x91CF;&#x8868;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumerOffsetManager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ConfigManager</span> </span>{    <span class="hljs-keyword">private</span> ConcurrentMap&lt;String<span class="hljs-comment">/* topic@group */</span>, ConcurrentMap&lt;Integer, Long&gt;&gt; offsetTable =        <span class="hljs-keyword">new</span> ConcurrentHashMap&lt;String, ConcurrentMap&lt;Integer, Long&gt;&gt;(<span class="hljs-number">512</span>);    }
+</code></pre>
+<p>&#x5728;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;<code>RebalanceService</code> &#x670D;&#x52A1;&#x4F1A;&#x5B9A;&#x65F6;&#x5730; (&#x9ED8;&#x8BA4; 20 &#x79D2;) &#x4ECE; Broker &#x670D;&#x52A1;&#x5668;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5BA2;&#x6237;&#x7AEF;&#x6240;&#x9700;&#x8981;&#x6D88;&#x8D39;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#xFF0C;&#x5E76;&#x4E0E;&#x5F53;&#x524D;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x8FDB;&#x884C;&#x5BF9;&#x6BD4;&#xFF0C;&#x770B;&#x662F;&#x5426;&#x6709;&#x53D8;&#x5316;&#x3002;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;&#x6D88;&#x8D39;&#x961F;&#x5217;&#xFF0C;&#x4F1A;&#x4ECE; Broker &#x670D;&#x52A1;&#x5668;&#x67E5;&#x8BE2;&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#x5F53;&#x524D;&#x7684;&#x6D88;&#x8D39;&#x504F;&#x79FB;&#x91CF;&#x3002;&#x7136;&#x540E;&#x6839;&#x636E;&#x8FD9;&#x51E0;&#x4E2A;&#x6D88;&#x8D39;&#x961F;&#x5217;&#xFF0C;&#x521B;&#x5EFA;&#x5BF9;&#x5E94;&#x7684;&#x62C9;&#x53D6;&#x8BF7;&#x6C42; <code>PullRequest</code> &#x51C6;&#x5907;&#x4ECE; Broker &#x670D;&#x52A1;&#x5668;&#x62C9;&#x53D6;&#x6D88;&#x606F;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;:</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/create_pull_request_from_messagequeue.png" data-lightbox="80ed2803-5118-435c-82f1-fcec9c6dd1fe" data-title="&#x5B9A;&#x65F6;&#x521B;&#x5EFA;&#x8BF7;&#x6C42;&#x62C9;&#x53D6;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/create_pull_request_from_messagequeue.png" alt="&#x5B9A;&#x65F6;&#x521B;&#x5EFA;&#x8BF7;&#x6C42;&#x62C9;&#x53D6;"></a></p>
+<p>&#x5F53;&#x4ECE; Broker &#x670D;&#x52A1;&#x5668;&#x62C9;&#x53D6;&#x4E0B;&#x6765;&#x6D88;&#x606F;&#x4EE5;&#x540E;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x7528;&#x6237;&#x6210;&#x529F;&#x6D88;&#x8D39;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x624D;&#x4F1A;&#x66F4;&#x65B0;&#x672C;&#x5730;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x8868;&#x3002;&#x672C;&#x5730;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x8868;&#x518D;&#x901A;&#x8FC7;&#x5B9A;&#x65F6;&#x670D;&#x52A1;&#x6BCF;&#x9694; 5 &#x79D2;&#x540C;&#x6B65;&#x5230; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MQClientInstance</span> </span>{    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startScheduledTask</span><span class="hljs-params">()</span> </span>{        <span class="hljs-keyword">this</span>.scheduledExecutorService.scheduleAtFixedRate(<span class="hljs-keyword">new</span> Runnable() {                <span class="hljs-meta">@Override</span>                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{                    MQClientInstance.<span class="hljs-keyword">this</span>.persistAllConsumerOffset();                }            }, <span class="hljs-number">1000</span> * <span class="hljs-number">10</span>, <span class="hljs-keyword">this</span>.clientConfig.getPersistConsumerOffsetInterval(), TimeUnit.MILLISECONDS);            }    }
+</code></pre>
+<p>&#x800C;&#x7EF4;&#x62A4;&#x5728; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x8868;&#x4E5F;&#x4F1A;&#x6BCF;&#x9694; 5 &#x79D2;&#x949F;&#x5E8F;&#x5217;&#x5316;&#x5230;&#x78C1;&#x76D8;&#x4E2D;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BrokerController</span> </span>{    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">initialize</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException </span>{        <span class="hljs-keyword">this</span>.scheduledExecutorService.scheduleAtFixedRate(<span class="hljs-keyword">new</span> Runnable() {                <span class="hljs-meta">@Override</span>                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{                    BrokerController.<span class="hljs-keyword">this</span>.consumerOffsetManager.persist();                }            }, <span class="hljs-number">1000</span> * <span class="hljs-number">10</span>, <span class="hljs-keyword">this</span>.brokerConfig.getFlushConsumerOffsetInterval(), TimeUnit.MILLISECONDS);    }    }
+</code></pre>
+<p>&#x4FDD;&#x5B58;&#x7684;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/2018_03_16_22_52_14.png" data-lightbox="caa49968-da6f-48d9-8cc2-8d66e7e57bd9" data-title="&#x6587;&#x4EF6;&#x4FDD;&#x5B58;&#x5F62;&#x5F0F;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/2018_03_16_22_52_14.png" alt="&#x6587;&#x4EF6;&#x4FDD;&#x5B58;&#x5F62;&#x5F0F;"></a></p>
+<p>&#x4E0A;&#x8FF0;&#x6574;&#x4F53;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF0C;&#x7EA2;&#x6846;&#x6846;&#x4F4F;&#x7684;&#x662F;&#x8FD9;&#x4E2A;&#x8BDD;&#x9898;&#x4E0B;&#x9762;&#x7684;&#x961F;&#x5217;&#x7684; ID&#xFF0C;&#x7BAD;&#x5934;&#x6307;&#x5411;&#x7684;&#x5206;&#x522B;&#x662F;&#x6BCF;&#x4E2A;&#x961F;&#x5217;&#x7684;&#x6D88;&#x8D39;&#x504F;&#x79FB;&#x91CF;&#xFF1A;</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/consume_queue_offset_update.png" data-lightbox="6d8a91d3-6cfe-480e-a759-85449f9f4818" data-title="&#x6D88;&#x8D39;&#x961F;&#x5217;&#x504F;&#x79FB;&#x91CF;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/consume_queue_offset_update.png" alt="&#x6D88;&#x8D39;&#x961F;&#x5217;&#x504F;&#x79FB;&#x91CF;"></a></p>
+<h3 id="2-&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;">(2) &#x5E7F;&#x64AD;&#x6A21;&#x5F0F;</h3>
+<p>&#x5BF9;&#x4E8E;&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x800C;&#x8A00;&#xFF0C;&#x6BCF;&#x4E2A;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x80AF;&#x5B9A;&#x4E0D;&#x80FD;&#x5B58;&#x50A8;&#x5728; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;&#xFF0C;&#x56E0;&#x4E3A;&#x591A;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x5BF9;&#x4E8E;&#x540C;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#x7684;&#x6D88;&#x8D39;&#x53EF;&#x80FD;&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x504F;&#x79FB;&#x91CF;&#x4F1A;&#x4E92;&#x76F8;&#x8986;&#x76D6;&#x6389;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5728;&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x6BCF;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x6D88;&#x8D39;&#x504F;&#x79FB;&#x91CF;&#x662F;&#x5B58;&#x50A8;&#x5728;&#x672C;&#x5730;&#x7684;&#xFF0C;&#x7136;&#x540E;&#x6BCF;&#x9694; 5 &#x79D2;&#x5C06;&#x5185;&#x5B58;&#x4E2D;&#x7684; <code>offsetTable</code> &#x6301;&#x4E45;&#x5316;&#x5230;&#x78C1;&#x76D8;&#x4E2D;&#x3002;&#x5F53;&#x9996;&#x6B21;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x83B7;&#x53D6;&#x53EF;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x504F;&#x79FB;&#x91CF;&#x4E0D;&#x50CF;&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;&#x4E0B;&#x662F;&#x4ECE; Broker &#x670D;&#x52A1;&#x5668;&#x8BFB;&#x53D6;&#x7684;&#xFF0C;&#x800C;&#x662F;&#x76F4;&#x63A5;&#x4ECE;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x4E2D;&#x8BFB;&#x53D6;&#x7684;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LocalFileOffsetStore</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">OffsetStore</span> </span>{    <span class="hljs-meta">@Override</span>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">long</span> <span class="hljs-title">readOffset</span><span class="hljs-params">(<span class="hljs-keyword">final</span> MessageQueue mq, <span class="hljs-keyword">final</span> ReadOffsetType type)</span> </span>{        <span class="hljs-keyword">if</span> (mq != <span class="hljs-keyword">null</span>) {            <span class="hljs-keyword">switch</span> (type) {             <span class="hljs-keyword">case</span> READ_FROM_STORE: {                <span class="hljs-comment">// &#x672C;&#x5730;&#x8BFB;&#x53D6;                offsetSerializeWrapper = this.readLocalOffset();                // ...            }            }        }        // ...    }    }</span>
+</code></pre>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/create_pull_request_from_messagequeue_broadcasting.png" data-lightbox="e0aa1130-c355-4703-8874-4aa6013f2aba" data-title="&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x504F;&#x79FB;&#x91CF;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/create_pull_request_from_messagequeue_broadcasting.png" alt="&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x504F;&#x79FB;&#x91CF;"></a></p>
+<p>&#x5F53;&#x6D88;&#x606F;&#x6D88;&#x8D39;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x504F;&#x79FB;&#x91CF;&#x7684;&#x66F4;&#x65B0;&#x4E5F;&#x662F;&#x6301;&#x4E45;&#x5316;&#x5230;&#x672C;&#x5730;&#xFF0C;&#x800C;&#x975E;&#x66F4;&#x65B0;&#x5230; Broker &#x670D;&#x52A1;&#x5668;&#x4E2D;&#x3002;&#x8FD9;&#x91CC;&#x63D0;&#x4E00;&#x4E0B;&#xFF0C;&#x5728;&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x6D88;&#x606F;&#x961F;&#x5217;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x9ED8;&#x8BA4;&#x653E;&#x5728;&#x7528;&#x6237;&#x76EE;&#x5F55;&#x4E0B;&#x7684; <code>.rocketmq_offsets</code> &#x76EE;&#x5F55;&#x4E0B;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LocalFileOffsetStore</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">OffsetStore</span> </span>{    <span class="hljs-meta">@Override</span>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">persistAll</span><span class="hljs-params">(Set&lt;MessageQueue&gt; mqs)</span> </span>{        <span class="hljs-comment">// ...        String jsonString = offsetSerializeWrapper.toJson(true);        MixAll.string2File(jsonString, this.storePath);        // ...    }    }</span>
+</code></pre>
+<p>&#x5B58;&#x50A8;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/2018_03_16_23_15_16.png" data-lightbox="1c0ccf41-54be-4405-8e43-f1d581aef8fd" data-title="&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x504F;&#x79FB;&#x91CF;&#x5B58;&#x50A8;&#x683C;&#x5F0F;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/2018_03_16_23_15_16.png" alt="&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x504F;&#x79FB;&#x91CF;&#x5B58;&#x50A8;&#x683C;&#x5F0F;"></a></p>
+<p>&#x7B80;&#x8981;&#x6D41;&#x7A0B;&#x56FE;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/consume_queue_offset_update_broadcasting.png" data-lightbox="88ce8e0f-e96f-47a5-80e1-98a80bff04b6" data-title="&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x504F;&#x79FB;&#x91CF;&#x66F4;&#x65B0;&#x6D41;&#x7A0B;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/consume_queue_offset_update_broadcasting.png" alt="&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x504F;&#x79FB;&#x91CF;&#x66F4;&#x65B0;&#x6D41;&#x7A0B;"></a></p>
+<h2 id="&#x4E94;&#x3001;&#x62C9;&#x53D6;&#x6D88;&#x606F;">&#x4E94;&#x3001;&#x62C9;&#x53D6;&#x6D88;&#x606F;</h2>
+<p>&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x8FD0;&#x884C;&#x7740;&#x4E00;&#x4E2A;&#x4E13;&#x95E8;&#x7528;&#x6765;&#x62C9;&#x53D6;&#x6D88;&#x606F;&#x7684;&#x540E;&#x53F0;&#x670D;&#x52A1; <code>PullMessageService</code>&#xFF0C;&#x5176;&#x63A5;&#x53D7;&#x6BCF;&#x4E2A;&#x961F;&#x5217;&#x521B;&#x5EFA; <code>PullRequest</code> &#x62C9;&#x53D6;&#x6D88;&#x606F;&#x8BF7;&#x6C42;&#xFF0C;&#x7136;&#x540E;&#x62C9;&#x53D6;&#x6D88;&#x606F;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PullMessageService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ServiceThread</span> </span>{    <span class="hljs-meta">@Override</span>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{        <span class="hljs-keyword">while</span> (!<span class="hljs-keyword">this</span>.isStopped()) {            PullRequest pullRequest = <span class="hljs-keyword">this</span>.pullRequestQueue.take();            <span class="hljs-keyword">if</span> (pullRequest != <span class="hljs-keyword">null</span>) {                <span class="hljs-keyword">this</span>.pullMessage(pullRequest);            }        }    }    }
+</code></pre>
+<p>&#x6BCF;&#x4E00;&#x4E2A; <code>PullRequest</code> &#x90FD;&#x5173;&#x8054;&#x7740;&#x4E00;&#x4E2A; <code>MessageQueue</code> &#x548C;&#x4E00;&#x4E2A; <code>ProcessQueue</code>&#xFF0C;&#x5728; <code>ProcessQueue</code> &#x7684;&#x5185;&#x90E8;&#x8FD8;&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x7B49;&#x5F85;&#x7528;&#x6237;&#x6D88;&#x8D39;&#x7684;&#x6D88;&#x606F;&#x6811;&#xFF0C;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#x6240;&#x793A;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PullRequest</span> </span>{    <span class="hljs-keyword">private</span> MessageQueue messageQueue;    <span class="hljs-keyword">private</span> ProcessQueue processQueue;    }<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessQueue</span> </span>{    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> TreeMap&lt;Long, MessageExt&gt; msgTreeMap = <span class="hljs-keyword">new</span> TreeMap&lt;Long, MessageExt&gt;();    }
+</code></pre>
+<p>&#x5F53;&#x771F;&#x6B63;&#x5C1D;&#x8BD5;&#x62C9;&#x53D6;&#x6D88;&#x606F;&#x4E4B;&#x524D;&#xFF0C;&#x5176;&#x4F1A;&#x68C0;&#x67E5;&#x5F53;&#x524D;&#x8BF7;&#x6C42;&#x7684;&#x5185;&#x90E8;&#x7F13;&#x5B58;&#x7684;&#x6D88;&#x606F;&#x6570;&#x91CF;&#x3001;&#x6D88;&#x606F;&#x5927;&#x5C0F;&#x3001;&#x6D88;&#x606F;&#x9608;&#x503C;&#x8DE8;&#x5EA6;&#x662F;&#x5426;&#x8D85;&#x8FC7;&#x4E86;&#x67D0;&#x4E2A;&#x9608;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x8D85;&#x8FC7;&#x67D0;&#x4E2A;&#x9608;&#x503C;&#xFF0C;&#x5219;&#x63A8;&#x8FDF; 50 &#x6BEB;&#x79D2;&#x91CD;&#x65B0;&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DefaultMQPushConsumerImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MQConsumerInner</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pullMessage</span><span class="hljs-params">(<span class="hljs-keyword">final</span> PullRequest pullRequest)</span> </span>{
+        <span class="hljs-comment">// ...</span>
+
+        <span class="hljs-keyword">final</span> ProcessQueue processQueue = pullRequest.getProcessQueue();
+        <span class="hljs-keyword">long</span> cachedMessageCount = processQueue.getMsgCount().get();
+        <span class="hljs-keyword">long</span> cachedMessageSizeInMiB = processQueue.getMsgSize().get() / (<span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>);
+
+        <span class="hljs-comment">// &#x7F13;&#x5B58;&#x6D88;&#x606F;&#x6570;&#x91CF;&#x9608;&#x503C;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 1000</span>
+        <span class="hljs-keyword">if</span> (cachedMessageCount &gt; <span class="hljs-keyword">this</span>.defaultMQPushConsumer.getPullThresholdForQueue()) {
+            <span class="hljs-keyword">this</span>.executePullRequestLater(pullRequest, PULL_TIME_DELAY_MILLS_WHEN_FLOW_CONTROL);
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-comment">// &#x7F13;&#x5B58;&#x6D88;&#x606F;&#x5927;&#x5C0F;&#x9608;&#x503C;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 100 MB</span>
+        <span class="hljs-keyword">if</span> (cachedMessageSizeInMiB &gt; <span class="hljs-keyword">this</span>.defaultMQPushConsumer.getPullThresholdSizeForQueue()) {
+            <span class="hljs-keyword">this</span>.executePullRequestLater(pullRequest, PULL_TIME_DELAY_MILLS_WHEN_FLOW_CONTROL);
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.consumeOrderly) {
+            <span class="hljs-comment">// &#x6700;&#x5C0F;&#x504F;&#x79FB;&#x91CF;&#x548C;&#x6700;&#x5927;&#x504F;&#x79FB;&#x91CF;&#x7684;&#x9608;&#x503C;&#x8DE8;&#x5EA6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 2000 &#x504F;&#x79FB;&#x91CF;&#xFF0C;&#x6D88;&#x8D39;&#x901F;&#x5EA6;&#x4E0D;&#x80FD;&#x592A;&#x6162;</span>
+            <span class="hljs-keyword">if</span> (processQueue.getMaxSpan() &gt; <span class="hljs-keyword">this</span>.defaultMQPushConsumer.getConsumeConcurrentlyMaxSpan()) {
+                <span class="hljs-keyword">this</span>.executePullRequestLater(pullRequest, PULL_TIME_DELAY_MILLS_WHEN_FLOW_CONTROL);
+                <span class="hljs-keyword">return</span>;
+            }
+        }
+
+        <span class="hljs-comment">// ...</span>
+    }
+
+}
+</code></pre>
+<p>&#x5F53;&#x6267;&#x884C;&#x5B8C;&#x4E00;&#x4E9B;&#x5FC5;&#x8981;&#x7684;&#x68C0;&#x67E5;&#x4E4B;&#x540E;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x4F1A;&#x5C06;&#x7528;&#x6237;&#x6307;&#x5B9A;&#x7684;&#x8FC7;&#x6EE4;&#x4FE1;&#x606F;&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x5176;&#x5B83;&#x5FC5;&#x8981;&#x6D88;&#x8D39;&#x5B57;&#x6BB5;&#x5C01;&#x88C5;&#x5230;&#x8BF7;&#x6C42;&#x4FE1;&#x606F;&#x4F53;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x624D;&#x5F00;&#x59CB;&#x4ECE; Broker &#x670D;&#x52A1;&#x5668;&#x62C9;&#x53D6;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;&#x4ECE;&#x5F53;&#x524D;&#x504F;&#x79FB;&#x91CF;&#x5F00;&#x59CB;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E00;&#x6B21;&#x6027;&#x6700;&#x591A;&#x62C9;&#x53D6; 32 &#x6761;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x7684;&#x54CD;&#x5E94;&#x4F1A;&#x544A;&#x8BC9;&#x5BA2;&#x6237;&#x7AEF;&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#x4E0B;&#x6B21;&#x5F00;&#x59CB;&#x62C9;&#x53D6;&#x65F6;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x3002;&#x5BA2;&#x6237;&#x7AEF;&#x6BCF;&#x6B21;&#x90FD;&#x4F1A;&#x6CE8;&#x518C;&#x4E00;&#x4E2A; <code>PullCallback</code> &#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x4EE5;&#x63A5;&#x53D7;&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x7684;&#x54CD;&#x5E94;&#x4FE1;&#x606F;&#xFF0C;&#x6839;&#x636E;&#x54CD;&#x5E94;&#x4FE1;&#x606F;&#x7684;&#x4E0D;&#x540C;&#x72B6;&#x6001;&#x4FE1;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x4FEE;&#x6B63;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;&#x7684;&#x504F;&#x79FB;&#x91CF;&#xFF0C;&#x5E76;&#x8FDB;&#x884C;&#x4E0B;&#x6B21;&#x8BF7;&#x6C42;:</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pullMessage</span><span class="hljs-params">(<span class="hljs-keyword">final</span> PullRequest pullRequest)</span> </span>{
+    PullCallback pullCallback = <span class="hljs-keyword">new</span> PullCallback() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSuccess</span><span class="hljs-params">(PullResult pullResult)</span> </span>{
+                <span class="hljs-keyword">if</span> (pullResult != <span class="hljs-keyword">null</span>) {
+                    <span class="hljs-comment">// ...</span>
+                    <span class="hljs-keyword">switch</span> (pullResult.getPullStatus()) {
+                    <span class="hljs-keyword">case</span> FOUND:
+                        <span class="hljs-comment">// ...</span>
+                        <span class="hljs-keyword">break</span>;
+
+                    <span class="hljs-keyword">case</span> NO_NEW_MSG:
+                        <span class="hljs-comment">// ...</span>
+                        <span class="hljs-keyword">break</span>;
+
+                    <span class="hljs-keyword">case</span> NO_MATCHED_MSG:
+                        <span class="hljs-comment">// ...</span>
+                        <span class="hljs-keyword">break</span>;
+
+                    <span class="hljs-keyword">case</span> OFFSET_ILLEGAL:
+                        <span class="hljs-comment">// ...</span>
+                        <span class="hljs-keyword">break</span>;
+
+                    <span class="hljs-keyword">default</span>:
+                        <span class="hljs-keyword">break</span>;
+                    }
+                }
+            }
+
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onException</span><span class="hljs-params">(Throwable e)</span> </span>{
+                <span class="hljs-comment">// ...</span>
+            }
+        };
+
+}
+</code></pre>
+<p>&#x4E0A;&#x8FF0;&#x662F;&#x5BA2;&#x6237;&#x7AEF;&#x62C9;&#x53D6;&#x6D88;&#x606F;&#x65F6;&#x7684;&#x4E00;&#x4E9B;&#x673A;&#x5236;&#xFF0C;&#x73B0;&#x5728;&#x518D;&#x8BF4;&#x4E00;&#x4E0B; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;&#x4E0E;&#x6B64;&#x76F8;&#x5BF9;&#x5E94;&#x7684;&#x903B;&#x8F91;&#x3002;</p>
+<p>&#x670D;&#x52A1;&#x5668;&#x5728;&#x6536;&#x5230;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x4E4B;&#x540E;&#xFF0C;&#x4F1A;&#x6839;&#x636E;&#x8BDD;&#x9898;&#x548C;&#x961F;&#x5217; ID &#x5B9A;&#x4F4D;&#x5230;&#x5BF9;&#x5E94;&#x7684;<strong>&#x6D88;&#x8D39;&#x961F;&#x5217;</strong>&#x3002;&#x7136;&#x540E;&#x6839;&#x636E;&#x8FD9;&#x6761;&#x8BF7;&#x6C42;&#x4F20;&#x5165;&#x7684; offset &#x6D88;&#x8D39;&#x961F;&#x5217;&#x504F;&#x79FB;&#x91CF;&#xFF0C;&#x5B9A;&#x4F4D;&#x5230;&#x5BF9;&#x5E94;&#x7684;<strong>&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;</strong>&#x3002;&#x504F;&#x79FB;&#x91CF;&#x6307;&#x5B9A;&#x7684;&#x662F;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;&#x7684;&#x6D88;&#x8D39;&#x4E0B;&#x9650;&#xFF0C;&#x800C;&#x6700;&#x5927;&#x4E0A;&#x9650;&#x662F;&#x7531;&#x5982;&#x4E0B;&#x7B97;&#x6CD5;&#x6765;&#x8FDB;&#x884C;&#x7EA6;&#x675F;&#x7684;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> maxFilterMessageCount = Math.max(<span class="hljs-number">16000</span>, maxMsgNums * ConsumeQueue.CQ_STORE_UNIT_SIZE);
+</code></pre>
+<p>&#x6709;&#x4E86;&#x4E0A;&#x9650;&#x548C;&#x4E0B;&#x9650;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x4FBF;&#x4F1A;&#x5F00;&#x59CB;&#x4ECE;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x6587;&#x4EF6;&#x4E2D;&#x53D6;&#x51FA;&#x6BCF;&#x4E2A;&#x6D88;&#x606F;&#x7684;<strong>&#x504F;&#x79FB;&#x91CF;&#x548C;&#x6D88;&#x606F;&#x5927;&#x5C0F;</strong>&#xFF0C;&#x7136;&#x540E;&#x518D;&#x6839;&#x636E;&#x8FD9;&#x4E24;&#x4E2A;&#x503C;&#x53BB; <code>CommitLog</code> &#x6587;&#x4EF6;&#x4E2D;&#x5BFB;&#x627E;&#x76F8;&#x5E94;&#x7684;&#x5B8C;&#x6574;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x5E76;&#x6DFB;&#x52A0;&#x5230;&#x6700;&#x540E;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x7CBE;&#x7B80;&#x8FC7;&#x7684;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DefaultMessageStore</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MessageStore</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> GetMessageResult <span class="hljs-title">getMessage</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String group, <span class="hljs-keyword">final</span> String topic, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> queueId, <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> offset,
+                                       <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> maxMsgNums,
+                                       <span class="hljs-keyword">final</span> MessageFilter messageFilter)</span> </span>{
+        <span class="hljs-comment">// ...</span>
+        ConsumeQueue consumeQueue = findConsumeQueue(topic, queueId);
+
+        <span class="hljs-keyword">if</span> (consumeQueue != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-comment">// &#x9996;&#x5148;&#x6839;&#x636E;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x5B9A;&#x4F4D;&#x6D88;&#x8D39;&#x961F;&#x5217;</span>
+            SelectMappedBufferResult bufferConsumeQueue = consumeQueue.getIndexBuffer(offset);
+            <span class="hljs-keyword">if</span> (bufferConsumeQueue != <span class="hljs-keyword">null</span>) {
+                <span class="hljs-keyword">try</span> {
+                    status = GetMessageStatus.NO_MATCHED_MESSAGE;
+
+                    <span class="hljs-comment">// &#x6700;&#x5927;&#x6D88;&#x606F;&#x957F;&#x5EA6;</span>
+                    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> maxFilterMessageCount = Math.max(<span class="hljs-number">16000</span>, maxMsgNums * ConsumeQueue.CQ_STORE_UNIT_SIZE);
+                    <span class="hljs-comment">// &#x53D6;&#x6D88;&#x606F;</span>
+                    <span class="hljs-keyword">for</span> (; i &lt; bufferConsumeQueue.getSize() &amp;&amp; i &lt; maxFilterMessageCount; i += ConsumeQueue.CQ_STORE_UNIT_SIZE) {
+                        <span class="hljs-keyword">long</span> offsetPy = bufferConsumeQueue.getByteBuffer().getLong();
+                        <span class="hljs-keyword">int</span> sizePy = bufferConsumeQueue.getByteBuffer().getInt();
+
+                        <span class="hljs-comment">// &#x6839;&#x636E;&#x6D88;&#x606F;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x548C;&#x6D88;&#x606F;&#x7684;&#x5927;&#x5C0F;&#x4ECE; CommitLog &#x6587;&#x4EF6;&#x4E2D;&#x53D6;&#x51FA;&#x4E00;&#x6761;&#x6D88;&#x606F;</span>
+                        SelectMappedBufferResult selectResult = <span class="hljs-keyword">this</span>.commitLog.getMessage(offsetPy, sizePy);
+                        getResult.addMessage(selectResult);
+
+                        status = GetMessageStatus.FOUND;
+                    }
+
+                    <span class="hljs-comment">// &#x589E;&#x52A0;&#x4E0B;&#x6B21;&#x5F00;&#x59CB;&#x7684;&#x504F;&#x79FB;&#x91CF;</span>
+                    nextBeginOffset = offset + (i / ConsumeQueue.CQ_STORE_UNIT_SIZE);
+                } <span class="hljs-keyword">finally</span> {
+                    bufferConsumeQueue.release();
+                }
+            }
+        }
+        <span class="hljs-comment">// ...</span>
+    }
+
+}
+</code></pre>
+<p>&#x5BA2;&#x6237;&#x7AEF;&#x548C; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;&#x5B8C;&#x6574;&#x62C9;&#x53D6;&#x6D88;&#x606F;&#x7684;&#x6D41;&#x7A0B;&#x56FE;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/pull_message_from_broker.png" data-lightbox="de438b93-6b80-46d5-88c4-774e4c26c1bd" data-title="&#x5BA2;&#x6237;&#x7AEF;&#x548C; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;&#x5B8C;&#x6574;&#x62C9;&#x53D6;&#x6D88;&#x606F;&#x7684;&#x6D41;&#x7A0B;&#x56FE;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/pull_message_from_broker.png" alt="&#x5BA2;&#x6237;&#x7AEF;&#x548C; Broker &#x670D;&#x52A1;&#x5668;&#x7AEF;&#x5B8C;&#x6574;&#x62C9;&#x53D6;&#x6D88;&#x606F;&#x7684;&#x6D41;&#x7A0B;&#x56FE;"></a></p>
+<h2 id="&#x516D;&#x3001;&#x6D88;&#x8D39;&#x6D88;&#x606F;">&#x516D;&#x3001;&#x6D88;&#x8D39;&#x6D88;&#x606F;</h2>
+<p>&#x4F9D;&#x8D56;&#x4E8E;&#x7528;&#x6237;&#x6307;&#x5B9A;&#x7684;&#x6D88;&#x606F;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x6D88;&#x606F;&#x7684;&#x6D88;&#x8D39;&#x5206;&#x4E3A;&#x4E24;&#x79CD;: <strong>&#x5E76;&#x53D1;&#x6D88;&#x8D39;</strong>&#x548C;<strong>&#x6709;&#x5E8F;&#x6D88;&#x8D39;</strong>&#x3002;</p>
+<p>&#x5E76;&#x53D1;&#x6D88;&#x8D39;&#x6CA1;&#x6709;&#x8003;&#x8651;&#x6D88;&#x606F;&#x53D1;&#x9001;&#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x83B7;&#x53D6;&#x5230;&#x6D88;&#x606F;&#x5C31;&#x4F1A;&#x76F4;&#x63A5;&#x56DE;&#x8C03;&#x7ED9;&#x7528;&#x6237;&#x3002;&#x800C;&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x4F1A;&#x8003;&#x8651;&#x6BCF;&#x4E2A;&#x961F;&#x5217;&#x6D88;&#x606F;&#x53D1;&#x9001;&#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x6CE8;&#x610F;&#x6B64;&#x5904;&#x5E76;&#x4E0D;&#x662F;&#x6BCF;&#x4E2A;&#x8BDD;&#x9898;&#x6D88;&#x606F;&#x53D1;&#x9001;&#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x4E00;&#x5B9A;&#x8981;&#x8BB0;&#x4F4F; RocketMQ &#x63A7;&#x5236;&#x6D88;&#x606F;&#x7684;&#x6700;&#x7EC6;&#x7C92;&#x5EA6;&#x662F;<strong>&#x6D88;&#x606F;&#x961F;&#x5217;</strong>&#x3002;&#x5F53;&#x6211;&#x4EEC;&#x8BB2;&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x8BF4;&#x5BF9;&#x4E8E;&#x67D0;&#x4E2A;&#x8BDD;&#x9898;&#x7684;&#x67D0;&#x4E2A;&#x961F;&#x5217;&#xFF0C;&#x53D1;&#x5F80;&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x63A5;&#x53D7;&#x6D88;&#x606F;&#x7684;&#x987A;&#x5E8F;&#x4E0E;&#x53D1;&#x9001;&#x7684;&#x987A;&#x5E8F;&#x5B8C;&#x5168;&#x4E00;&#x81F4;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x5206;&#x522B;&#x770B;&#x8FD9;&#x4E24;&#x79CD;&#x6D88;&#x8D39;&#x6A21;&#x5F0F;&#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x7684;&#x3002;</p>
+<h3 id="1-&#x5E76;&#x53D1;&#x6D88;&#x8D39;">(1) &#x5E76;&#x53D1;&#x6D88;&#x8D39;</h3>
+<p>&#x5F53;&#x7528;&#x6237;&#x6CE8;&#x518C;&#x6D88;&#x606F;&#x56DE;&#x8C03;&#x7C7B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;&#x6CE8;&#x518C;&#x7684;&#x662F; <code>MessageListenerConcurrently</code> &#x56DE;&#x8C03;&#x7C7B;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8BA4;&#x4E3A;&#x7528;&#x6237;&#x4E0D;&#x5173;&#x5FC3;&#x6D88;&#x606F;&#x7684;&#x987A;&#x5E8F;&#x95EE;&#x9898;&#x3002;&#x6211;&#x4EEC;&#x5728;&#x4E0A;&#x6587;&#x63D0;&#x5230;&#x8FC7;&#x6BCF;&#x4E2A; <code>PullRequest</code> &#x90FD;&#x5173;&#x8054;&#x4E86;&#x4E00;&#x4E2A;&#x5904;&#x7406;&#x961F;&#x5217; <code>ProcessQueue</code>&#xFF0C;&#x800C;&#x6BCF;&#x4E2A;&#x5904;&#x7406;&#x961F;&#x5217;&#x53C8;&#x90FD;&#x5173;&#x8054;&#x4E86;&#x4E00;&#x9897;&#x6D88;&#x606F;&#x6811; <code>msgTreeMap</code>&#x3002;&#x5F53;&#x5BA2;&#x6237;&#x7AEF;&#x62C9;&#x53D6;&#x5230;&#x65B0;&#x7684;&#x6D88;&#x606F;&#x4EE5;&#x540E;&#xFF0C;&#x5176;&#x5148;&#x5C06;&#x6D88;&#x606F;&#x653E;&#x5165;&#x5230;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;&#x6240;&#x5173;&#x8054;&#x7684;&#x5904;&#x7406;&#x961F;&#x5217;&#x7684;&#x6D88;&#x606F;&#x6811;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x6D88;&#x8D39;&#x8BF7;&#x6C42;&#xFF0C;&#x7528;&#x4EE5;&#x56DE;&#x8C03;&#x7528;&#x6237;&#x7AEF;&#x7684;&#x4EE3;&#x7801;&#x6D88;&#x8D39;&#x6D88;&#x606F;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DefaultMQPushConsumerImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MQConsumerInner</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pullMessage</span><span class="hljs-params">(<span class="hljs-keyword">final</span> PullRequest pullRequest)</span> </span>{
+        PullCallback pullCallback = <span class="hljs-keyword">new</span> PullCallback() {
+                <span class="hljs-meta">@Override</span>
+                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSuccess</span><span class="hljs-params">(PullResult pullResult)</span> </span>{
+                    <span class="hljs-keyword">if</span> (pullResult != <span class="hljs-keyword">null</span>) {
+                        <span class="hljs-keyword">switch</span> (pullResult.getPullStatus()) {
+                        <span class="hljs-keyword">case</span> FOUND:
+                            <span class="hljs-comment">// &#x6D88;&#x606F;&#x653E;&#x5165;&#x5904;&#x7406;&#x961F;&#x5217;&#x7684;&#x6D88;&#x606F;&#x6811;&#x4E2D;</span>
+                            <span class="hljs-keyword">boolean</span> dispathToConsume = processQueue
+                                .putMessage(pullResult.getMsgFoundList());
+
+                            <span class="hljs-comment">// &#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x6D88;&#x8D39;&#x8BF7;&#x6C42;</span>
+                            DefaultMQPushConsumerImpl.<span class="hljs-keyword">this</span>
+                                .consumeMessageService
+                                .submitConsumeRequest(
+                                                      pullResult.getMsgFoundList(),
+                                                      processQueue,
+                                                      pullRequest.getMessageQueue(),
+                                                      dispathToConsume);
+                            <span class="hljs-keyword">break</span>;
+                        }
+                    }
+                }
+
+            };
+
+    }
+
+}
+</code></pre>
+<p>&#x5F53;&#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x6D88;&#x8D39;&#x8BF7;&#x6C42;&#x540E;&#xFF0C;&#x5BF9;&#x4E8E;<strong>&#x5E76;&#x53D1;&#x6D88;&#x8D39;</strong>&#xFF0C;&#x5176;&#x5B9E;&#x73B0;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumeMessageConcurrentlyService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ConsumeMessageService</span> </span>{
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumeRequest</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-comment">// ...</span>
+            status = listener.consumeMessage(Collections.unmodifiableList(msgs), context);
+            <span class="hljs-comment">// ...</span>
+        }
+
+    }
+
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230; <code>msgs</code> &#x662F;&#x76F4;&#x63A5;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x62FF;&#x5230;&#x7684;&#x6700;&#x65B0;&#x6D88;&#x606F;&#xFF0C;&#x76F4;&#x63A5;&#x5582;&#x7ED9;&#x4E86;&#x5BA2;&#x6237;&#x7AEF;&#x8FDB;&#x884C;&#x6D88;&#x8D39;&#xFF0C;&#x5E76;&#x672A;&#x505A;&#x4EFB;&#x4F55;&#x6709;&#x5E8F;&#x5904;&#x7406;&#x3002;&#x5F53;&#x6D88;&#x8D39;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x4F1A;&#x4ECE;&#x6D88;&#x606F;&#x6811;&#x4E2D;&#x5C06;&#x8FD9;&#x4E9B;&#x6D88;&#x606F;&#x518D;&#x7ED9;&#x5220;&#x9664;&#x6389;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumeMessageConcurrentlyService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ConsumeMessageService</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">processConsumeResult</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ConsumeConcurrentlyStatus status, <span class="hljs-comment">/** &#x5176;&#x5B83;&#x53C2;&#x6570; **/</span>)</span> </span>{
+        <span class="hljs-comment">// &#x4ECE;&#x6D88;&#x606F;&#x6811;&#x4E2D;&#x5220;&#x9664;&#x6D88;&#x606F;</span>
+        <span class="hljs-keyword">long</span> offset = consumeRequest.getProcessQueue().removeMessage(consumeRequest.getMsgs());
+        <span class="hljs-keyword">if</span> (offset &gt;= <span class="hljs-number">0</span> &amp;&amp; !consumeRequest.getProcessQueue().isDropped()) {
+            <span class="hljs-keyword">this</span>.defaultMQPushConsumerImpl.getOffsetStore()
+                .updateOffset(consumeRequest.getMessageQueue(), offset, <span class="hljs-keyword">true</span>);
+        }
+    }
+
+}
+</code></pre>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/consume_message_service.png" data-lightbox="05fec459-931e-4e4c-a41d-fcf5d8f01078" data-title="&#x5E76;&#x53D1;&#x6D88;&#x8D39;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/consume_message_service.png" alt="&#x5E76;&#x53D1;&#x6D88;&#x8D39;"></a></p>
+<h3 id="2-&#x6709;&#x5E8F;&#x6D88;&#x8D39;">(2) &#x6709;&#x5E8F;&#x6D88;&#x8D39;</h3>
+<p>RocketMQ &#x7684;&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x4E3B;&#x8981;&#x4F9D;&#x9760;<strong>&#x4E24;&#x628A;&#x9501;</strong>&#xFF0C;&#x4E00;&#x628A;&#x662F;&#x7EF4;&#x62A4;&#x5728; Broker &#x7AEF;&#xFF0C;&#x4E00;&#x628A;&#x7EF4;&#x62A4;&#x5728;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x3002;Broker &#x7AEF;&#x6709;&#x4E00;&#x4E2A; <code>RebalanceLockManager</code> &#x670D;&#x52A1;&#xFF0C;&#x5176;&#x5185;&#x90E8;&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4E2A; <code>mqLockTable</code> &#x6D88;&#x606F;&#x961F;&#x5217;&#x9501;&#x8868;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RebalanceLockManager</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ConcurrentMap&lt;String<span class="hljs-comment">/* group */</span>, ConcurrentHashMap&lt;MessageQueue, LockEntry&gt;&gt; mqLockTable =
+        <span class="hljs-keyword">new</span> ConcurrentHashMap&lt;String, ConcurrentHashMap&lt;MessageQueue, LockEntry&gt;&gt;(<span class="hljs-number">1024</span>);
+
+}
+</code></pre>
+<p>&#x5728;&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x7684;&#x65F6;&#x5019;&#xFF0C;Broker &#x9700;&#x8981;&#x786E;&#x4FDD;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#x5728;&#x4EFB;&#x4F55;&#x65F6;&#x5019;&#x90FD;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x5728;&#x6D88;&#x8D39;&#x5B83;&#xFF0C;&#x90FD;&#x5728;&#x88AB;&#x4E00;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x6240;&#x9501;&#x5B9A;&#x3002;&#x5F53;&#x5BA2;&#x6237;&#x7AEF;&#x5728;&#x672C;&#x5730;&#x6839;&#x636E;&#x6D88;&#x606F;&#x961F;&#x5217;&#x6784;&#x5EFA; <code>PullRequest</code> &#x4E4B;&#x524D;&#xFF0C;&#x4F1A;&#x4E0E; Broker &#x6C9F;&#x901A;&#x5C1D;&#x8BD5;&#x9501;&#x5B9A;&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#xFF0C;&#x53E6;&#x5916;&#x5F53;&#x8FDB;&#x884C;&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x4E5F;&#x4F1A;&#x5468;&#x671F;&#x6027;&#x5730; (&#x9ED8;&#x8BA4;&#x662F; 20 &#x79D2;) &#x9501;&#x5B9A;&#x6240;&#x6709;&#x5F53;&#x524D;&#x9700;&#x8981;&#x6D88;&#x8D39;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumeMessageOrderlyService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ConsumeMessageService</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (MessageModel.CLUSTERING.equals(ConsumeMessageOrderlyService.<span class="hljs-keyword">this</span>.defaultMQPushConsumerImpl.messageModel())) {
+            <span class="hljs-keyword">this</span>.scheduledExecutorService.scheduleAtFixedRate(<span class="hljs-keyword">new</span> Runnable() {
+                    <span class="hljs-meta">@Override</span>
+                    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+                        ConsumeMessageOrderlyService.<span class="hljs-keyword">this</span>.lockMQPeriodically();
+                    }
+                }, <span class="hljs-number">1000</span> * <span class="hljs-number">1</span>, ProcessQueue.REBALANCE_LOCK_INTERVAL, TimeUnit.MILLISECONDS);
+        }
+    }
+
+}
+</code></pre>
+<p>&#x7531;&#x4E0A;&#x8FF0;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x4E5F;&#x80FD;&#x770B;&#x51FA;&#xFF0C;&#x53EA;&#x5728;&#x96C6;&#x7FA4;&#x6A21;&#x5F0F;&#x4E0B;&#x624D;&#x4F1A;&#x5468;&#x671F;&#x6027;&#x5730;&#x9501;&#x5B9A; Broker &#x7AEF;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#xFF0C;&#x56E0;&#x6B64;&#x5728;<strong>&#x5E7F;&#x64AD;&#x6A21;&#x5F0F;&#x4E0B;&#x662F;&#x4E0D;&#x652F;&#x6301;&#x8FDB;&#x884C;&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x7684;</strong>&#x3002;</p>
+<p>&#x800C;&#x5728; Broker &#x8FD9;&#x7AEF;&#xFF0C;&#x6BCF;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x6240;&#x9501;&#x5B9A;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x5BF9;&#x5E94;&#x7684;&#x9501;&#x9879; <code>LogEntry</code> &#x6709;&#x4E00;&#x4E2A;&#x4E0A;&#x6B21;&#x9501;&#x5B9A;&#x65F6;&#x7684;&#x65F6;&#x95F4;&#x6233;&#xFF0C;&#x5F53;&#x8D85;&#x8FC7;&#x9501;&#x7684;&#x8D85;&#x65F6;&#x65F6;&#x95F4; (&#x9ED8;&#x8BA4;&#x662F; 60 &#x79D2;) &#x540E;&#xFF0C;&#x4E5F;&#x4F1A;&#x5224;&#x5B9A;&#x8FD9;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x5DF2;&#x7ECF;&#x4E0D;&#x518D;&#x6301;&#x6709;&#x8FD9;&#x628A;&#x9501;&#xFF0C;&#x4EE5;&#x8BA9;&#x5176;&#x4ED6;&#x5BA2;&#x6237;&#x7AEF;&#x80FD;&#x591F;&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#x3002;</p>
+<p>&#x5728;&#x524D;&#x9762;&#x6211;&#x4EEC;&#x8BF4;&#x5230;&#x8FC7; <code>RebalanceService</code> &#x5747;&#x8861;&#x670D;&#x52A1;&#x4F1A;&#x5B9A;&#x65F6;&#x5730;&#x4F9D;&#x636E;&#x4E0D;&#x540C;&#x6D88;&#x8D39;&#x8005;&#x6570;&#x91CF;&#x5206;&#x914D;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x3002;&#x6211;&#x4EEC;&#x5047;&#x8BBE; Consumer-1 &#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x4E00;&#x5F00;&#x59CB;&#x9700;&#x8981;&#x6D88;&#x8D39; 3 &#x4E2A;&#x6D88;&#x8D39;&#x961F;&#x5217;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x53C8;&#x52A0;&#x5165;&#x4E86; Consumer-2 &#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x5E76;&#x4E14;&#x5206;&#x914D;&#x5230;&#x4E86; MessageQueue-2 &#x6D88;&#x8D39;&#x961F;&#x5217;&#x3002;&#x5F53; Consumer-1 &#x5185;&#x90E8;&#x7684;&#x5747;&#x8861;&#x670D;&#x52A1;&#x68C0;&#x6D4B;&#x5230;&#x5F53;&#x524D;&#x6D88;&#x8D39;&#x961F;&#x5217;&#x9700;&#x8981;&#x79FB;&#x9664; MessageQueue-2 &#x961F;&#x5217;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x9996;&#x5148;&#x89E3;&#x9664; Broker &#x7AEF;&#x7684;&#x9501;&#xFF0C;&#x786E;&#x4FDD;&#x65B0;&#x52A0;&#x5165;&#x7684; Consumer-2 &#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x80FD;&#x591F;&#x6210;&#x529F;&#x9501;&#x4F4F;&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#xFF0C;&#x4EE5;&#x8FDB;&#x884C;&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RebalanceImpl</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">updateProcessQueueTableInRebalance</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String topic,
+                                                       <span class="hljs-keyword">final</span> Set&lt;MessageQueue&gt; mqSet,
+                                                       <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> isOrder)</span> </span>{
+        <span class="hljs-keyword">while</span> (it.hasNext()) {
+            <span class="hljs-comment">// ...</span>
+
+            <span class="hljs-keyword">if</span> (mq.getTopic().equals(topic)) {
+                <span class="hljs-comment">// &#x5F53;&#x524D;&#x5BA2;&#x6237;&#x7AEF;&#x4E0D;&#x9700;&#x8981;&#x5904;&#x7406;&#x8FD9;&#x4E2A;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E86;</span>
+                <span class="hljs-keyword">if</span> (!mqSet.contains(mq)) {
+                    pq.setDropped(<span class="hljs-keyword">true</span>);
+                    <span class="hljs-comment">// &#x89E3;&#x9501;</span>
+                    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.removeUnnecessaryMessageQueue(mq, pq)) {
+                        <span class="hljs-comment">// ...</span>
+                    }
+                }
+
+                <span class="hljs-comment">// ...</span>
+            }
+        }
+    }
+
+}
+</code></pre>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/remove_unnessary_message_queue.png" data-lightbox="de280546-f719-42a2-9e7f-7af68593fa5b" data-title="&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x52A0;&#x9501;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/remove_unnessary_message_queue.png" alt="&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x52A0;&#x9501;"></a></p>
+<p>&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x6BCF;&#x4E00;&#x6B21;&#x62C9;&#x53D6;&#x6D88;&#x606F;&#x8BF7;&#x6C42;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x53D1;&#x73B0;&#x65B0;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x90A3;&#x4E48;&#x90FD;&#x4F1A;&#x5C06;&#x8FD9;&#x4E9B;&#x6D88;&#x606F;&#x5C01;&#x88C5;&#x4E3A; <code>ConsumeRequest</code> &#x6765;&#x5582;&#x7ED9;&#x6D88;&#x8D39;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x4EE5;&#x5F85;&#x6D88;&#x8D39;&#x3002;&#x5982;&#x679C;&#x6D88;&#x606F;&#x7279;&#x522B;&#x591A;&#xFF0C;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#x53EF;&#x80FD;&#x6709;&#x591A;&#x4E2A;&#x6D88;&#x8D39;&#x8BF7;&#x6C42;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x5BA2;&#x6237;&#x7AEF;&#x6D88;&#x8D39;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x80FD;&#x4F1A;&#x5148;&#x6D88;&#x8D39;&#x504F;&#x79FB;&#x91CF;&#x5927;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x540E;&#x6D88;&#x8D39;&#x504F;&#x79FB;&#x91CF;&#x5C0F;&#x7684;&#x6D88;&#x606F;&#x3002;&#x6240;&#x4EE5;&#x6D88;&#x8D39;&#x540C;&#x4E00;&#x961F;&#x5217;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x4E00;&#x628A;&#x9501;&#x4EE5;&#x6D88;&#x8D39;&#x8BF7;&#x6C42;&#x987A;&#x5E8F;&#x5316;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumeMessageOrderlyService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ConsumeMessageService</span> </span>{
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumeRequest</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">final</span> Object objLock = messageQueueLock.fetchLockObject(<span class="hljs-keyword">this</span>.messageQueue);
+            <span class="hljs-keyword">synchronized</span> (objLock) {
+                <span class="hljs-comment">// ...</span>
+            }
+        }
+    }
+
+}
+</code></pre>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/message_order_consume.png" data-lightbox="21ad880d-f4ba-4585-b76c-d5fa15fdf6d3" data-title="&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x9501;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/message_order_consume.png" alt="&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x9501;"></a></p>
+<p>RocketMQ &#x7684;&#x6D88;&#x606F;&#x6811;&#x662F;&#x7528; <code>TreeMap</code> &#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x5176;&#x5185;&#x90E8;&#x57FA;&#x4E8E;&#x6D88;&#x606F;&#x504F;&#x79FB;&#x91CF;&#x7EF4;&#x62A4;&#x4E86;&#x6D88;&#x606F;&#x7684;&#x6709;&#x5E8F;&#x6027;&#x3002;&#x6BCF;&#x6B21;&#x6D88;&#x8D39;&#x8BF7;&#x6C42;&#x90FD;&#x4F1A;&#x4ECE;<strong>&#x6D88;&#x606F;&#x6811;&#x4E2D;&#x62FF;&#x53D6;</strong>&#x504F;&#x79FB;&#x91CF;&#x6700;&#x5C0F;&#x7684;&#x51E0;&#x6761;&#x6D88;&#x606F; (&#x9ED8;&#x8BA4;&#x4E3A; 1 &#x6761;)&#x7ED9;&#x7528;&#x6237;&#xFF0C;&#x4EE5;&#x6B64;&#x6765;&#x8FBE;&#x5230;&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x7684;&#x76EE;&#x7684;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumeMessageOrderlyService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ConsumeMessageService</span> </span>{
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConsumeRequest</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-comment">// ...</span>
+            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> consumeBatchSize =
+                ConsumeMessageOrderlyService.<span class="hljs-keyword">this</span>
+                .defaultMQPushConsumer
+                .getConsumeMessageBatchMaxSize();
+            List&lt;MessageExt&gt; msgs = <span class="hljs-keyword">this</span>.processQueue.takeMessags(consumeBatchSize);
+
+        }
+    }
+
+}
+</code></pre>
+<p><a href="../../images/messagequeue/rocketmq-message-receive-flow/order_take_message.png" data-lightbox="fff9bdfe-e375-4e1c-8602-b63910879c28" data-title="&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x6811;"><img src="../../images/messagequeue/rocketmq-message-receive-flow/order_take_message.png" alt="&#x6709;&#x5E8F;&#x6D88;&#x8D39;&#x6811;"></a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="rocketmq_2.html" class="navigation navigation-prev " aria-label="Previous page: rocketMQ 消息储存流程">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../threadpool/" class="navigation navigation-next " aria-label="Next page: 线程池">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"rocketMQ 消息消费流程","level":"2.4.3","depth":2,"next":{"title":"线程池","level":"2.5","depth":1,"path":"doc/threadpool/README.md","ref":"doc/threadpool/README.md","articles":[]},"previous":{"title":"rocketMQ 消息储存流程","level":"2.4.2","depth":2,"path":"doc/messagequeue/rocketmq_2.md","ref":"doc/messagequeue/rocketmq_2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-lunr","-search","chapter-fold","lightbox","search-pro","pageview-count"],"pluginsConfig":{"chapter-fold":{},"lightbox":{"jquery":true,"sameUuid":false},"search-pro":{},"pageview-count":{},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/messagequeue/rocketmq_3.md","mtime":"2021-08-24T07:14:07.257Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-24T07:16:06.797Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

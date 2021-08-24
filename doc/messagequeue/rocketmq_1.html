@@ -1,0 +1,650 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>rocketMQ 消息发送流程 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-lightbox/css/lightbox.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="rocketmq_2.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    我的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../design/">
+            
+                <a href="../design/">
+            
+                    
+                    设计模式
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../design/design.html">
+            
+                <a href="../design/design.html">
+            
+                    
+                    24 种设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../design/status_machine.html">
+            
+                <a href="../design/status_machine.html">
+            
+                    
+                    状态机模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../io/">
+            
+                <a href="../io/">
+            
+                    
+                    java io
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../io/niodesc.html">
+            
+                <a href="../io/niodesc.html">
+            
+                    
+                    java nio 三大组件 Buffer、Channel 和 Selector
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../container/">
+            
+                <a href="../container/">
+            
+                    
+                    java 容器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../container/arraylist.html">
+            
+                <a href="../container/arraylist.html">
+            
+                    
+                    ArrayList
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../container/linkedlist.html">
+            
+                <a href="../container/linkedlist.html">
+            
+                    
+                    LinkedList
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.3" data-path="../container/hashmap.html">
+            
+                <a href="../container/hashmap.html">
+            
+                    
+                    HashMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    消息队列
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="2.4.1" data-path="rocketmq_1.html">
+            
+                <a href="rocketmq_1.html">
+            
+                    
+                    rocketMQ 消息发送流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4.2" data-path="rocketmq_2.html">
+            
+                <a href="rocketmq_2.html">
+            
+                    
+                    rocketMQ 消息储存流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4.3" data-path="rocketmq_3.html">
+            
+                <a href="rocketmq_3.html">
+            
+                    
+                    rocketMQ 消息消费流程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../threadpool/">
+            
+                <a href="../threadpool/">
+            
+                    
+                    线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >rocketMQ 消息发送流程</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="rocketmq-&#x6D88;&#x606F;&#x53D1;&#x9001;&#x6D41;&#x7A0B;">RocketMQ &#x6D88;&#x606F;&#x53D1;&#x9001;&#x6D41;&#x7A0B;</h1>
+<blockquote>
+<p>&#x57FA;&#x4E8E; RocketMQ 4.2.0 &#x7248;&#x672C;&#x8FDB;&#x884C;&#x7684;&#x6E90;&#x7801;&#x5206;&#x6790;&#x3002;</p>
+</blockquote>
+<p>&#x672C;&#x6587;&#x8BB2;&#x8FF0; RocketMQ &#x53D1;&#x9001;&#x4E00;&#x6761;<strong>&#x666E;&#x901A;&#x6D88;&#x606F;</strong>&#x7684;&#x6D41;&#x7A0B;&#x3002;</p>
+<h2 id="&#x4E00;&#x3001;&#x670D;&#x52A1;&#x5668;&#x542F;&#x52A8;">&#x4E00;&#x3001;&#x670D;&#x52A1;&#x5668;&#x542F;&#x52A8;</h2>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://rocketmq.apache.org/docs/quick-start/" target="_blank">&#x5B98;&#x65B9;&#x6587;&#x6863;</a>&#x6765;&#x542F;&#x52A8;&#x670D;&#x52A1;:</p>
+<ul>
+<li>&#x542F;&#x52A8; Name &#x670D;&#x52A1;&#x5668;:</li>
+</ul>
+<pre><code class="lang-bash">sh bin/mqnamesrv
+</code></pre>
+<ul>
+<li>&#x542F;&#x52A8; Broker &#x670D;&#x52A1;&#x5668;:</li>
+</ul>
+<pre><code class="lang-bash">sh bin/mqbroker -n localhost:9876
+</code></pre>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/nameserver_broker_startup.png" data-lightbox="35518b38-25f8-41b9-944b-1ec45efb4a94" data-title="&#x542F;&#x52A8;&#x670D;&#x52A1;&#x5668;"><img src="../../images/messagequeue/rocketmq-send-message-flow/nameserver_broker_startup.png" alt="&#x542F;&#x52A8;&#x670D;&#x52A1;&#x5668;"></a></p>
+<h2 id="&#x4E8C;&#x3001;&#x6784;&#x5EFA;&#x6D88;&#x606F;&#x4F53;">&#x4E8C;&#x3001;&#x6784;&#x5EFA;&#x6D88;&#x606F;&#x4F53;</h2>
+<p>&#x4E00;&#x6761;&#x6D88;&#x606F;&#x4F53;&#x6700;&#x5C11;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x4E24;&#x4E2A;&#x503C;:</p>
+<ul>
+<li>&#x6240;&#x5C5E;&#x8BDD;&#x9898;</li>
+<li>&#x6D88;&#x606F;&#x5185;&#x5BB9;</li>
+</ul>
+<p>&#x5982;&#x4E0B;&#x5C31;&#x662F;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x6761;&#x8BDD;&#x9898;&#x4E3A; &#x201C;Test&#x201D;&#xFF0C;&#x6D88;&#x606F;&#x4F53;&#x4E3A; &#x201C;Hello World&#x201D; &#x7684;&#x6D88;&#x606F;:</p>
+<pre><code class="lang-java">Message msg = <span class="hljs-keyword">new</span> Message( <span class="hljs-string">&quot;Test&quot;</span>, <span class="hljs-string">&quot;Hello World&quot;</span>.getBytes() );
+</code></pre>
+<h2 id="&#x4E09;&#x3001;&#x542F;&#x52A8;-producer-&#x51C6;&#x5907;&#x53D1;&#x9001;&#x6D88;&#x606F;">&#x4E09;&#x3001;&#x542F;&#x52A8; Producer &#x51C6;&#x5907;&#x53D1;&#x9001;&#x6D88;&#x606F;</h2>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x5462;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x8981;&#x518D;&#x542F;&#x52A8;&#x4E00;&#x4E2A; DefaultProducer (&#x751F;&#x4EA7;&#x8005;) &#x7C7B;&#x6765;&#x53D1;&#x6D88;&#x606F;:</p>
+<pre><code class="lang-java">DefaultMQProducer producer = <span class="hljs-keyword">new</span> DefaultMQProducer();
+producer.start();
+</code></pre>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6240;&#x542F;&#x52A8;&#x7684;&#x670D;&#x52A1;&#x5982;&#x4E0B;&#x6240;&#x793A;:</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/nameserver_broker_client_startup.png" data-lightbox="08c23b76-375f-49a2-8a03-8c948d5ae2ff" data-title="&#x542F;&#x52A8;&#x5BA2;&#x6237;&#x7AEF;"><img src="../../images/messagequeue/rocketmq-send-message-flow/nameserver_broker_client_startup.png" alt="&#x542F;&#x52A8;&#x5BA2;&#x6237;&#x7AEF;"></a></p>
+<h2 id="&#x56DB;&#x3001;name-&#x670D;&#x52A1;&#x5668;&#x7684;&#x5747;&#x7B49;&#x6027;">&#x56DB;&#x3001;Name &#x670D;&#x52A1;&#x5668;&#x7684;&#x5747;&#x7B49;&#x6027;</h2>
+<p>&#x6CE8;&#x610F;&#x6211;&#x4EEC;&#x4E0A;&#x8FF0;&#x5F00;&#x542F;&#x7684;&#x662F;&#x5355;&#x4E2A;&#x670D;&#x52A1;&#xFF0C;&#x4E5F;&#x5373;&#x4E00;&#x4E2A; Broker &#x548C;&#x4E00;&#x4E2A; Name &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x5B9E;&#x9645;&#x4E0A;&#x4F7F;&#x7528;&#x6D88;&#x606F;&#x961F;&#x5217;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x642D;&#x5EFA;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x96C6;&#x7FA4;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;:</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/nameserver_broker_cluster.png" data-lightbox="e12185da-d101-4203-bc47-a82316487e42" data-title="RocketMQ &#x96C6;&#x7FA4;"><img src="../../images/messagequeue/rocketmq-send-message-flow/nameserver_broker_cluster.png" alt="RocketMQ &#x96C6;&#x7FA4;"></a></p>
+<p>&#x5728; RocketMQ &#x7684;&#x8BBE;&#x8BA1;&#x4E2D;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x9700;&#x8981;&#x9996;&#x5148;<strong>&#x8BE2;&#x95EE; Name &#x670D;&#x52A1;&#x5668;</strong>&#x624D;&#x80FD;&#x786E;&#x5B9A;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684; Broker &#x4EE5;&#x8FDB;&#x884C;&#x6D88;&#x606F;&#x7684;&#x53D1;&#x9001;:</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/producer_find_broker_though_nameserver.png" data-lightbox="85c8906b-e322-45ef-91ff-7d1941f9bf46" data-title="&#x8BE2;&#x95EE; Name &#x670D;&#x52A1;&#x5668;"><img src="../../images/messagequeue/rocketmq-send-message-flow/producer_find_broker_though_nameserver.png" alt="&#x8BE2;&#x95EE; Name &#x670D;&#x52A1;&#x5668;"></a></p>
+<p>&#x7136;&#x800C;&#x8FD9;&#x4E48;&#x591A; Name &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x662F;&#x5982;&#x4F55;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684; Name &#x670D;&#x52A1;&#x5668;&#x5462;?</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x610F;&#x8BC6;&#x5230;&#x5F88;&#x91CD;&#x8981;&#x7684;&#x4E00;&#x70B9;&#xFF0C;Name &#x670D;&#x52A1;&#x5668;&#x5168;&#x90E8;&#x90FD;&#x662F;&#x5904;&#x4E8E;&#x76F8;&#x540C;&#x72B6;&#x6001;&#x7684;&#xFF0C;&#x4FDD;&#x5B58;&#x7684;&#x90FD;&#x662F;&#x76F8;&#x540C;&#x7684;&#x4FE1;&#x606F;&#x3002;&#x5728; Broker &#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5176;&#x4F1A;&#x5C06;&#x81EA;&#x5DF1;&#x5728;&#x672C;&#x5730;&#x5B58;&#x50A8;&#x7684;&#x8BDD;&#x9898;&#x914D;&#x7F6E;&#x6587;&#x4EF6; (&#x9ED8;&#x8BA4;&#x4F4D;&#x4E8E; <code>$HOME/store/config/topics.json</code> &#x76EE;&#x5F55;) &#x4E2D;&#x7684;&#x6240;&#x6709;&#x8BDD;&#x9898;&#x52A0;&#x8F7D;&#x5230;&#x5185;&#x5B58;&#x4E2D;&#x53BB;&#xFF0C;&#x7136;&#x540E;&#x4F1A;&#x5C06;&#x8FD9;&#x4E9B;&#x6240;&#x6709;&#x7684;&#x8BDD;&#x9898;&#x5168;&#x90E8;&#x540C;&#x6B65;&#x5230;&#x6240;&#x6709;&#x7684; Name &#x670D;&#x52A1;&#x5668;&#x4E2D;&#x3002;&#x4E0E;&#x6B64;&#x540C;&#x65F6;&#xFF0C;Broker &#x4E5F;&#x4F1A;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#xFF0C;&#x9ED8;&#x8BA4;&#x6BCF;&#x9694; 30 &#x79D2;&#x6765;&#x6267;&#x884C;&#x4E00;&#x6B21;&#x8BDD;&#x9898;&#x5168;&#x540C;&#x6B65;:</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/broker_sync_topics_to_namesrv.png" data-lightbox="7ca08d6f-e6e2-4942-888b-e3751071af06" data-title="&#x540C;&#x6B65;&#x8BDD;&#x9898;"><img src="../../images/messagequeue/rocketmq-send-message-flow/broker_sync_topics_to_namesrv.png" alt="&#x540C;&#x6B65;&#x8BDD;&#x9898;"></a></p>
+<h2 id="&#x4E94;&#x3001;&#x9009;&#x62E9;-name-&#x670D;&#x52A1;&#x5668;">&#x4E94;&#x3001;&#x9009;&#x62E9; Name &#x670D;&#x52A1;&#x5668;</h2>
+<p>&#x7531;&#x4E8E; Name &#x670D;&#x52A1;&#x5668;&#x6BCF;&#x53F0;&#x673A;&#x5668;&#x5B58;&#x50A8;&#x7684;&#x6570;&#x636E;&#x90FD;&#x662F;&#x4E00;&#x81F4;&#x7684;&#x3002;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x5BA2;&#x6237;&#x7AEF;&#x4EFB;&#x610F;&#x9009;&#x62E9;&#x4E00;&#x53F0;&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x884C;&#x6C9F;&#x901A;&#x5373;&#x53EF;&#x3002;</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/client_random_pickup_nameserver.png" data-lightbox="5de914e9-7021-4c6e-b9d5-199bfce0eddf" data-title="&#x9009;&#x62E9; Name &#x670D;&#x52A1;&#x5668;"><img src="../../images/messagequeue/rocketmq-send-message-flow/client_random_pickup_nameserver.png" alt="&#x9009;&#x62E9; Name &#x670D;&#x52A1;&#x5668;"></a></p>
+<p>&#x5176;&#x4E2D;&#x5BA2;&#x6237;&#x7AEF;&#x4E00;&#x5F00;&#x59CB;&#x9009;&#x62E9; Name &#x670D;&#x52A1;&#x5668;&#x7684;&#x6E90;&#x7801;&#x5982;&#x4E0B;&#x6240;&#x793A;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NettyRemotingClient</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">NettyRemotingAbstract</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RemotingClient</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> AtomicInteger namesrvIndex = <span class="hljs-keyword">new</span> AtomicInteger(initValueIndex());
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">initValueIndex</span><span class="hljs-params">()</span> </span>{
+        Random r = <span class="hljs-keyword">new</span> Random();
+        <span class="hljs-keyword">return</span> Math.abs(r.nextInt() % <span class="hljs-number">999</span>) % <span class="hljs-number">999</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> Channel <span class="hljs-title">getAndCreateNameserverChannel</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+
+        <span class="hljs-comment">// ...</span>
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; addrList.size(); i++) {
+            <span class="hljs-keyword">int</span> index = <span class="hljs-keyword">this</span>.namesrvIndex.incrementAndGet();
+            index = Math.abs(index);
+            index = index % addrList.size();
+            String newAddr = addrList.get(index);
+
+            <span class="hljs-keyword">this</span>.namesrvAddrChoosed.set(newAddr);
+            Channel channelNew = <span class="hljs-keyword">this</span>.createChannel(newAddr);
+            <span class="hljs-keyword">if</span> (channelNew != <span class="hljs-keyword">null</span>)
+                <span class="hljs-keyword">return</span> channelNew;
+        }
+
+        <span class="hljs-comment">// ...</span>
+    }
+
+}
+</code></pre>
+<p>&#x4EE5;&#x540E;&#xFF0C;&#x5982;&#x679C; <code>namesrvAddrChoosed</code> &#x9009;&#x62E9;&#x7684;&#x670D;&#x52A1;&#x5668;&#x5982;&#x679C;&#x4E00;&#x76F4;&#x5904;&#x4E8E;&#x8FDE;&#x63A5;&#x72B6;&#x6001;&#xFF0C;&#x90A3;&#x4E48;&#x5BA2;&#x6237;&#x7AEF;&#x5C31;&#x4F1A;&#x4E00;&#x76F4;&#x4E0E;&#x8FD9;&#x53F0;&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x884C;&#x6C9F;&#x901A;&#x3002;&#x5426;&#x5219;&#x7684;&#x8BDD;&#xFF0C;&#x5982;&#x4E0A;&#x6E90;&#x4EE3;&#x7801;&#x6240;&#x793A;&#xFF0C;&#x5C31;&#x4F1A;&#x81EA;&#x52A8;&#x8F6E;&#x5BFB;&#x4E0B;&#x4E00;&#x53F0;&#x53EF;&#x7528;&#x670D;&#x52A1;&#x5668;&#x3002;</p>
+<h2 id="&#x516D;&#x3001;&#x5BFB;&#x627E;&#x8BDD;&#x9898;&#x8DEF;&#x7531;&#x4FE1;&#x606F;">&#x516D;&#x3001;&#x5BFB;&#x627E;&#x8BDD;&#x9898;&#x8DEF;&#x7531;&#x4FE1;&#x606F;</h2>
+<p>&#x5F53;&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5176;&#x9996;&#x5148;&#x4F1A;&#x5C1D;&#x8BD5;&#x5BFB;&#x627E;&#x8BDD;&#x9898;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x3002;&#x5373;&#x8FD9;&#x6761;&#x6D88;&#x606F;&#x5E94;&#x8BE5;&#x88AB;&#x53D1;&#x9001;&#x5230;&#x54EA;&#x4E2A;&#x5730;&#x65B9;&#x53BB;&#x3002;</p>
+<p>&#x5BA2;&#x6237;&#x7AEF;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4EFD;&#x548C;&#x8BDD;&#x9898;&#x76F8;&#x5173;&#x7684;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x8868; <code>topicPublishInfoTable</code>&#xFF0C;&#x5F53;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x9996;&#x5148;&#x5C1D;&#x8BD5;&#x4ECE;&#x6B64;&#x8868;&#x4E2D;&#x83B7;&#x53D6;&#x4FE1;&#x606F;&#x3002;&#x5982;&#x679C;&#x6B64;&#x8868;&#x4E0D;&#x5B58;&#x5728;&#x8FD9;&#x6761;&#x8BDD;&#x9898;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x4FBF;&#x4F1A;&#x4ECE; Name &#x670D;&#x52A1;&#x5668;&#x83B7;&#x53D6;&#x8DEF;&#x7531;&#x6D88;&#x606F;&#x3002;</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/get_test_topic_route_info.png" data-lightbox="910de134-1a32-4a33-8b31-8eec9ca70669" data-title="&#x83B7;&#x53D6;&#x8BDD;&#x9898;&#x8DEF;&#x7531;&#x4FE1;&#x606F;"><img src="../../images/messagequeue/rocketmq-send-message-flow/get_test_topic_route_info.png" alt="&#x83B7;&#x53D6;&#x8BDD;&#x9898;&#x8DEF;&#x7531;&#x4FE1;&#x606F;"></a></p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DefaultMQProducerImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MQProducerInner</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> TopicPublishInfo <span class="hljs-title">tryToFindTopicPublishInfo</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String topic)</span> </span>{
+        TopicPublishInfo topicPublishInfo = <span class="hljs-keyword">this</span>.topicPublishInfoTable.get(topic);
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> == topicPublishInfo || !topicPublishInfo.ok()) {
+            <span class="hljs-keyword">this</span>.topicPublishInfoTable.putIfAbsent(topic, <span class="hljs-keyword">new</span> TopicPublishInfo());
+            <span class="hljs-keyword">this</span>.mQClientFactory.updateTopicRouteInfoFromNameServer(topic);
+            topicPublishInfo = <span class="hljs-keyword">this</span>.topicPublishInfoTable.get(topic);
+        }
+
+        <span class="hljs-comment">// ...</span>
+
+    }
+
+}
+</code></pre>
+<p>&#x5F53;&#x5C1D;&#x8BD5;&#x4ECE; Name &#x670D;&#x52A1;&#x5668;&#x83B7;&#x53D6;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5176;&#x53EF;&#x80FD;&#x4F1A;&#x8FD4;&#x56DE;&#x4E24;&#x79CD;&#x60C5;&#x51B5;:</p>
+<h3 id="1-&#x65B0;&#x5EFA;&#x8BDD;&#x9898;">(1) &#x65B0;&#x5EFA;&#x8BDD;&#x9898;</h3>
+<p>&#x8FD9;&#x4E2A;&#x8BDD;&#x9898;&#x662F;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#xFF0C;Name &#x670D;&#x52A1;&#x5668;&#x4E0D;&#x5B58;&#x5728;&#x548C;&#x6B64;&#x8BDD;&#x9898;&#x76F8;&#x5173;&#x7684;&#x4FE1;&#x606F;&#xFF1A;</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/nameserver_not_exist_topic.png" data-lightbox="6413a4ea-3484-4ace-bff0-1ee61765631b" data-title="NameServer &#x4E0D;&#x5B58;&#x5728;&#x8BDD;&#x9898;"><img src="../../images/messagequeue/rocketmq-send-message-flow/nameserver_not_exist_topic.png" alt="NameServer &#x4E0D;&#x5B58;&#x5728;&#x8BDD;&#x9898;"></a></p>
+<h3 id="2-&#x5DF2;&#x5B58;&#x8BDD;&#x9898;">(2) &#x5DF2;&#x5B58;&#x8BDD;&#x9898;</h3>
+<p>&#x8BDD;&#x9898;&#x4E4B;&#x524D;&#x521B;&#x5EFA;&#x8FC7;&#xFF0C;Name &#x670D;&#x52A1;&#x5668;&#x5B58;&#x5728;&#x6B64;&#x8BDD;&#x9898;&#x4FE1;&#x606F;&#xFF1A;</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/read_topic_info_from_nameserver.png" data-lightbox="0fb5b7d6-5056-4adc-a2c3-6eb3ede36075" data-title="NameServer &#x5B58;&#x5728;&#x8BDD;&#x9898;"><img src="../../images/messagequeue/rocketmq-send-message-flow/read_topic_info_from_nameserver.png" alt="NameServer &#x5B58;&#x5728;&#x8BDD;&#x9898;"></a></p>
+<p>&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x7684;&#x8BDD;&#x9898;&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x5305;&#x62EC;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;:</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/topic_route_data.png" data-lightbox="fac36c33-2f0c-437b-bdb6-fafc48cd0959" data-title="&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x5185;&#x5BB9;"><img src="../../images/messagequeue/rocketmq-send-message-flow/topic_route_data.png" alt="&#x8DEF;&#x7531;&#x4FE1;&#x606F;&#x5185;&#x5BB9;"></a></p>
+<p>&#x201C;broker-1&#x201D;&#x3001;&#x201D;broker-2&#x201D; &#x5206;&#x522B;&#x4E3A;&#x4E24;&#x4E2A; Broker &#x670D;&#x52A1;&#x5668;&#x7684;&#x540D;&#x79F0;&#xFF0C;&#x76F8;&#x540C;&#x540D;&#x79F0;&#x4E0B;&#x53EF;&#x4EE5;&#x6709;&#x4E3B;&#x4ECE; Broker&#xFF0C;&#x56E0;&#x6B64;&#x6BCF;&#x4E2A; Broker &#x53C8;&#x90FD;&#x6709; brokerId &#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;BrokerId &#x5982;&#x679C;&#x4E3A; <code>MixAll.MASTER_ID</code> &#xFF08;&#x503C;&#x4E3A; 0&#xFF09; &#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x8BA4;&#x4E3A;&#x8FD9;&#x4E2A; Broker &#x4E3A; MASTER &#x4E3B;&#x673A;&#xFF0C;&#x5176;&#x4F59;&#x7684;&#x4F4D;&#x4E8E;&#x76F8;&#x540C;&#x540D;&#x79F0;&#x4E0B;&#x7684; Broker &#x4E3A;&#x8FD9;&#x53F0; MASTER &#x4E3B;&#x673A;&#x7684; SLAVE &#x4E3B;&#x673A;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MQClientInstance</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">findBrokerAddressInPublish</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String brokerName)</span> </span>{
+        HashMap&lt;Long<span class="hljs-comment">/* brokerId */</span>, String<span class="hljs-comment">/* address */</span>&gt; map = <span class="hljs-keyword">this</span>.brokerAddrTable.get(brokerName);
+        <span class="hljs-keyword">if</span> (map != <span class="hljs-keyword">null</span> &amp;&amp; !map.isEmpty()) {
+            <span class="hljs-keyword">return</span> map.get(MixAll.MASTER_ID);
+        }
+
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+
+}
+</code></pre>
+<p>&#x6BCF;&#x4E2A; Broker &#x4E0A;&#x9762;&#x53EF;&#x4EE5;&#x7ED1;&#x5B9A;&#x591A;&#x4E2A;&#x53EF;&#x5199;&#x6D88;&#x606F;&#x961F;&#x5217;&#x548C;&#x591A;&#x4E2A;&#x53EF;&#x8BFB;&#x6D88;&#x606F;&#x961F;&#x5217;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x6839;&#x636E;&#x8FD4;&#x56DE;&#x7684;&#x6240;&#x6709; Broker &#x5730;&#x5740;&#x5217;&#x8868;&#x548C;&#x6BCF;&#x4E2A; Broker &#x7684;&#x53EF;&#x5199;&#x6D88;&#x606F;&#x961F;&#x5217;&#x5217;&#x8868;&#x4F1A;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x6784;&#x5EFA;&#x4E00;&#x4EFD;&#x6240;&#x6709;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x5217;&#x8868;&#x3002;&#x4E4B;&#x540E;&#x5BA2;&#x6237;&#x7AEF;&#x6BCF;&#x6B21;&#x53D1;&#x9001;&#x6D88;&#x606F;&#xFF0C;&#x90FD;&#x4F1A;&#x5728;&#x6D88;&#x606F;&#x961F;&#x5217;&#x5217;&#x8868;&#x4E0A;&#x8F6E;&#x5FAA;&#x9009;&#x62E9;&#x961F;&#x5217; (&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#x8FD4;&#x56DE;&#x4E86;&#x4E24;&#x4E2A; Broker&#xFF0C;&#x6BCF;&#x4E2A; Broker &#x5747;&#x6709; 4 &#x4E2A;&#x53EF;&#x5199;&#x6D88;&#x606F;&#x961F;&#x5217;):</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TopicPublishInfo</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> MessageQueue <span class="hljs-title">selectOneMessageQueue</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">int</span> index = <span class="hljs-keyword">this</span>.sendWhichQueue.getAndIncrement();
+        <span class="hljs-keyword">int</span> pos = Math.abs(index) % <span class="hljs-keyword">this</span>.messageQueueList.size();
+        <span class="hljs-keyword">if</span> (pos &lt; <span class="hljs-number">0</span>)
+            pos = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.messageQueueList.get(pos);
+    }
+
+}
+</code></pre>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/client_select_message_queue.png" data-lightbox="4df86a4f-9051-473d-b27c-3ada8ad3d849" data-title="&#x5BA2;&#x6237;&#x7AEF;&#x8F6E;&#x8BE2;&#x6D88;&#x606F;&#x961F;&#x5217;"><img src="../../images/messagequeue/rocketmq-send-message-flow/client_select_message_queue.png" alt="&#x5BA2;&#x6237;&#x7AEF;&#x8F6E;&#x8BE2;&#x6D88;&#x606F;&#x961F;&#x5217;"></a></p>
+<h2 id="&#x4E03;&#x3001;&#x7ED9;-broker-&#x53D1;&#x9001;&#x6D88;&#x606F;">&#x4E03;&#x3001;&#x7ED9; Broker &#x53D1;&#x9001;&#x6D88;&#x606F;</h2>
+<p>&#x5728;&#x786E;&#x5B9A;&#x4E86; Master Broker &#x5730;&#x5740;&#x548C;&#x8FD9;&#x4E2A; Broker &#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4EE5;&#x540E;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x624D;&#x5F00;&#x59CB;&#x771F;&#x6B63;&#x5730;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x7ED9;&#x8FD9;&#x4E2A; Broker&#xFF0C;&#x4E5F;&#x662F;&#x4ECE;&#x8FD9;&#x91CC;&#x5BA2;&#x6237;&#x7AEF;&#x624D;&#x5F00;&#x59CB;&#x4E0E; Broker &#x8FDB;&#x884C;&#x4EA4;&#x4E92;:</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/client_send_msg_to_broker.png" data-lightbox="b79c8e7a-a75f-4ff7-a05f-a05a712925f1" data-title="&#x53D1;&#x9001;&#x6D88;&#x606F;"><img src="../../images/messagequeue/rocketmq-send-message-flow/client_send_msg_to_broker.png" alt="&#x53D1;&#x9001;&#x6D88;&#x606F;"></a></p>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x6682;&#x4E14;&#x5148;&#x5FFD;&#x7565;&#x6D88;&#x606F;&#x4F53;&#x683C;&#x5F0F;&#x7684;&#x5177;&#x4F53;&#x7F16;/&#x89E3;&#x7801;&#x8FC7;&#x7A0B;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5E76;&#x4E0D;&#x60F3;&#x4E00;&#x5F00;&#x59CB;&#x5C31;&#x5377;&#x5165;&#x8FD9;&#x4E9B;&#x7E41;&#x679D;&#x7EC6;&#x8282;&#x4E2D;&#xFF0C;&#x73B0;&#x5728;&#x5148;&#x4ECE;&#x5927;&#x4F53;&#x4E0A;&#x4E86;&#x89E3;&#x4E00;&#x4E0B;&#x6574;&#x4E2A;&#x6D88;&#x606F;&#x7684;&#x53D1;&#x9001;&#x6D41;&#x7A0B;&#xFF0C;&#x540E;&#x7EED;&#x4F1A;&#x5199;&#x4E13;&#x95E8;&#x7684;&#x6587;&#x7AE0;&#x6765;&#x8BF4;&#x660E;&#x3002;</p>
+<h2 id="&#x516B;&#x3001;broker-&#x68C0;&#x67E5;&#x8BDD;&#x9898;&#x4FE1;&#x606F;">&#x516B;&#x3001;Broker &#x68C0;&#x67E5;&#x8BDD;&#x9898;&#x4FE1;&#x606F;</h2>
+<p>&#x521A;&#x624D;&#x8BF4;&#x5230;&#xFF0C;&#x5982;&#x679C;&#x8BDD;&#x9898;&#x4FE1;&#x606F;&#x5728; Name &#x670D;&#x52A1;&#x5668;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x4F1A;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x8BDD;&#x9898;&#x4FE1;&#x606F;&#x8FDB;&#x884C;&#x6D88;&#x606F;&#x7684;&#x53D1;&#x9001;&#x3002;&#x7136;&#x800C;&#x4E00;&#x65E6;&#x8FD9;&#x6761;&#x6D88;&#x606F;&#x5230;&#x6765;&#x4E4B;&#x540E;&#xFF0C;Broker &#x7AEF;&#x8FD8;&#x5E76;&#x6CA1;&#x6709;&#x8FD9;&#x4E2A;&#x8BDD;&#x9898;&#x3002;&#x6240;&#x4EE5; Broker &#x9700;&#x8981;&#x68C0;&#x67E5;&#x8BDD;&#x9898;&#x7684;&#x5B58;&#x5728;&#x6027;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractSendMessageProcessor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">NettyRequestProcessor</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> RemotingCommand <span class="hljs-title">msgCheck</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ChannelHandlerContext ctx,
+                                       <span class="hljs-keyword">final</span> SendMessageRequestHeader requestHeader, <span class="hljs-keyword">final</span> RemotingCommand response)</span> </span>{
+
+        <span class="hljs-comment">// ...</span>
+
+        TopicConfig topicConfig =
+            <span class="hljs-keyword">this</span>.brokerController
+                .getTopicConfigManager()
+                .selectTopicConfig(requestHeader.getTopic());
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> == topicConfig) {
+
+            <span class="hljs-comment">// ...</span>
+
+            topicConfig = <span class="hljs-keyword">this</span>.brokerController
+                .getTopicConfigManager()
+                .createTopicInSendMessageMethod( ... );
+
+        }
+
+    }
+
+}
+</code></pre>
+<p>&#x5982;&#x679C;&#x8BDD;&#x9898;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x4FBF;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8BDD;&#x9898;&#x4FE1;&#x606F;&#x5B58;&#x50A8;&#x5230;&#x672C;&#x5730;&#xFF0C;&#x5E76;&#x5C06;&#x6240;&#x6709;&#x8BDD;&#x9898;&#x518D;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x540C;&#x6B65;&#x7ED9;&#x6240;&#x6709;&#x7684; Name &#x670D;&#x52A1;&#x5668;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TopicConfigManager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ConfigManager</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> TopicConfig <span class="hljs-title">createTopicInSendMessageMethod</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String topic, <span class="hljs-comment">/** params **/</span>)</span> </span>{
+        <span class="hljs-comment">// ...</span>
+        topicConfig = <span class="hljs-keyword">new</span> TopicConfig(topic);
+
+        <span class="hljs-keyword">this</span>.topicConfigTable.put(topic, topicConfig);
+        <span class="hljs-keyword">this</span>.persist();
+
+        <span class="hljs-comment">// ...</span>
+
+        <span class="hljs-keyword">this</span>.brokerController.registerBrokerAll(<span class="hljs-keyword">false</span>, <span class="hljs-keyword">true</span>);
+
+        <span class="hljs-keyword">return</span> topicConfig;
+    }
+
+}
+</code></pre>
+<p>&#x8BDD;&#x9898;&#x68C0;&#x67E5;&#x7684;&#x6574;&#x4F53;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#x6240;&#x793A;:</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/broker_check_topic_and_sync_to_nameserver.png" data-lightbox="36539dec-4271-4d22-819b-141900e77499" data-title="&#x68C0;&#x67E5;&#x8BDD;&#x9898;&#x6D41;&#x7A0B;"><img src="../../images/messagequeue/rocketmq-send-message-flow/broker_check_topic_and_sync_to_nameserver.png" alt="&#x68C0;&#x67E5;&#x8BDD;&#x9898;&#x6D41;&#x7A0B;"></a></p>
+<h2 id="&#x4E5D;&#x3001;&#x6D88;&#x606F;&#x5B58;&#x50A8;">&#x4E5D;&#x3001;&#x6D88;&#x606F;&#x5B58;&#x50A8;</h2>
+<p>&#x5F53; Broker &#x5BF9;&#x6D88;&#x606F;&#x7684;&#x4E00;&#x4E9B;&#x5B57;&#x6BB5;&#x505A;&#x8FC7;&#x4E00;&#x756A;&#x5FC5;&#x8981;&#x7684;&#x68C0;&#x67E5;&#x4E4B;&#x540E;&#xFF0C;&#x4FBF;&#x4F1A;&#x5B58;&#x50A8;&#x5230;&#x78C1;&#x76D8;&#x4E2D;&#x53BB;:</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/broker_save_message.png" data-lightbox="42552148-bcb3-49e0-833a-9c85e806a701" data-title="&#x6D88;&#x606F;&#x5B58;&#x50A8;"><img src="../../images/messagequeue/rocketmq-send-message-flow/broker_save_message.png" alt="&#x6D88;&#x606F;&#x5B58;&#x50A8;"></a></p>
+<h2 id="&#x5341;&#x3001;&#x6574;&#x4F53;&#x6D41;&#x7A0B;">&#x5341;&#x3001;&#x6574;&#x4F53;&#x6D41;&#x7A0B;</h2>
+<p>&#x53D1;&#x9001;&#x6D88;&#x606F;&#x7684;&#x6574;&#x4F53;&#x6D41;&#x7A0B;:</p>
+<p><a href="../../images/messagequeue/rocketmq-send-message-flow/send_message_full_flow.png" data-lightbox="505474c1-3392-497a-8653-20cd040589d6" data-title="&#x53D1;&#x9001;&#x6D88;&#x606F;&#x6D41;&#x7A0B;"><img src="../../images/messagequeue/rocketmq-send-message-flow/send_message_full_flow.png" alt="&#x53D1;&#x9001;&#x6D88;&#x606F;&#x6D41;&#x7A0B;"></a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 消息队列">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="rocketmq_2.html" class="navigation navigation-next " aria-label="Next page: rocketMQ 消息储存流程">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"rocketMQ 消息发送流程","level":"2.4.1","depth":2,"next":{"title":"rocketMQ 消息储存流程","level":"2.4.2","depth":2,"path":"doc/messagequeue/rocketmq_2.md","ref":"doc/messagequeue/rocketmq_2.md","articles":[]},"previous":{"title":"消息队列","level":"2.4","depth":1,"path":"doc/messagequeue/README.md","ref":"doc/messagequeue/README.md","articles":[{"title":"rocketMQ 消息发送流程","level":"2.4.1","depth":2,"path":"doc/messagequeue/rocketmq_1.md","ref":"doc/messagequeue/rocketmq_1.md","articles":[]},{"title":"rocketMQ 消息储存流程","level":"2.4.2","depth":2,"path":"doc/messagequeue/rocketmq_2.md","ref":"doc/messagequeue/rocketmq_2.md","articles":[]},{"title":"rocketMQ 消息消费流程","level":"2.4.3","depth":2,"path":"doc/messagequeue/rocketmq_3.md","ref":"doc/messagequeue/rocketmq_3.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-lunr","-search","chapter-fold","lightbox","search-pro","pageview-count"],"pluginsConfig":{"chapter-fold":{},"lightbox":{"jquery":true,"sameUuid":false},"search-pro":{},"pageview-count":{},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/messagequeue/rocketmq_1.md","mtime":"2021-08-24T02:11:33.267Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-24T07:16:06.797Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lightbox/js/lightbox.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
